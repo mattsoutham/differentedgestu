@@ -314,44 +314,64 @@ ul { list-style: none; }
 }
 
 .problem__intro h2 {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
-.problem__sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
 
-.problem__cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.problem__underline {
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
 }
 
-.problem__card {
-  background: var(--mid);
+.problem__sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Numbered list */
+.problem__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1.75rem 1.5rem;
+  overflow: hidden;
 }
 
-.problem__icon {
+.problem__list-item {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 1.5px solid var(--border);
-  border-radius: 50%;
-  margin-bottom: 1.25rem;
-  flex-shrink: 0;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
 }
-.problem__icon svg {
-  width: 20px;
-  height: 20px;
+.problem__list-item:last-child { border-bottom: none; }
+.problem__list-item:hover { background: var(--mid); }
+
+.problem__list-num {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--accent);
+  padding-top: 2px;
+  min-width: 24px;
 }
 
-.problem__card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.problem__list-item p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+  margin: 0;
+}
 
 /* ============================================================
    URGENCY BANNER
@@ -954,7 +974,6 @@ ul { list-style: none; }
   .hero__stat-box { max-width: 320px; }
 
   .problem__grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .problem__cards { grid-template-columns: 1fr; }
 
   .positioning__grid { grid-template-columns: 1fr; gap: 2rem; padding-left: 1.5rem; }
 
