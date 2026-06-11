@@ -276,21 +276,28 @@ ul { list-style: none; }
   line-height: 1.5;
 }
 
+.hero__stat-source {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
 /* ============================================================
    STRAPLINE STRIP
    ============================================================ */
 .strapline-strip {
   background: var(--mid);
   border-bottom: 1px solid var(--border);
-  padding-block: 1.1rem;
+  padding-block: 1.4rem;
   text-align: center;
 }
 
 .strapline-strip p {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.7);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--white);
 }
 
 /* also add a helper for positioning__sub */
@@ -329,9 +336,10 @@ ul { list-style: none; }
 }
 
 .problem__sub {
-  color: rgba(255,255,255,0.6);
-  font-size: 1rem;
-  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 /* Numbered list */
@@ -347,29 +355,31 @@ ul { list-style: none; }
 
 .problem__list-item {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
   align-items: flex-start;
-  padding: 1.25rem 1.5rem;
+  padding: 1.6rem 1.75rem;
   border-bottom: 1px solid var(--border);
   transition: background 0.2s;
 }
 .problem__list-item:last-child { border-bottom: none; }
-.problem__list-item:hover { background: var(--mid); }
+.problem__list-item:hover { background: rgba(255,255,255,0.03); }
 
 .problem__list-num {
   flex-shrink: 0;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
   color: var(--accent);
-  padding-top: 2px;
-  min-width: 24px;
+  line-height: 1;
+  min-width: 36px;
+  padding-top: 3px;
 }
 
 .problem__list-item p {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.65;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.7;
   margin: 0;
 }
 
