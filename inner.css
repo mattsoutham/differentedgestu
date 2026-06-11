@@ -529,6 +529,262 @@
 }
 
 /* ============================================================
+   SERVICE PAGES — shared
+   ============================================================ */
+
+/* Hero image below page header */
+.service-hero-img { background: var(--black); padding-block: 0 3rem; }
+.service-hero-img img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+
+/* Intro split */
+.service-intro { background: var(--dark); }
+
+.service-intro__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.service-intro__copy h2 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+.service-intro__copy p {
+  font-size: 0.925rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+.service-intro__copy strong { color: var(--white); }
+
+/* Proof cards */
+.service-intro__proof { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.proof-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.proof-card--secondary { border-color: var(--border); }
+
+.proof-card .eyebrow { margin-bottom: 0.5rem; }
+.proof-card__stat {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+.proof-card p:last-child {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+/* Stat cards (visibility/showcase) */
+.service-intro__stats { display: flex; flex-direction: column; gap: 1rem; }
+
+.stat-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+.stat-card__num {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+.stat-card p:last-child {
+  font-size: 0.825rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+/* Steps grid (Sales Engine) */
+.service-steps { background: var(--black); }
+.service-steps h2 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.step-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.75rem;
+  transition: border-color 0.2s;
+}
+.step-card:hover { border-color: var(--accent); }
+
+.step-card__num {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+.step-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+.step-card p {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+}
+
+/* Image break */
+.service-image-break {
+  background: var(--dark);
+  padding-block: 3rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.service-image-break img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--border);
+}
+
+/* Includes grid */
+.service-includes { background: var(--black); }
+.service-includes h2 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+}
+
+.includes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.include-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: border-color 0.2s;
+}
+.include-card:hover { border-color: var(--accent); }
+
+.include-card__icon {
+  width: 44px; height: 44px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.include-card__icon svg { width: 20px; height: 20px; color: var(--accent); }
+
+.include-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.include-card p {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+}
+.include-card strong { color: var(--white); }
+
+/* Pricing */
+.service-pricing { background: var(--dark); }
+
+.service-pricing__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.service-pricing__copy h2 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.service-pricing__copy p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 0.6rem;
+}
+
+.service-pricing__numbers {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pricing-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.pricing-line:last-child { border-bottom: none; }
+
+.pricing-line__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pricing-line__value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.pricing-line--note {
+  display: block;
+  padding: 1rem 1.5rem;
+}
+.pricing-line--note p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ============================================================
    RESPONSIVE — INNER PAGES
    ============================================================ */
 @media (max-width: 1024px) {
@@ -539,10 +795,16 @@
   .visibility-stats { grid-template-columns: 1fr; }
   .tpm__grid { grid-template-columns: 1fr; }
   .programme__pricing { grid-template-columns: 1fr; }
+  .service-intro__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .service-pricing__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .includes-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
   .blog-grid { grid-template-columns: 1fr; }
   .post__title { font-size: 1.5rem; }
   .visibility-stats { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .stat-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
