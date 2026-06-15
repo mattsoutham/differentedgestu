@@ -6,7 +6,7 @@
   <header class="nav">
     <div class="nav__inner container">
       <a href="/" class="nav__logo">
-        <img src="/images/logo.svg" alt="Different Edge Studio" />
+        <img src="/images/Logo-light.svg" alt="Different Edge Studio" />
       </a>
       <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
