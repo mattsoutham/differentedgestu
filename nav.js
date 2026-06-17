@@ -22,6 +22,7 @@
               <li><a href="/sales-engine">Sales Engine</a></li>
               <li><a href="/visibility">Visibility</a></li>
               <li><a href="/showcase">Showcase</a></li>
+              <li><a href="/complete-system">The Complete System</a></li>
             </ul>
           </li>
           <li><a href="/#about">About</a></li>
