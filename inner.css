@@ -870,11 +870,36 @@
 
 .origin-video__embed { max-width: 900px; }
 
-.origin-video__note {
-  margin-top: 1rem;
-  font-size: 0.8rem;
+.origin-video__placeholder {
+  aspect-ratio: 16 / 9;
+  background: var(--mid);
+  border: 2px dashed var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.origin-video__placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   color: rgba(255,255,255,0.3);
-  font-style: italic;
+}
+
+.origin-video__placeholder-inner svg {
+  width: 72px;
+  height: 72px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.origin-video__placeholder-inner p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 900px) {
