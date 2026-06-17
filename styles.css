@@ -1138,6 +1138,7 @@ ul { list-style: none; }
   .stats__grid { grid-template-columns: 1fr; gap: 2rem; }
 
   .cta__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .cta__video { max-height: 300px; width: 100%; }
 }
 
 @media (max-width: 600px) {
