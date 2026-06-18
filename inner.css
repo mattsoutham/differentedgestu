@@ -749,19 +749,24 @@
 .crossfade {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .crossfade__img {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   opacity: 0;
   animation: crossfade 20s infinite;
+}
+
+.crossfade__img:not(:first-child) {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: contain;
 }
 
 .crossfade__img--1 { animation-delay: 0s; }
