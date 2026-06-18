@@ -1152,8 +1152,8 @@ ul { list-style: none; }
 
   .stats__grid { grid-template-columns: 1fr; gap: 0; }
   .stats__item { padding: 2rem 0; border-right: none; border-bottom: 1px solid var(--border); }
-  .stats__item:not(:first-child) { padding-left: 0; }
-  .stats__item:last-child { border-bottom: none; }
+  .stats__item:not(:first-child):not(:last-child) { padding-left: 0; }
+  .stats__item:last-child { border-bottom: none; padding-left: 0; }
 
   .cta__checks { flex-direction: column; align-items: center; }
 }
