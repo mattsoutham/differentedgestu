@@ -998,7 +998,11 @@
   grid-column: 1 / -1;
 }
 
-.complete-science { background: var(--dark); }
+.complete-science {
+  background: var(--dark);
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
 
 .complete-science__inner {
   display: grid;
