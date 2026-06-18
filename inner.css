@@ -661,6 +661,75 @@
   line-height: 1.65;
 }
 
+/* Sales Engine Stage Timeline */
+.stage-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  margin-top: 3rem;
+}
+
+.stage-timeline__step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 2rem;
+  position: relative;
+}
+
+.stage-timeline__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: var(--black);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.stage-timeline__icon svg { width: 22px; height: 22px; }
+
+.stage-timeline__connector {
+  position: absolute;
+  top: 26px;
+  left: 52px;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.stage-timeline__connector--last { display: none; }
+
+.stage-timeline__num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.stage-timeline__step h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.stage-timeline__step p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+}
+
 /* Image break */
 .service-image-break {
   background: var(--dark);
@@ -806,6 +875,9 @@
   .post__title { font-size: 1.5rem; }
   .visibility-stats { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
+  .stage-timeline { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stage-timeline__connector { display: none; }
+  .stage-timeline__step { padding-right: 0; }
   .stat-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
 
