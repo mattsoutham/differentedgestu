@@ -819,6 +819,9 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+  align-self: start;
 }
 
 .pricing-line {
