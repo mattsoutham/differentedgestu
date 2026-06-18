@@ -755,12 +755,14 @@
   background: var(--black);
 }
 
-.crossfade__img {
+.crossfade .crossfade__img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   max-height: none;
+  border: none;
+  border-radius: 0;
   object-fit: cover;
   opacity: 0;
   animation: crossfade 20s infinite;
