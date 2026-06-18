@@ -745,6 +745,112 @@
   background: var(--border);
 }
 
+/* Contain variant for PNGs with own background */
+.service-hero-img--contain img,
+.service-image-break--contain img {
+  object-fit: contain;
+  background: transparent;
+  border: none;
+}
+
+/* Studio Comparison Table */
+.studio-comparison { background: var(--dark); }
+
+.studio-comparison__table {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.studio-comparison__header {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.studio-comparison__col-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.studio-comparison__col-label--us { text-align: right; color: var(--accent); }
+
+.studio-comparison__row {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.studio-comparison__row:hover { background: rgba(255,255,255,0.03); }
+
+.studio-comparison__them {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.studio-comparison__arrow {
+  text-align: center;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.studio-comparison__us {
+  font-size: 0.9rem;
+  color: var(--white);
+  text-align: right;
+}
+
+.studio-comparison__footer {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  padding: 1.1rem 1.5rem;
+  background: var(--accent);
+}
+
+.studio-comparison__footer-them,
+.studio-comparison__footer-us {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.studio-comparison__footer-us { text-align: right; }
+
+.studio-comparison__footer-arrow {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--black);
+  background: rgba(0,0,0,0.15);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .studio-comparison__row,
+  .studio-comparison__header,
+  .studio-comparison__footer {
+    grid-template-columns: 1fr 32px 1fr;
+    padding: 0.85rem 1rem;
+  }
+  .studio-comparison__them,
+  .studio-comparison__us,
+  .studio-comparison__footer-them,
+  .studio-comparison__footer-us { font-size: 0.78rem; }
+}
+
 /* Includes grid */
 .service-includes { background: var(--black); }
 .service-includes h2 {
