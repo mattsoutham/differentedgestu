@@ -24,6 +24,7 @@
               <li><a href="/showcase">Showcase</a></li>
             </ul>
           </li>
+          <li><a href="/sales-calculator">Sales Calculator</a></li>
           <li><a href="/#about">About</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/blog/">Blog</a></li>
