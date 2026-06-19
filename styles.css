@@ -728,14 +728,14 @@ ul { list-style: none; }
 }
 
 .logos__track img {
-  height: 48px;
+  height: 56px;
   width: auto;
   flex-shrink: 0;
   filter: brightness(0) invert(1);
-  opacity: 0.4;
+  opacity: 0.45;
   transition: opacity 0.2s;
 }
-.logos__track img:hover { opacity: 0.85; }
+.logos__track img:hover { opacity: 0.9; }
 
 /* ============================================================
    THREE PRODUCTS
