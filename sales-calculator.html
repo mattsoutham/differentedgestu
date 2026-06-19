@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Hire vs Sales Engine Calculator | Different Edge Studio</title>
+  <meta name="description" content="Run the numbers before you hire another salesperson. See how the DES Sales Engine compares to a new hire on cost, ramp time and ROI." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://differentedgestudio.com/sales-calculator" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="inner.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Calculator page styles ── */
+
+    .calc-wrap { max-width: 1080px; margin: 0 auto; padding: 3rem 0 5rem; }
+
+    /* Step labels */
+    .calc-step {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .calc-step__num {
+      background: var(--accent);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+    .calc-step__title { color: var(--white); font-weight: 600; letter-spacing: 0.08em; }
+
+    /* Cards */
+    .calc-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Input grid */
+    .calc-input-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .calc-input-group { flex: 1; min-width: 180px; }
+    .calc-input-group label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .calc-input-group .hint { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4; }
+
+    .calc-input-wrap { position: relative; display: flex; align-items: center; }
+    .calc-input-wrap .prefix,
+    .calc-input-wrap .suffix {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 0 0.75rem;
+      background: var(--mid);
+      border: 1px solid var(--border);
+      height: 44px;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .calc-input-wrap .prefix { border-right: none; }
+    .calc-input-wrap .suffix { border-left: none; }
+
+    .calc-input-wrap input[type="number"] {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--mid);
+      border: 1px solid var(--border);
+      height: 44px;
+      padding: 0 0.75rem;
+      width: 100%;
+      outline: none;
+      -moz-appearance: textfield;
+      font-family: inherit;
+    }
+    .calc-input-wrap input::-webkit-outer-spin-button,
+    .calc-input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .calc-input-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(200,240,0,0.1); }
+    .calc-input-wrap input[readonly] { background: var(--black); color: var(--muted); }
+
+    /* Live readout */
+    .live-readout {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(200,240,0,0.05);
+      border-left: 3px solid var(--accent);
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .rd-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(200,240,0,0.6); margin-bottom: 0.25rem; }
+    .rd-val { font-size: 1.5rem; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
+
+    /* Slider */
+    .calc-slider-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 2rem;
+      margin-bottom: 1.75rem;
+    }
+    .calc-slider-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--white); margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+    .calc-slider-card h3 em { font-style: normal; color: var(--accent); }
+    .calc-slider-card .slider-sub { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+    .slider-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .slider-wrap { flex: 1; min-width: 280px; position: relative; padding: 1.25rem 0 0.5rem; }
+
+    .slider-track-bg {
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      transform: translateY(-50%);
+      height: 3px;
+      background: var(--border);
+      pointer-events: none;
+    }
+    .slider-fill {
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      height: 3px;
+      background: var(--accent);
+      pointer-events: none;
+      transition: width 0.05s;
+    }
+
+    input[type="range"].des-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      outline: none;
+      position: relative;
+      z-index: 1;
+    }
+    input[type="range"].des-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--black);
+      box-shadow: 0 0 0 1.5px var(--accent);
+      cursor: grab;
+      margin-top: -9px;
+    }
+    input[type="range"].des-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--black);
+      cursor: grab;
+    }
+    .slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .slider-value {
+      flex: 0 0 auto;
+      text-align: center;
+      min-width: 110px;
+      background: var(--black);
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+    }
+    .sv-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+    .sv-val { font-size: 1.75rem; font-weight: 900; color: var(--accent); line-height: 1; }
+
+    .slider-preview {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(200,240,0,0.04);
+      border: 1px dashed rgba(200,240,0,0.25);
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .sp-piece { display: flex; gap: 0.5rem; align-items: baseline; }
+    .sp-piece span { color: var(--muted); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sp-piece strong { font-weight: 700; color: var(--accent); font-size: 0.8rem; }
+
+    /* Compare columns */
+    .compare-grid { display: flex; gap: 1.5rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+    .compare-col {
+      flex: 1;
+      min-width: 300px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .compare-col.hire { border-top: 3px solid #e05555; }
+    .compare-col.engine { border-top: 3px solid var(--accent); }
+
+    .col-header { padding: 1.25rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
+    .col-header h2 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+    .hire .col-header h2 { color: #e05555; }
+    .engine .col-header h2 { color: var(--accent); }
+    .col-header .sub { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    .col-body { padding: 1.25rem 1.5rem; flex: 1; }
+    .body-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; font-weight: 700; }
+
+    .mini-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-input-row label { font-size: 0.8rem; color: rgba(255,255,255,0.65); flex: 1; }
+    .mini-input-row label small { display: block; font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+
+    .mini-input { display: flex; align-items: center; flex: 0 0 auto; }
+    .mini-input .mi-prefix {
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 0 0.375rem;
+      background: var(--black);
+      border: 1px solid var(--border);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      border-right: none;
+    }
+    .mini-input input {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      width: 90px;
+      height: 30px;
+      padding: 0 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--mid);
+      color: #e05555;
+      outline: none;
+      text-align: right;
+      -moz-appearance: textfield;
+    }
+    .mini-input input::-webkit-outer-spin-button,
+    .mini-input input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .mini-input input[readonly] { background: var(--black); color: rgba(224,85,85,0.55); }
+    .mini-input input:focus { border-color: var(--accent); }
+
+    .fixed-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 0.75rem;
+    }
+    .fr-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); flex: 1; }
+    .fr-label small { display: block; font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+    .fr-val { font-size: 0.875rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+    /* Ramp visual */
+    .ramp-visual { margin-top: 1.25rem; padding: 1rem 1.25rem; background: rgba(224,85,85,0.07); border-left: 3px solid rgba(224,85,85,0.5); }
+    .rv-title { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e05555; margin-bottom: 0.25rem; font-weight: 700; }
+    .rv-sub { font-size: 0.7rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.4; }
+    .ramp-bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; align-items: end; height: 80px; margin-bottom: 0.5rem; }
+    .ramp-bar { background: rgba(224,85,85,0.65); width: 100%; position: relative; }
+    .rb-deals { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; font-weight: 700; color: #e05555; white-space: nowrap; }
+    .ramp-labels { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .ramp-labels span { font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; }
+
+    /* Live day 1 */
+    .live-day-1 { margin-top: 1.25rem; padding: 1rem 1.25rem; background: rgba(200,240,0,0.05); border-left: 3px solid var(--accent); }
+    .ld-title { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(200,240,0,0.6); font-weight: 700; margin-bottom: 0.25rem; }
+    .ld-headline { font-size: 1rem; font-weight: 800; color: var(--accent); line-height: 1.3; }
+    .ld-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+
+    /* Year totals */
+    .year-totals { border-top: 1px solid var(--border); padding: 1rem 1.5rem; background: rgba(255,255,255,0.02); }
+    .year-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.4rem 0; }
+    .yr-label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .yr-val { font-weight: 900; font-size: 1.25rem; }
+    .hire .year-row .yr-val { color: #e05555; }
+    .engine .year-row .yr-val { color: var(--accent); }
+    .year-row.y2 .yr-val { font-size: 1rem; }
+    .year-row.y2 .yr-label { color: rgba(255,255,255,0.35); }
+
+    /* Verdict */
+    .verdict {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      padding: 2.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .verdict-eyebrow { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
+    .verdict-headline {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      line-height: 1.1;
+    }
+    .verdict-headline em { font-style: normal; color: var(--accent); }
+    .verdict-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+    .verdict-block h3 { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .vb-val { font-size: 1.75rem; font-weight: 900; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+    .vb-val.gold { color: var(--accent); font-size: 2rem; }
+    .vb-val.sage { color: rgba(200,240,0,0.65); }
+    .vb-sub { font-size: 0.65rem; color: var(--muted); margin-top: 0.3rem; }
+
+    /* ROI band */
+    .roi-band {
+      background: rgba(200,240,0,0.05);
+      border: 1px solid rgba(200,240,0,0.2);
+      border-left: 4px solid var(--accent);
+      padding: 2rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      flex-wrap: wrap;
+    }
+    .roi-number { font-size: clamp(3rem, 7vw, 5rem); font-weight: 900; color: var(--accent); line-height: 0.9; letter-spacing: -0.04em; }
+    .roi-number sup { font-size: 0.45em; vertical-align: super; }
+    .roi-copy { flex: 1; min-width: 240px; }
+    .roi-eyebrow { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(200,240,0,0.6); margin-bottom: 0.4rem; font-weight: 700; }
+    .roi-headline { font-size: 1.25rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 0.4rem; }
+    .roi-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* CTA bar */
+    .calc-cta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border);
+      background: var(--dark);
+      border-left: 4px solid var(--accent);
+    }
+    .calc-cta-bar .cta-copy { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.7); max-width: 500px; line-height: 1.4; }
+
+    /* Footnote */
+    .calc-footnote { margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed var(--border); font-size: 0.7rem; color: var(--muted); line-height: 1.6; max-width: 780px; }
+    .calc-footnote strong { font-weight: 700; color: rgba(255,255,255,0.45); }
+
+    /* Responsive */
+    @media (max-width: 720px) { .verdict-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) {
+      .compare-col { min-width: 100%; }
+      .calc-cta-bar { flex-direction: column; align-items: flex-start; }
+      .roi-band { gap: 1.25rem; }
+      .verdict { padding: 1.5rem; }
+      .calc-card, .calc-slider-card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV injected by nav.js -->
+
+  <main style="padding-top: var(--nav-h);">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero section">
+      <div class="container page-hero__inner">
+        <p class="eyebrow">Commercial Assessment — Different Edge Studio</p>
+        <h1>Before you hire another salesperson,<br/><span class="accent">run the numbers.</span></h1>
+        <p class="page-hero__sub">Most founder-led businesses underestimate what a sales hire really costs — and overestimate how quickly they pay back. Enter your numbers below. The comparison is yours.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="calc-wrap">
+
+        <!-- STEP 01 -->
+        <p class="calc-step"><span class="calc-step__num">01</span><span class="calc-step__title">Your business — current sales picture</span></p>
+
+        <div class="calc-card">
+          <div class="calc-input-grid">
+            <div class="calc-input-group">
+              <label>Monthly sales conversations (avg)</label>
+              <div class="calc-input-wrap"><input type="number" id="conversations" value="20" min="1" max="9999"></div>
+              <p class="hint">Qualified conversations per month, across all channels.</p>
+            </div>
+            <div class="calc-input-group">
+              <label>Current conversion rate</label>
+              <div class="calc-input-wrap"><input type="number" id="convRate" value="10" min="0.1" max="100" step="0.1"><span class="suffix">%</span></div>
+              <p class="hint">% of conversations that close to a deal today.</p>
+            </div>
+            <div class="calc-input-group">
+              <label>Average deal value</label>
+              <div class="calc-input-wrap"><span class="prefix">£</span><input type="number" id="dealValue" value="15000" min="1"></div>
+              <p class="hint">Average revenue per closed deal, excl. VAT.</p>
+            </div>
+          </div>
+          <div class="live-readout">
+            <div class="rd-block"><p class="rd-label">Monthly revenue (current)</p><p class="rd-val" id="rd-monthly">—</p></div>
+            <div class="rd-block"><p class="rd-label">Annual revenue (current)</p><p class="rd-val" id="rd-annual">—</p></div>
+            <div class="rd-block"><p class="rd-label">Deals closed per month</p><p class="rd-val" id="rd-deals">—</p></div>
+          </div>
+        </div>
+
+        <!-- STEP 02 -->
+        <p class="calc-step"><span class="calc-step__num">02</span><span class="calc-step__title">Target conversion uplift to achieve</span></p>
+
+        <div class="calc-slider-card">
+          <h3>Different Edge clients typically see <em>2.7%–7% uplift</em> in conversion rate.</h3>
+          <p class="slider-sub">Drag the slider to set the uplift you think is realistic for your business. The numbers below update live.</p>
+          <div class="slider-row">
+            <div class="slider-wrap">
+              <div class="slider-track-bg"></div>
+              <div class="slider-fill" id="sliderFill"></div>
+              <input type="range" class="des-slider" id="uplift" min="2.7" max="7" step="0.1" value="4.5">
+              <div class="slider-ticks"><span>2.7%</span><span>3.5%</span><span>4.5%</span><span>5.5%</span><span>7%</span></div>
+            </div>
+            <div class="slider-value">
+              <p class="sv-label">Uplift</p>
+              <p class="sv-val" id="sv-val">+4.5%</p>
+            </div>
+          </div>
+          <div class="slider-preview">
+            <div class="sp-piece"><span>New conversion rate</span><strong id="sp-newrate">—</strong></div>
+            <div class="sp-piece"><span>Additional monthly revenue</span><strong id="sp-mo">—</strong></div>
+            <div class="sp-piece"><span>Additional annual revenue</span><strong id="sp-yr">—</strong></div>
+          </div>
+        </div>
+
+        <!-- STEP 03 -->
+        <p class="calc-step"><span class="calc-step__num">03</span><span class="calc-step__title">The comparison — new hire vs Sales Engine</span></p>
+
+        <div class="compare-grid">
+          <!-- HIRE -->
+          <div class="compare-col hire">
+            <div class="col-header">
+              <h2>New Sales Hire</h2>
+              <p class="sub">Year-one cash outlay · UK 2025/26 rates</p>
+            </div>
+            <div class="col-body">
+              <p class="body-label">Cost breakdown</p>
+              <div class="mini-input-row"><label>Base salary</label><div class="mini-input"><span class="mi-prefix">£</span><input type="number" id="salary" value="39000" min="0"></div></div>
+              <div class="mini-input-row"><label>Employer NI<small>15% on earnings above £5,000 (HMRC 2025/26)</small></label><div class="mini-input"><span class="mi-prefix">£</span><input type="number" id="ni" readonly tabindex="-1"></div></div>
+              <div class="mini-input-row"><label>Pension contribution<small>3% statutory minimum</small></label><div class="mini-input"><span class="mi-prefix">£</span><input type="number" id="pension" readonly tabindex="-1"></div></div>
+              <div class="mini-input-row"><label>Recruitment fee<small>10% of base salary</small></label><div class="mini-input"><span class="mi-prefix">£</span><input type="number" id="recruitment" readonly tabindex="-1"></div></div>
+              <div class="mini-input-row"><label>Equipment &amp; tools<small>Laptop, phone, CRM licences</small></label><div class="mini-input"><span class="mi-prefix">£</span><input type="number" id="equipment" value="3000" min="0"></div></div>
+              <div class="ramp-visual">
+                <p class="rv-title">Expected deals · first 6 months</p>
+                <p class="rv-sub">A new hire takes ~6 months to reach steady-state productivity. Industry standard ramp shown below.</p>
+                <div class="ramp-bars" id="rampBars">
+                  <div class="ramp-bar" style="height:17%"><span class="rb-deals">—</span></div>
+                  <div class="ramp-bar" style="height:33%"><span class="rb-deals">—</span></div>
+                  <div class="ramp-bar" style="height:50%"><span class="rb-deals">—</span></div>
+                  <div class="ramp-bar" style="height:67%"><span class="rb-deals">—</span></div>
+                  <div class="ramp-bar" style="height:83%"><span class="rb-deals">—</span></div>
+                  <div class="ramp-bar" style="height:100%"><span class="rb-deals">—</span></div>
+                </div>
+                <div class="ramp-labels"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span></div>
+              </div>
+            </div>
+            <div class="year-totals">
+              <div class="year-row y1"><span class="yr-label">Year 1 total</span><span class="yr-val" id="hire-y1">—</span></div>
+              <div class="year-row y2"><span class="yr-label">Year 2 (no recruitment fee)</span><span class="yr-val" id="hire-y2">—</span></div>
+            </div>
+          </div>
+
+          <!-- ENGINE -->
+          <div class="compare-col engine">
+            <div class="col-header">
+              <h2>DES Sales Engine</h2>
+              <p class="sub">Annual programme · up to 12 seats</p>
+            </div>
+            <div class="col-body">
+              <p class="body-label">Cost breakdown</p>
+              <div class="fixed-row"><span class="fr-label">Build fee — one-off studio production<small>Filmed, edited, platform-ready</small></span><span class="fr-val">£4,299</span></div>
+              <div class="fixed-row"><span class="fr-label">Monthly platform &amp; distribution<small>£829/mo × 12 (up to 12 seats)</small></span><span class="fr-val">£9,948</span></div>
+              <div class="fixed-row"><span class="fr-label">Recruitment</span><span class="fr-val" style="color:var(--muted);">£0</span></div>
+              <div class="fixed-row"><span class="fr-label">NI / pension / employment cost</span><span class="fr-val" style="color:var(--muted);">£0</span></div>
+              <div class="fixed-row"><span class="fr-label">Equipment &amp; tools</span><span class="fr-val" style="color:var(--muted);">£0</span></div>
+              <div class="live-day-1">
+                <p class="ld-title">Time to performance</p>
+                <p class="ld-headline">Live in 90 days. Compounding from day one.</p>
+                <p class="ld-sub">No ramp. Your conversion uplift is operating across every conversation from launch.</p>
+              </div>
+            </div>
+            <div class="year-totals">
+              <div class="year-row y1"><span class="yr-label">Year 1 total</span><span class="yr-val">£14,247</span></div>
+              <div class="year-row y2"><span class="yr-label">Year 2 (no build fee)</span><span class="yr-val">£9,948</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERDICT -->
+        <div class="verdict">
+          <p class="verdict-eyebrow">Year-One &amp; Year-Two Verdict</p>
+          <p class="verdict-headline">The hire is <em>not the cheap option</em> — and the Sales Engine compounds.</p>
+          <div class="verdict-grid">
+            <div class="verdict-block"><h3>Year 1 cash saving</h3><p class="vb-val gold" id="v-y1-save">—</p><p class="vb-sub">vs hiring</p></div>
+            <div class="verdict-block"><h3>Year 2 cash saving</h3><p class="vb-val gold" id="v-y2-save">—</p><p class="vb-sub">No build fee in year 2</p></div>
+            <div class="verdict-block"><h3>Two-year saving</h3><p class="vb-val sage" id="v-2yr-save">—</p><p class="vb-sub">Combined Y1 + Y2</p></div>
+            <div class="verdict-block"><h3>Revenue uplift (2 yrs)</h3><p class="vb-val sage" id="v-rev-uplift">—</p><p class="vb-sub">From the conversion uplift you set</p></div>
+          </div>
+        </div>
+
+        <!-- ROI -->
+        <div class="roi-band">
+          <div class="roi-number"><span id="roi-mult">—</span><sup>×</sup></div>
+          <div class="roi-copy">
+            <p class="roi-eyebrow">Two-Year Return on Investment</p>
+            <p class="roi-headline" id="roi-headline">Every £1 invested generates additional revenue —</p>
+            <p class="roi-detail">Revenue uplift over two years divided by total Sales Engine investment (Y1 £14,247 + Y2 £9,948 = £24,195). Cash saving vs hiring is on top of this figure.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="calc-cta-bar">
+          <p class="cta-copy">These are your numbers — not a brochure estimate.<br/>Want to see what they look like applied to your specific pipeline?</p>
+          <a href="https://calendly.com/differentedgestudio" id="ctaBtn" target="_blank" rel="noopener" class="btn btn--primary">Book a strategy call &rarr;</a>
+        </div>
+
+        <!-- FOOTNOTE -->
+        <p class="calc-footnote">
+          <strong>Assumptions:</strong> Employer NI at 15% on earnings above £5,000 secondary threshold (HMRC 2025/26, continuing 2026/27). Pension at 3% of base salary (statutory minimum). Recruitment at 10% of base salary. Year 2 hire cost excludes recruitment fee; includes £500 ongoing equipment/software. Sales Engine: £4,299 one-off build + £829/month for up to 12 seats. Year 2 monthly cost only (no build fee). Ramp: industry-standard 6-month linear curve 17%–100%. Conversion uplift range (2.7%–7%) reflects DES founder-led client outcomes 2024–2026. ROI = revenue uplift only ÷ DES investment (conservative basis).
+          <br/><br/>
+          <strong>Sources:</strong> Employer NI: HMRC <em>Rates and thresholds for employers 2025 to 2026</em>. Pension: Pensions Act 2008.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta section">
+      <div class="container cta__inner">
+        <h2>Let's see if we're a fit.</h2>
+        <p class="cta__sub">No pitch. No deck.<br/>Just a straight conversation about your goals.</p>
+        <a href="https://calendly.com/differentedgestudio" target="_blank" rel="noopener" class="btn btn--primary">Book a Strategy Call &rarr;</a>
+        <ul class="cta__checks">
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>Strategic conversation with Matt or Dan</li>
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>No commitment</li>
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>Walk away with clarity either way</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="/" class="footer__logo"><img src="images/Logo-light.svg" alt="Different Edge Studio" /></a>
+      <p class="footer__copy">&copy; 2026 Different Edge Studio. All rights reserved.</p>
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="/faq">FAQ</a>
+        <a href="#">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script>
+    const CONFIG = {
+      NI_RATE:          0.15,
+      NI_THRESHOLD:     5000,
+      PENSION_RATE:     0.03,
+      RECRUITMENT_RATE: 0.10,
+      EQUIPMENT_Y2:     500,
+      RAMP_PCT:         [0.17, 0.33, 0.50, 0.67, 0.83, 1.00],
+      ENGINE_BUILD:     4299,
+      ENGINE_MONTHLY:   829,
+      ENGINE_MONTHS:    12,
+      ENGINE_Y1:        4299 + (829 * 12),
+      ENGINE_Y2:        829 * 12,
+    };
+
+    function fmt(n, opts = {}) {
+      if (n === undefined || n === null || isNaN(n)) return '—';
+      const sign = opts.sign ?? false;
+      const dec  = opts.dec  ?? 0;
+      const abs  = Math.abs(n);
+      const str  = abs.toLocaleString('en-GB', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+      let prefix = '£';
+      if (n < 0)           prefix = '−£';
+      else if (sign && n > 0) prefix = '+£';
+      return prefix + str;
+    }
+
+    function val(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const v = parseFloat(el.value);
+      return isNaN(v) ? 0 : v;
+    }
+
+    function set(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function calculate() {
+      const convs    = val('conversations');
+      const convRate = val('convRate');
+      const dealVal  = val('dealValue');
+
+      const monthlyDeals  = convs * (convRate / 100);
+      const monthlyRev    = monthlyDeals * dealVal;
+      const annualRev     = monthlyRev * 12;
+
+      const upliftPts      = val('uplift');
+      const newRate        = convRate + upliftPts;
+      const newMonthlyRev  = convs * (newRate / 100) * dealVal;
+      const upliftMonthly  = newMonthlyRev - monthlyRev;
+      const upliftAnnual   = upliftMonthly * 12;
+
+      const salary      = val('salary');
+      const equipment   = val('equipment');
+      const ni          = Math.max(0, salary - CONFIG.NI_THRESHOLD) * CONFIG.NI_RATE;
+      const pension     = salary * CONFIG.PENSION_RATE;
+      const recruitment = salary * CONFIG.RECRUITMENT_RATE;
+
+      const hireY1 = salary + ni + pension + recruitment + equipment;
+      const hireY2 = salary + ni + pension + CONFIG.EQUIPMENT_Y2;
+
+      const rampDeals = CONFIG.RAMP_PCT.map(p => monthlyDeals * p);
+
+      const y1Save       = hireY1 - CONFIG.ENGINE_Y1;
+      const y2Save       = hireY2 - CONFIG.ENGINE_Y2;
+      const twoYrSave    = y1Save + y2Save;
+      const revUplift2yr = upliftAnnual * 2;
+
+      const desInvestment2yr = CONFIG.ENGINE_Y1 + CONFIG.ENGINE_Y2;
+      const roiMultiple      = revUplift2yr / desInvestment2yr;
+
+      return { convs, convRate, dealVal, monthlyDeals, monthlyRev, annualRev, upliftPts, newRate, upliftMonthly, upliftAnnual, salary, ni, pension, recruitment, equipment, hireY1, hireY2, rampDeals, y1Save, y2Save, twoYrSave, revUplift2yr, roiMultiple };
+    }
+
+    function render() {
+      const d = calculate();
+
+      set('rd-monthly', fmt(d.monthlyRev));
+      set('rd-annual',  fmt(d.annualRev));
+      set('rd-deals',   d.monthlyDeals.toFixed(d.monthlyDeals < 1 ? 1 : 0));
+
+      set('sv-val', '+' + d.upliftPts.toFixed(1) + '%');
+      set('sp-newrate', d.convRate.toFixed(1) + '% → ' + d.newRate.toFixed(1) + '%');
+      set('sp-mo', fmt(d.upliftMonthly, { sign: true }));
+      set('sp-yr', fmt(d.upliftAnnual, { sign: true }));
+
+      const sl  = document.getElementById('uplift');
+      const pct = ((d.upliftPts - parseFloat(sl.min)) / (parseFloat(sl.max) - parseFloat(sl.min))) * 100;
+      document.getElementById('sliderFill').style.width = pct + '%';
+
+      document.getElementById('ni').value          = Math.round(d.ni);
+      document.getElementById('pension').value     = Math.round(d.pension);
+      document.getElementById('recruitment').value = Math.round(d.recruitment);
+
+      document.querySelectorAll('#rampBars .ramp-bar').forEach((bar, i) => {
+        bar.style.height = (CONFIG.RAMP_PCT[i] * 100) + '%';
+        const label = bar.querySelector('.rb-deals');
+        if (label) label.textContent = d.rampDeals[i] < 1 ? d.rampDeals[i].toFixed(1) : Math.round(d.rampDeals[i]).toString();
+      });
+
+      set('hire-y1', fmt(d.hireY1));
+      set('hire-y2', fmt(d.hireY2));
+      set('v-y1-save',    fmt(d.y1Save));
+      set('v-y2-save',    fmt(d.y2Save));
+      set('v-2yr-save',   fmt(d.twoYrSave));
+      set('v-rev-uplift', fmt(d.revUplift2yr, { sign: true }));
+      set('roi-mult',     d.roiMultiple.toFixed(1));
+      set('roi-headline', 'Every £1 invested generates £' + d.roiMultiple.toFixed(2) + ' in additional revenue over two years.');
+    }
+
+    ['conversations','convRate','dealValue','uplift','salary','equipment'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', render);
+    });
+
+    render();
+  </script>
+</body>
+</html>
