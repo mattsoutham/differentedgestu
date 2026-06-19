@@ -1201,6 +1201,97 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   UPGRADE BAND
+   ============================================================ */
+.upgrade-band {
+  background: #26215C;
+  width: 100%;
+}
+.upgrade-band__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.upgrade-band__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5DCAA5;
+  margin: 0;
+}
+.upgrade-band__headline {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.15;
+}
+.upgrade-band__body {
+  font-size: 1.0625rem;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.7;
+}
+.upgrade-band__checks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+}
+.upgrade-band__checks li {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.upgrade-band__tick {
+  color: #5DCAA5;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.upgrade-band__cta {
+  background: #5DCAA5;
+  color: #0a0a0a;
+  border-color: #5DCAA5;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.upgrade-band__cta:hover {
+  background: #4ab893;
+  border-color: #4ab893;
+  color: #0a0a0a;
+}
+.upgrade-band__learn {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.upgrade-band__learn:hover {
+  color: #5DCAA5;
+}
+.upgrade-band__scarcity {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* ============================================================
    ANIMATIONS (on-scroll fade-up)
    ============================================================ */
 [data-reveal] {
