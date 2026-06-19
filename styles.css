@@ -728,7 +728,7 @@ ul { list-style: none; }
 }
 
 .logos__track img {
-  height: 24px;
+  height: 48px;
   width: auto;
   flex-shrink: 0;
   filter: brightness(0) invert(1);
