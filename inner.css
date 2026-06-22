@@ -851,26 +851,24 @@
   grid-template-columns: 1fr 48px 1fr;
   align-items: center;
   padding: 1.1rem 1.5rem;
-  background: var(--accent);
+  border-top: 1px solid var(--border);
 }
 
 .studio-comparison__footer-them,
 .studio-comparison__footer-us {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--black);
+  color: var(--white);
 }
 
-.studio-comparison__footer-us { text-align: right; }
+.studio-comparison__footer-them { color: rgba(255,255,255,0.4); }
+
+.studio-comparison__footer-us { text-align: right; color: var(--accent); }
 
 .studio-comparison__footer-arrow {
   text-align: center;
   font-size: 1rem;
-  color: var(--black);
-  background: rgba(0,0,0,0.15);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
