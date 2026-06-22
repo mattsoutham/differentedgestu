@@ -1271,6 +1271,46 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   WHAT'S INCLUDED TABLE
+   ============================================================ */
+.incl-table {
+  max-width: 700px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+.incl-table__header {
+  padding: 1rem 1.75rem;
+  background: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.incl-table__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.75rem;
+  border-top: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.incl-table__row:hover { background: rgba(255,255,255,0.03); }
+.incl-table__row--last { border-bottom: none; }
+.incl-table__label {
+  font-size: 0.9375rem;
+  color: var(--white);
+}
+.incl-table__tick {
+  color: var(--accent);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================================
    UPGRADE BAND
    ============================================================ */
 .upgrade-band {
