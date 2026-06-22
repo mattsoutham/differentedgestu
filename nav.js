@@ -3,6 +3,12 @@
   const CALENDLY = 'https://calendly.com/differentedgestudio'; // update this link
 
   const html = `
+  <div class="announce-bar">
+    <div class="announce-bar__inner">
+      <span class="announce-bar__text">2025 National Sales Awards — Finalist</span>
+      <img src="/images/NSA-logo-white.png" alt="National Sales Awards 2025 Finalist" class="announce-bar__logo" />
+    </div>
+  </div>
   <header class="nav">
     <div class="nav__inner container">
       <a href="/" class="nav__logo">
