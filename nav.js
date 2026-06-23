@@ -6,7 +6,7 @@
   <div class="announce-bar">
     <div class="announce-bar__inner">
       <span class="announce-bar__text">2025 National Sales Awards — Finalist</span>
-      <img src="/images/NSA-logo-white.png" alt="National Sales Awards 2025 Finalist" class="announce-bar__logo" />
+      <img src="/images/NSA-logo.svg" alt="National Sales Awards 2025 Finalist" class="announce-bar__logo" />
     </div>
   </div>
   <header class="nav">
