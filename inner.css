@@ -534,12 +534,15 @@
 
 /* Hero image below page header */
 .service-hero-img { background: var(--black); padding-block: 0 3rem; }
-.service-hero-video {
+.service-hero-video-wrap {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.service-hero-video--full {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 8px;
-  border: 1px solid var(--border);
 }
 .service-hero-img img {
   width: 100%;
