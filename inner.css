@@ -2,6 +2,14 @@
    INNER PAGES — shared styles for all non-home pages
    ============================================================ */
 
+/* WHO THIS IS BUILT FOR strip */
+.built-for { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.5rem 0; }
+.built-for__inner { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+.built-for__label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
+.built-for__tags { display: flex; gap: 1rem; flex-wrap: wrap; }
+.built-for__tag { display: flex; align-items: center; gap: 0.6rem; background: var(--mid); border: 1px solid var(--border); border-radius: 999px; padding: 0.55rem 1.2rem; font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.built-for__tag svg { color: var(--accent); flex-shrink: 0; }
+
 /* Active nav link */
 .nav__active { color: var(--white) !important; }
 
