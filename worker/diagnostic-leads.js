@@ -1,14 +1,16 @@
 /**
  * Different Edge Studio — Diagnostic Lead Worker
- *
- * Environment variables (set as Secrets in Cloudflare dashboard):
- *   MAILGUN_API_KEY      — your Mailgun API key
- *   MAILGUN_DOMAIN       — your sending domain, e.g. mg.differentedgestudio.com
- *   NOTIFY_EMAIL         — comma-separated addresses to alert, e.g. matt@mjsmedia.co.uk,dan@...
- *   FROM_EMAIL           — sending address, e.g. results@differentedgestudio.com
- *   MAILERLITE_API_KEY   — (optional) MailerLite API key
- *   MAILERLITE_GROUP_ID  — (optional) MailerLite group/segment ID to add subscriber to
+ * Fill in your values in the CONFIG block below, then hit Deploy.
  */
+
+const CONFIG = {
+  MAILGUN_API_KEY:  'FILL_IN',   // your Mailgun API key
+  MAILGUN_DOMAIN:   'FILL_IN',   // e.g. mg.differentedgestudio.com
+  FROM_EMAIL:       'results@differentedgestudio.com',
+  NOTIFY_EMAIL:     'matt@mjsmedia.co.uk',  // add ,dan@... if needed
+  MAILERLITE_API_KEY:  '',  // leave blank if not using
+  MAILERLITE_GROUP_ID: '',  // leave blank if not using
+};
 
 const ALLOWED_ORIGIN = 'https://differentedgestudio.com';
 
@@ -50,24 +52,24 @@ export default {
 
     try {
       // 1. Email results to the user
-      await sendEmail(env, {
+      await sendEmail(null, {
         to: `${name} <${email}>`,
-        from: `Different Edge Studio <${env.FROM_EMAIL}>`,
+        from: `Different Edge Studio <${CONFIG.FROM_EMAIL}>`,
         subject: 'Your Sales Video Assessment Results',
         html: buildUserEmail(name, score, recommendation, areas),
       });
 
       // 2. Alert the DES team
-      await sendEmail(env, {
-        to: env.NOTIFY_EMAIL,
-        from: `DES Diagnostic <${env.FROM_EMAIL}>`,
+      await sendEmail(null, {
+        to: CONFIG.NOTIFY_EMAIL,
+        from: `DES Diagnostic <${CONFIG.FROM_EMAIL}>`,
         subject: `New diagnostic lead: ${name} — ${score}/7 — ${recommendation}`,
         html: buildLeadEmail(name, email, size, score, recommendation, areas),
       });
 
       // 3. Add to MailerLite (optional — only runs if MAILERLITE_API_KEY is set)
-      if (env.MAILERLITE_API_KEY) {
-        await addToMailerLite(env, { name, email });
+      if (CONFIG.MAILERLITE_API_KEY) {
+        await addToMailerLite(null, { name, email });
       }
 
       return new Response(JSON.stringify({ ok: true }), {
@@ -86,12 +88,12 @@ export default {
 
 /* ── Mailgun ─────────────────────────────────────────────────── */
 
-async function sendEmail(env, { to, from, subject, html }) {
+async function sendEmail(_, { to, from, subject, html }) {
   const body = new URLSearchParams({ to, from, subject, html });
-  const res = await fetch(`https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}/messages`, {
+  const res = await fetch(`https://api.mailgun.net/v3/${CONFIG.MAILGUN_DOMAIN}/messages`, {
     method: 'POST',
     headers: {
-      Authorization: `Basic ${btoa('api:' + env.MAILGUN_API_KEY)}`,
+      Authorization: `Basic ${btoa('api:' + CONFIG.MAILGUN_API_KEY)}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body,
@@ -104,21 +106,21 @@ async function sendEmail(env, { to, from, subject, html }) {
 
 /* ── MailerLite ──────────────────────────────────────────────── */
 
-async function addToMailerLite(env, { name, email }) {
+async function addToMailerLite(_, { name, email }) {
   const [firstName, ...rest] = name.trim().split(' ');
   const payload = {
     email,
     fields: { name: firstName, last_name: rest.join(' ') || '' },
     status: 'active',
   };
-  if (env.MAILERLITE_GROUP_ID) {
-    payload.groups = [env.MAILERLITE_GROUP_ID];
+  if (CONFIG.MAILERLITE_GROUP_ID) {
+    payload.groups = [CONFIG.MAILERLITE_GROUP_ID];
   }
   const res = await fetch('https://connect.mailerlite.com/api/subscribers', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${env.MAILERLITE_API_KEY}`,
+      Authorization: `Bearer ${CONFIG.MAILERLITE_API_KEY}`,
       Accept: 'application/json',
     },
     body: JSON.stringify(payload),
