@@ -78,7 +78,6 @@ exit;
 
 function send_email($api_key, $domain, $to, $from, $subject, $html) {
     if ($api_key) {
-        // Mailgun REST API via curl
         $ch = curl_init("https://api.mailgun.net/v3/{$domain}/messages");
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -91,10 +90,12 @@ function send_email($api_key, $domain, $to, $from, $subject, $html) {
                 'html'    => $html,
             ],
         ]);
-        curl_exec($ch);
+        $result = curl_exec($ch);
+        $err    = curl_error($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+        error_log("Mailgun response {$status}: {$result} | curl error: {$err}");
     } else {
-        // Fallback: PHP mail()
         $headers  = "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         $headers .= "From: {$from}\r\n";
