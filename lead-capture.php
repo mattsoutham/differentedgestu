@@ -2,13 +2,16 @@
 /**
  * Different Edge Studio — Diagnostic Lead Capture
  * Drop this file in the root of the site (same folder as index.html).
- * No dependencies — uses PHP's built-in mail().
+ * Uses Mailgun REST API via curl for reliable delivery.
+ * Falls back to PHP mail() if Mailgun key is not set.
  */
 
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-$NOTIFY_EMAIL = 'matt@differentedgestudio.com, dan@differentedgestudio.com';
-$FROM_EMAIL   = 'noreply@differentedgestudio.com';
-$FROM_NAME    = 'Different Edge Studio';
+$NOTIFY_EMAIL      = 'matt@differentedgestudio.com, dan@differentedgestudio.com';
+$FROM_EMAIL        = 'results@mg.differentedgestudio.com';
+$FROM_NAME         = 'Different Edge Studio';
+$MAILGUN_API_KEY   = '';  // paste your Mailgun private API key here (bbbc8336-...)
+$MAILGUN_DOMAIN    = 'mg.differentedgestudio.com';
 // ─────────────────────────────────────────────────────────────────────────────
 
 header('Access-Control-Allow-Origin: https://differentedgestudio.com');
@@ -49,29 +52,55 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
-$headers .= "Reply-To: {$FROM_EMAIL}\r\n";
-
 // 1. Email results to the user
-$user_subject = 'Your Sales Video Assessment Results';
-$user_body    = build_user_email($name, $score, $recommendation, $areas);
-mail($email, $user_subject, $user_body, $headers);
+send_email(
+    $MAILGUN_API_KEY, $MAILGUN_DOMAIN,
+    $email,
+    "{$FROM_NAME} <{$FROM_EMAIL}>",
+    'Your Sales Video Assessment Results',
+    build_user_email($name, $score, $recommendation, $areas)
+);
 
 // 2. Alert the DES team
-$team_subject = "New diagnostic lead: {$name} — {$score}/7 — {$recommendation}";
-$team_body    = build_lead_email($name, $email, $size, $score, $recommendation, $areas);
-
-$team_headers  = "MIME-Version: 1.0\r\n";
-$team_headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$team_headers .= "From: DES Diagnostic <{$FROM_EMAIL}>\r\n";
-$team_headers .= "Reply-To: {$email}\r\n";
-mail($NOTIFY_EMAIL, $team_subject, $team_body, $team_headers);
+send_email(
+    $MAILGUN_API_KEY, $MAILGUN_DOMAIN,
+    $NOTIFY_EMAIL,
+    "DES Diagnostic <{$FROM_EMAIL}>",
+    "New diagnostic lead: {$name} — {$score}/7 — {$recommendation}",
+    build_lead_email($name, $email, $size, $score, $recommendation, $areas)
+);
 
 http_response_code(200);
 echo json_encode(['ok' => true]);
 exit;
+
+// ── Mailer ────────────────────────────────────────────────────────────────────
+
+function send_email($api_key, $domain, $to, $from, $subject, $html) {
+    if ($api_key) {
+        // Mailgun REST API via curl
+        $ch = curl_init("https://api.mailgun.net/v3/{$domain}/messages");
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD        => "api:{$api_key}",
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => [
+                'from'    => $from,
+                'to'      => $to,
+                'subject' => $subject,
+                'html'    => $html,
+            ],
+        ]);
+        curl_exec($ch);
+        curl_close($ch);
+    } else {
+        // Fallback: PHP mail()
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: {$from}\r\n";
+        mail($to, $subject, $html, $headers);
+    }
+}
 
 // ── Email templates ───────────────────────────────────────────────────────────
 
