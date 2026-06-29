@@ -4,12 +4,18 @@
  */
 
 const CONFIG = {
-  MAILGUN_API_KEY:  'FILL_IN',   // your Mailgun API key
-  MAILGUN_DOMAIN:   'FILL_IN',   // e.g. mg.differentedgestudio.com
+  MAILGUN_API_KEY:  'YOUR_MAILGUN_API_KEY',  // paste your Mailgun API key here
+  MAILGUN_DOMAIN:   'mg.differentedgestudio.com',
   FROM_EMAIL:       'results@differentedgestudio.com',
-  NOTIFY_EMAIL:     'matt@mjsmedia.co.uk',  // add ,dan@... if needed
-  MAILERLITE_API_KEY:  '',  // leave blank if not using
-  MAILERLITE_GROUP_ID: '',  // leave blank if not using
+  NOTIFY_EMAIL:     'matt@differentedgestudio.com,dan@differentedgestudio.com',
+
+  // HubSpot — create a Private App token at:
+  // HubSpot → Settings → Integrations → Private Apps → Create private app
+  // Scopes needed: crm.objects.contacts.write
+  HUBSPOT_API_KEY:  'YOUR_HUBSPOT_PRIVATE_APP_TOKEN',  // paste token here
+
+  MAILERLITE_API_KEY:  '',  // leave blank — not using
+  MAILERLITE_GROUP_ID: '',
 };
 
 const ALLOWED_ORIGIN = 'https://differentedgestudio.com';
@@ -67,7 +73,12 @@ export default {
         html: buildLeadEmail(name, email, size, score, recommendation, areas),
       });
 
-      // 3. Add to MailerLite (optional — only runs if MAILERLITE_API_KEY is set)
+      // 3. Add to HubSpot CRM
+      if (CONFIG.HUBSPOT_API_KEY && !CONFIG.HUBSPOT_API_KEY.startsWith('YOUR_')) {
+        await addToHubspot({ name, email, size, score, recommendation });
+      }
+
+      // 4. Add to MailerLite (optional — only runs if key is set)
       if (CONFIG.MAILERLITE_API_KEY) {
         await addToMailerLite(null, { name, email });
       }
@@ -128,6 +139,59 @@ async function addToMailerLite(_, { name, email }) {
   if (!res.ok && res.status !== 409) { // 409 = already subscribed, that's fine
     const text = await res.text();
     console.warn(`MailerLite: ${res.status} ${text}`);
+  }
+}
+
+/* ── HubSpot ─────────────────────────────────────────────────── */
+
+async function addToHubspot({ name, email, size, score, recommendation }) {
+  const [firstname, ...rest] = name.trim().split(' ');
+  const lastname = rest.join(' ') || '';
+
+  // Create or update contact
+  const res = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${CONFIG.HUBSPOT_API_KEY}`,
+    },
+    body: JSON.stringify({
+      properties: {
+        firstname,
+        lastname,
+        email,
+        // Standard HubSpot properties
+        company_size: size,
+        // Lead source note — stored in the built-in notes/message field
+        hs_lead_status: 'NEW',
+        lifecyclestage: 'lead',
+        lead_source_detail: `DES Diagnostic — Score: ${score}/7 — Recommendation: ${recommendation}`,
+      },
+    }),
+  });
+
+  // 409 = contact already exists — update it instead
+  if (res.status === 409) {
+    const existing = await res.json();
+    const id = existing.message?.match(/ID: (\d+)/)?.[1];
+    if (id) {
+      await fetch(`https://api.hubapi.com/crm/v3/objects/contacts/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${CONFIG.HUBSPOT_API_KEY}`,
+        },
+        body: JSON.stringify({
+          properties: {
+            lead_source_detail: `DES Diagnostic — Score: ${score}/7 — Recommendation: ${recommendation}`,
+            hs_lead_status: 'NEW',
+          },
+        }),
+      });
+    }
+  } else if (!res.ok) {
+    const text = await res.text();
+    console.warn(`HubSpot: ${res.status} ${text}`);
   }
 }
 
