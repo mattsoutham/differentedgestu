@@ -79,7 +79,7 @@ exit;
 
 function send_email($api_key, $domain, $to, $from, $subject, $html) {
     if ($api_key) {
-        $ch = curl_init("https://api.mailgun.net/v3/{$domain}/messages");
+        $ch = curl_init("https://api.eu.mailgun.net/v3/{$domain}/messages");
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_USERPWD        => "api:{$api_key}",
