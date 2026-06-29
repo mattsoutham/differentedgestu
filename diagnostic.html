@@ -387,10 +387,14 @@
       document.getElementById('btn-gate').disabled = !(n && e.includes('@') && e.includes('.') && s);
     }
 
+    // Update this URL after deploying the Cloudflare Worker
+    const WORKER_URL = 'https://diagnostic-leads.YOUR_SUBDOMAIN.workers.dev';
+
     function submitGate() {
       const name = document.getElementById('g-name').value.trim();
       const email = document.getElementById('g-email').value.trim();
       const size = document.getElementById('g-size').value;
+      const btn = document.getElementById('btn-gate');
 
       const areas = {
         visibility: { label: 'Visibility', yes: 0, total: 0 },
@@ -405,11 +409,16 @@
 
       const recoTitle = getRecommendation(areas, total);
 
-      // TODO: replace with Cloudflare Worker POST
-      console.log('LEAD:', { name, email, size, score: total, recommendation: recoTitle });
-
+      // Show results immediately — don't make the user wait on the network call
       document.getElementById('diag-gate').classList.add('hidden');
       renderResults(areas, total, recoTitle);
+
+      // Fire-and-forget POST to Cloudflare Worker
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, size, score: total, recommendation: recoTitle, areas }),
+      }).catch(err => console.warn('Lead capture failed:', err));
     }
 
     function getRecommendation(areas, total) {
