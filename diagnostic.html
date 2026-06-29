@@ -387,8 +387,7 @@
       document.getElementById('btn-gate').disabled = !(n && e.includes('@') && e.includes('.') && s);
     }
 
-    // Update this URL after deploying the Cloudflare Worker
-    const WORKER_URL = 'https://diagnostic-leads.frosty-field-6160.workers.dev';
+    const WORKER_URL = '/lead-capture.php';
 
     function submitGate() {
       const name = document.getElementById('g-name').value.trim();
