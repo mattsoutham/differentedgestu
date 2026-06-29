@@ -1,6 +1,6 @@
 // Shared nav component — included on every page
 (function () {
-  const CALENDLY = 'https://calendly.com/differentedgestudio'; // update this link
+  const CALENDLY = 'https://calendly.com/dan_de/bootcamp-application'; // update this link
 
   const html = `
   <div class="announce-bar">
