@@ -1234,6 +1234,31 @@ ul { list-style: none; }
   height: 24px;
   width: auto;
 }
+.announce-bar__divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.announce-bar__reviews {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.announce-bar__reviews:hover .announce-bar__stars { color: #f5c518; }
+.announce-bar__stars {
+  font-size: 0.85rem;
+  color: #f5c518;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+.announce-bar__google {
+  height: 16px;
+  width: auto;
+  flex-shrink: 0;
+}
 
 /* ============================================================
    MID-PAGE CTA
