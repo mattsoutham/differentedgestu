@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $raw  = file_get_contents('php://input');
+error_log("lead-capture.php hit — method: " . $_SERVER['REQUEST_METHOD'] . " | body: " . $raw);
 $data = json_decode($raw, true);
 
 if (!$data || empty($data['name']) || empty($data['email'])) {
