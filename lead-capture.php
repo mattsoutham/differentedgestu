@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $raw  = file_get_contents('php://input');
-file_put_contents(__DIR__ . '/lead-debug.log', date('Y-m-d H:i:s') . " | " . $_SERVER['REQUEST_METHOD'] . " | " . $raw . "\n", FILE_APPEND);
 $data = json_decode($raw, true);
 
 if (!$data || empty($data['name']) || empty($data['email'])) {
@@ -95,7 +94,6 @@ function send_email($api_key, $domain, $to, $from, $subject, $html) {
         $err    = curl_error($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        file_put_contents(__DIR__ . '/lead-debug.log', date('Y-m-d H:i:s') . " | Mailgun {$status}: {$result} | curl: {$err}\n", FILE_APPEND);
     } else {
         $headers  = "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
