@@ -7,6 +7,7 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Core service pages -->
   <url>
     <loc>https://differentedgestudio.com/sales-engine</loc>
     <changefreq>monthly</changefreq>
@@ -32,15 +33,67 @@
   </url>
 
   <url>
-    <loc>https://differentedgestudio.com/faq</loc>
+    <loc>https://differentedgestudio.com/the-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tools -->
+  <url>
+    <loc>https://differentedgestudio.com/diagnostic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://differentedgestudio.com/sales-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://differentedgestudio.com/our-story</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://differentedgestudio.com/blog</loc>
+    <loc>https://differentedgestudio.com/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://differentedgestudio.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://differentedgestudio.com/blog/video-throughout-b2b-sales-process/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://differentedgestudio.com/blog/why-visible-founders-are-trusted-more/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://differentedgestudio.com/blog/behavioural-science-video-trust/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://differentedgestudio.com/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
