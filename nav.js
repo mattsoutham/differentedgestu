@@ -113,12 +113,45 @@
     nav?.classList.toggle('nav--scrolled', window.scrollY > 20);
   }, { passive: true });
 
-  // Microsoft Clarity
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", "x8wqptmlwc");
+  // Analytics — only load after consent
+  function loadAnalytics() {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x8wqptmlwc");
+  }
+
+  // Cookie consent banner
+  (function() {
+    const CONSENT_KEY = 'des_cookie_consent';
+    const consent = localStorage.getItem(CONSENT_KEY);
+
+    if (consent === 'accepted') { loadAnalytics(); return; }
+    if (consent === 'declined') { return; }
+
+    // Show banner
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.innerHTML = `
+      <p>We use cookies to understand how people use our site (<a href="/privacy">Microsoft Clarity</a>). No advertising. No data selling.</p>
+      <div class="cookie-banner__actions">
+        <button id="cookie-decline">Decline</button>
+        <button id="cookie-accept" class="btn btn--primary">Accept</button>
+      </div>`;
+    document.body.appendChild(banner);
+
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      localStorage.setItem(CONSENT_KEY, 'accepted');
+      banner.remove();
+      loadAnalytics();
+    });
+
+    document.getElementById('cookie-decline').addEventListener('click', function() {
+      localStorage.setItem(CONSENT_KEY, 'declined');
+      banner.remove();
+    });
+  })();
 
   // Active nav link highlight
   const path = window.location.pathname.replace(/\/$/, '') || '/';
