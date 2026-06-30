@@ -134,7 +134,7 @@
     const banner = document.createElement('div');
     banner.id = 'cookie-banner';
     banner.innerHTML = `
-      <p>We use cookies to understand how people use our site (<a href="/privacy">Microsoft Clarity</a>). No advertising. No data selling.</p>
+      <p>We use cookies to improve your experience. <a href="/privacy">Learn more</a></p>
       <div class="cookie-banner__actions">
         <button id="cookie-decline">Decline</button>
         <button id="cookie-accept" class="btn btn--primary">Accept</button>
