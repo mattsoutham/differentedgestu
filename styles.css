@@ -1487,3 +1487,64 @@ ul { list-style: none; }
 [data-reveal-delay="1"] { transition-delay: 0.1s; }
 [data-reveal-delay="2"] { transition-delay: 0.2s; }
 [data-reveal-delay="3"] { transition-delay: 0.3s; }
+
+
+/* ── Complete Science (homepage) ───────────────────────────── */
+.complete-science {
+  background: var(--dark);
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.complete-science__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.complete-science__copy h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.complete-science__copy p {
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.complete-science__closer {
+  color: var(--white) !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.complete-science__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.stat-card {
+  background: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+.stat-card__num {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+.stat-card p:last-child {
+  font-size: 0.825rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .complete-science__inner { grid-template-columns: 1fr; gap: 3rem; }
+}
