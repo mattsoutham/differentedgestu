@@ -38,7 +38,6 @@
           <li><a href="/sales-calculator">Sales Calculator</a></li>
           <li><a href="/#about">About</a></li>
           <li><a href="/faq">FAQ</a></li>
-          <li><a href="/#science">The Science</a></li>
           <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
