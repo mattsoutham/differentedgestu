@@ -1117,6 +1117,18 @@ ul { list-style: none; }
   transition: color 0.2s;
 }
 .footer__nav a:hover { color: var(--white); }
+.footer__social {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.footer__social a {
+  color: var(--muted);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.footer__social a:hover { color: var(--accent); }
 
 /* ============================================================
    RESPONSIVE
