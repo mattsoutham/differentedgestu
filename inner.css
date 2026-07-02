@@ -590,6 +590,7 @@
   width: 100%;
   height: auto;
   max-height: none;
+  mix-blend-mode: screen;
   object-fit: contain;
   border-radius: 8px;
   border: 1px solid var(--border);
