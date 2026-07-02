@@ -575,7 +575,7 @@
    ============================================================ */
 
 /* Hero image below page header */
-.service-hero-img { background: var(--black); padding-block: 0 3rem; }
+.service-hero-img { background: transparent; padding-block: 0 3rem; }
 .service-hero-video-wrap {
   width: 100%;
   overflow: hidden;
@@ -590,7 +590,6 @@
   width: 100%;
   height: auto;
   max-height: none;
-  mix-blend-mode: screen;
   object-fit: contain;
   border-radius: 8px;
   border: 1px solid var(--border);
