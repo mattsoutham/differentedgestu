@@ -30,9 +30,9 @@
               <svg class="nav__chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
             <ul class="nav__dropdown" aria-hidden="true">
-              <li><a href="/sales-engine">Sales Engine</a></li>
-              <li><a href="/visibility">Visibility</a></li>
-              <li><a href="/showcase">Showcase</a></li>
+              <li><a href="/authority-build">The Authority Build</a></li>
+              <li><a href="/visibility">The Visibility Engine</a></li>
+              <li><a href="/sales-engine">The Sales Engine</a></li>
             </ul>
           </li>
           <li><a href="/sales-calculator">Sales Calculator</a></li>
