@@ -1132,6 +1132,9 @@ ul { list-style: none; }
 }
 .footer__social a:hover { color: var(--accent); }
 
+.footer__kerfuffle img { height: 36px; width: auto; opacity: 0.8; transition: opacity 0.2s; }
+.footer__kerfuffle:hover img { opacity: 1; }
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
