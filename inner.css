@@ -1188,6 +1188,193 @@
 .faq-contact a:hover { text-decoration: underline; }
 
 /* ============================================================
+   VISIBILITY PAGE — INVESTMENT SECTION
+   ============================================================ */
+.vis-investment { background: var(--dark); }
+
+.vis-investment__grid {
+  display: grid;
+  grid-template-columns: 54% 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.vis-investment__headline {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.vis-investment__intro {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+/* Benefit rows */
+.vis-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.vis-benefit {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.vis-benefit__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.vis-benefit__icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.vis-benefit__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+.vis-benefit__body {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+}
+
+.vis-investment__rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.vis-investment__closer-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.vis-investment__closer-body {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+}
+
+/* Right column */
+.vis-investment__right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+  align-self: start;
+}
+
+.vis-investment__img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  display: block;
+}
+
+/* Pricing card */
+.vis-pricing-card {
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 1.75rem;
+}
+
+.vis-pricing-card__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.vis-pricing-card__price {
+  font-size: 2.75rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.vis-pricing-card__note {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.vis-pricing-card__divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+.vis-pricing-card__what {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.vis-pricing-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.75rem;
+}
+
+.vis-pricing-card__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+.vis-pricing-card__list li svg {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+.vis-pricing-card__cta {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .vis-investment__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .vis-investment__right {
+    position: static;
+  }
+}
+
+/* ============================================================
    COMPLETE SYSTEM PAGE
    ============================================================ */
 .step-card--wide {
