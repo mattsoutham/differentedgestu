@@ -620,6 +620,30 @@
   margin-bottom: 0.75rem;
 }
 .service-intro__copy strong { color: var(--white); }
+.service-intro__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.service-intro__bullets li {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  padding-left: 1.4rem;
+  position: relative;
+}
+.service-intro__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
 
 /* Proof cards */
 .service-intro__proof { display: flex; flex-direction: column; gap: 1.25rem; }

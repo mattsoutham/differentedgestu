@@ -862,6 +862,31 @@ ul { list-style: none; }
   flex: 1;
 }
 
+.products__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.products__bullets li {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+  padding-left: 1.2rem;
+  position: relative;
+}
+.products__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.38em;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
 .products__link {
   font-size: 0.8rem;
   font-weight: 700;
