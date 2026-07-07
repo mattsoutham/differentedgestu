@@ -57,7 +57,7 @@ send_email(
     $MAILGUN_API_KEY, $MAILGUN_DOMAIN,
     $email,
     "{$FROM_NAME} <{$FROM_EMAIL}>",
-    'Your Sales Video Assessment Results',
+    'Your Buyer Confidence Assessment Results',
     build_user_email($name, $score, $recommendation, $areas)
 );
 
@@ -141,7 +141,7 @@ function build_user_email($name, $score, $recommendation, $areas) {
 <div style='max-width:600px;margin:0 auto;padding:40px 24px;font-family:Inter,Arial,sans-serif;color:#fff;'>
   <img src='https://differentedgestudio.com/images/Logo-light.svg' alt='Different Edge Studio' style='height:32px;margin-bottom:40px;' />
   <h1 style='font-size:26px;font-weight:900;margin:0 0 8px;'>Hi {$name},</h1>
-  <p style='color:#888;font-size:15px;margin:0 0 32px;'>Here are your Sales Video Assessment results.</p>
+  <p style='color:#888;font-size:15px;margin:0 0 32px;'>Here are your Buyer Confidence Assessment results.</p>
   <div style='background:#111111;border:2px solid #c8f000;border-radius:10px;padding:28px;text-align:center;margin-bottom:32px;'>
     <p style='color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 12px;'>Overall Score</p>
     <p style='font-size:72px;font-weight:900;color:#c8f000;margin:0;line-height:1;'>{$score}<span style='font-size:32px;color:#444;'>/7</span></p>

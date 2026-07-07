@@ -61,7 +61,7 @@ export default {
       await sendEmail(null, {
         to: `${name} <${email}>`,
         from: `Different Edge Studio <${CONFIG.FROM_EMAIL}>`,
-        subject: 'Your Sales Video Assessment Results',
+        subject: 'Your Buyer Confidence Assessment Results',
         html: buildUserEmail(name, score, recommendation, areas),
       });
 
@@ -232,7 +232,7 @@ function buildUserEmail(name, score, recommendation, areas) {
   <img src="https://differentedgestudio.com/images/Logo-light.svg" alt="Different Edge Studio" style="height:32px;margin-bottom:40px;" />
 
   <h1 style="font-size:26px;font-weight:900;margin:0 0 8px;">Hi ${name},</h1>
-  <p style="color:#888;font-size:15px;margin:0 0 32px;">Here are your Sales Video Assessment results.</p>
+  <p style="color:#888;font-size:15px;margin:0 0 32px;">Here are your Buyer Confidence Assessment results.</p>
 
   <div style="background:#111111;border:2px solid #c8f000;border-radius:10px;padding:28px;text-align:center;margin-bottom:32px;">
     <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 12px;">Overall Score</p>

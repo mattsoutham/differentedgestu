@@ -338,13 +338,14 @@
     const CALENDLY = 'https://calendly.com/dan_de/bootcamp-application';
 
     const questions = [
-      { text: 'Is your founder or a senior leader regularly on camera representing the business?', area: 'visibility', areaLabel: 'Visibility' },
-      { text: 'Do you have a defined video that maps to each stage of your sales process?', area: 'engine', areaLabel: 'Sales Engine' },
-      { text: 'Do you have a brand film that tells your story in under 90 seconds?', area: 'showcase', areaLabel: 'Showcase' },
-      { text: 'Do you have a video library that addresses your top 5 buyer objections?', area: 'engine', areaLabel: 'Sales Engine' },
-      { text: 'Are your customer testimonials captured on video with real names and results?', area: 'showcase', areaLabel: 'Showcase' },
-      { text: 'Does your social content feature real people from your business, not just graphics and stock?', area: 'visibility', areaLabel: 'Visibility' },
-      { text: 'Have you specifically captured your top-performing salesperson on video so others can replicate what they do?', area: 'engine', areaLabel: 'Sales Engine' }
+      'Can buyers easily see and hear from the people leading your business before they enquire?',
+      'Do buyers receive the right commercial assets at every stage of their buying journey?',
+      'Can a new buyer understand what makes your business different in under 90 seconds?',
+      'Have you answered your buyers’ biggest questions before they need to ask them?',
+      'Do buyers see genuine proof from customers before making a decision?',
+      'Would a buyer regularly see your expertise if they followed your business for a month?',
+      'Can every salesperson consistently communicate what your top performers already know?',
+      'Does your website, marketing and sales process tell one consistent commercial story?'
     ];
 
     let current = 0;
@@ -357,12 +358,11 @@
     }
 
     function showQuestion() {
-      const q = questions[current];
-      document.getElementById('q-area').textContent = q.areaLabel;
-      document.getElementById('q-text').textContent = q.text;
-      document.getElementById('prog-text').textContent = `Question ${current + 1} of 7`;
-      document.getElementById('prog-area').textContent = q.areaLabel;
-      document.getElementById('prog-fill').style.width = ((current + 1) / 7 * 100) + '%';
+      document.getElementById('q-area').textContent = '';
+      document.getElementById('q-text').textContent = questions[current];
+      document.getElementById('prog-text').textContent = `Question ${current + 1} of 8`;
+      document.getElementById('prog-area').textContent = '';
+      document.getElementById('prog-fill').style.width = ((current + 1) / 8 * 100) + '%';
       const card = document.getElementById('q-card');
       card.style.animation = 'none';
       card.offsetHeight;
@@ -370,9 +370,9 @@
     }
 
     function answer(val) {
-      answers.push({ area: questions[current].area, yes: val });
+      answers.push(val);
       current++;
-      if (current < 7) {
+      if (current < 8) {
         showQuestion();
       } else {
         document.getElementById('diag-quiz').classList.add('hidden');
@@ -398,101 +398,35 @@
       const name = document.getElementById('g-name').value.trim();
       const email = document.getElementById('g-email').value.trim();
       const size = document.getElementById('g-size').value;
-      const btn = document.getElementById('btn-gate');
 
-      const areas = {
-        visibility: { label: 'Visibility', yes: 0, total: 0 },
-        engine:     { label: 'Sales Engine', yes: 0, total: 0 },
-        showcase:   { label: 'Showcase', yes: 0, total: 0 }
-      };
-      let total = 0;
-      answers.forEach(a => {
-        areas[a.area].total++;
-        if (a.yes) { areas[a.area].yes++; total++; }
-      });
+      const yesCount = answers.filter(Boolean).length;
+      const score = yesCount * 12.5;
+      const reco = getRecommendation(score);
 
-      const recoTitle = getRecommendation(areas, total);
-
-      // Show results immediately — don't make the user wait on the network call
       document.getElementById('diag-gate').classList.add('hidden');
-      renderResults(areas, total, recoTitle);
+      renderResults(score, reco);
 
-      // Fire-and-forget POST to Cloudflare Worker
       fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, size, score: total, recommendation: recoTitle, areas }),
+        body: JSON.stringify({ name, email, size, score, recommendation: reco.next }),
       }).catch(err => console.warn('Lead capture failed:', err));
     }
 
-    function getRecommendation(areas, total) {
-      if (total <= 2) return 'The Complete System';
-      const order = ['visibility','engine','showcase'];
-      let worst = null, worstPct = 1;
-      order.forEach(k => {
-        const pct = areas[k].total > 0 ? areas[k].yes / areas[k].total : 1;
-        if (pct < worstPct) { worstPct = pct; worst = k; }
-      });
-      return { visibility: 'Visibility', engine: 'Sales Engine', showcase: 'Showcase' }[worst] || 'The Complete System';
+    function getRecommendation(score) {
+      if (score <= 25)   return { title: 'Hidden Expertise',           next: 'The Authority Build' };
+      if (score <= 62.5) return { title: 'Building Authority',         next: 'The Authority Build + The Visibility Engine' };
+      if (score < 100)   return { title: 'Visible, But Underutilised', next: 'The Sales Engine' };
+                         return { title: 'Commercial Growth System',   next: 'The Complete System' };
     }
 
-    function renderResults(areas, total, recoTitle) {
+    function renderResults(score, reco) {
       const el = document.getElementById('diag-results');
-      const pct = Math.round((total / 7) * 100);
-      const dashOffset = 440 - (440 * pct / 100);
-      const ringColor = pct >= 70 ? '#c8f000' : pct >= 40 ? '#E0A852' : '#E05252';
-
-      const recoDesc = {
-        'Visibility': 'Your leadership team is invisible. Visibility puts your founder on camera consistently, building the authority that makes buyers choose you before the first meeting.',
-        'Sales Engine': 'Your sales process is running without its most powerful tool. Sales Engine maps video to every stage of your pipeline so prospects arrive pre-sold.',
-        'Showcase': 'You\'re missing the proof layer. Showcase gives you the brand film and customer evidence that turns interest into confidence.',
-        'The Complete System': 'The gaps span your entire commercial video presence. The Complete System addresses visibility, sales enablement, and brand proof in one programme.'
-      };
-
-      const recoLinks = {
-        'Visibility': '/visibility',
-        'Sales Engine': '/sales-engine',
-        'Showcase': '/showcase',
-        'The Complete System': '/complete-system'
-      };
-
-      const notes = {
-        visibility: {
-          0: 'No founder presence on camera. Prospects can\'t connect with a faceless business.',
-          1: 'Partial coverage. One gap is holding back your authority positioning.',
-          2: 'Strong. Your leadership is visible and building familiarity.'
-        },
-        engine: {
-          0: 'No video in the sales process. Every conversation starts cold.',
-          1: 'One element exists. Two critical gaps remain.',
-          2: 'Good coverage. Fine-tuning will tighten close rates further.',
-          3: 'Excellent. Your sales team is equipped with video at every stage.'
-        },
-        showcase: {
-          0: 'No proof on film. Prospects have nothing to anchor trust to.',
-          1: 'One piece exists. The other gap is diluting your credibility.',
-          2: 'Both covered. Your proof layer is doing its job.'
-        }
-      };
-
-      let indexHTML = '';
-      ['visibility','engine','showcase'].forEach(key => {
-        const a = areas[key];
-        const aPct = a.total > 0 ? Math.round((a.yes / a.total) * 100) : 0;
-        const cls = aPct >= 75 ? 'good' : aPct >= 50 ? 'mid' : 'weak';
-        const note = notes[key][a.yes] || '';
-        indexHTML += `
-          <div class="diag-breakdown__row">
-            <div class="diag-breakdown__score ${cls}">${a.yes}/${a.total}</div>
-            <div>
-              <div class="diag-breakdown__area">${a.label}</div>
-              <div class="diag-breakdown__note">${note}</div>
-            </div>
-          </div>`;
-      });
+      const dashOffset = 440 - (440 * score / 100);
+      const ringColor = score >= 75 ? '#c8f000' : score >= 37.5 ? '#E0A852' : '#E05252';
 
       el.innerHTML = `
-        <h2>Your Video Revenue <span class="accent">Score</span></h2>
+        <h2>Your Buyer Confidence <span class="accent">Score</span></h2>
         <div class="diag-ring-wrap">
           <div class="diag-ring">
             <svg viewBox="0 0 160 160">
@@ -500,25 +434,21 @@
               <circle class="diag-ring__fill" id="ring-anim" cx="80" cy="80" r="70" style="stroke:${ringColor}"/>
             </svg>
             <div class="diag-ring__num">
-              <span class="diag-ring__big">${total}</span>
-              <span class="diag-ring__of">out of 7</span>
+              <span class="diag-ring__big">${Math.round(score)}</span>
+              <span class="diag-ring__of">out of 100</span>
             </div>
           </div>
         </div>
         <div class="diag-breakdown">
-          <div class="diag-breakdown__heading">Score breakdown</div>
-          ${indexHTML}
+          <div class="diag-breakdown__heading">Your result</div>
+          <div class="diag-breakdown__row">
+            <div class="diag-breakdown__area">${reco.title}</div>
+          </div>
         </div>
         <div class="diag-reco">
-          <div class="diag-reco__label">Our recommendation</div>
-          <h3>${recoTitle}</h3>
-          <p>${recoDesc[recoTitle]}</p>
+          <div class="diag-reco__label">Recommended next step</div>
+          <h3>${reco.next}</h3>
           <a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn--primary">Book a Strategy Call &rarr;</a>
-        </div>
-        <div class="diag-upsell">
-          <h4>Want the full picture?</h4>
-          <p>This scored 7 areas. Our deep-dive diagnostic assesses 30, and it's free. We'll audit your site, sales process, and competitor landscape, then record a personalised video walkthrough of exactly where the gaps are costing you deals.</p>
-          <a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn--ghost" style="margin-top:0.5rem;">Request the free 30-point diagnostic &rarr;</a>
         </div>
       `;
       el.classList.remove('hidden');
