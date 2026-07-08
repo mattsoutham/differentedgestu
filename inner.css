@@ -626,6 +626,33 @@
   margin-bottom: 0.75rem;
 }
 .service-intro__copy strong { color: var(--white); }
+.service-intro__outcomes {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.service-intro__outcomes li {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  padding-left: 1.6rem;
+  position: relative;
+  line-height: 1.5;
+}
+.service-intro__outcomes li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.service-intro__outcomes strong {
+  color: var(--white);
+}
+
 .service-intro__bullets {
   list-style: none;
   padding: 0;
