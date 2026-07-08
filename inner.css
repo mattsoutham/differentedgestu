@@ -1099,14 +1099,13 @@
   line-height: 1.4;
 }
 .pricing-checklist li::before {
-  content: '';
+  content: '✓';
   position: absolute;
   left: 0;
-  top: 0.2em;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
+  top: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 
 /* ============================================================
