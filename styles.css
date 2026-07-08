@@ -859,8 +859,8 @@ ul { list-style: none; }
   font-size: 0.875rem;
   color: rgba(255,255,255,0.5);
   line-height: 1.6;
-  flex: 1;
 }
+.products__price { margin-top: auto; }
 
 .products__bullets {
   list-style: none;
