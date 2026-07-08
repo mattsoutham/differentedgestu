@@ -1431,6 +1431,52 @@ ul { list-style: none; }
 /* ============================================================
    UPGRADE BAND
    ============================================================ */
+/* ── Numbers Band ── */
+.numbers-band { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.numbers-band__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.numbers-band__item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.numbers-band__item:last-child { border-right: none; }
+.numbers-band__product {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.numbers-band__stat {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.numbers-band__desc {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+}
+.numbers-band__source {
+  font-size: 0.7rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 0.25rem;
+}
+@media (max-width: 768px) {
+  .numbers-band__grid { grid-template-columns: 1fr; }
+  .numbers-band__item { border-right: none; border-bottom: 1px solid var(--border); }
+  .numbers-band__item:last-child { border-bottom: none; }
+}
+
 .upgrade-band {
   background: var(--mid);
   border-top: 2px solid var(--accent);
