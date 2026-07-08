@@ -1383,6 +1383,22 @@
   line-height: 1.1;
   margin-bottom: 0.75rem;
 }
+.vis-upfront-box__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.vis-upfront-box__cta {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.vis-upfront-box__cta:hover { text-decoration: underline; }
 .vis-upfront-box__perks {
   list-style: none;
   padding: 0;
