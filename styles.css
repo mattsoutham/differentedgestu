@@ -1305,9 +1305,10 @@ ul { list-style: none; }
   flex-shrink: 0;
 }
 @media (max-width: 480px) {
-  .announce-bar__reviews,
+  :root { --announce-h: 64px; }
+  .announce-bar__inner { flex-wrap: wrap; justify-content: center; gap: 0.3rem 0.75rem; }
   .announce-bar__divider { display: none; }
-  .announce-bar__inner { gap: 0.6rem; }
+  .announce-bar__reviews { flex-basis: 100%; justify-content: center; }
 }
 
 /* ============================================================
