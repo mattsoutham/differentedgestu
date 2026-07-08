@@ -36,11 +36,12 @@
     .se-feature-list { list-style: none; margin-top: 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     .se-feature-list li { font-size: 13px; line-height: 1.5; color: var(--muted); padding-left: 18px; position: relative; }
     .se-feature-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-    .se-scope { font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 2rem; }
-    .se-anchor { padding: 20px 0; border-top: 1px solid var(--border); margin-top: 2rem; }
-    .se-anchor p { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0; }
-    .se-anchor strong { color: var(--white); font-weight: 600; }
-    .se-ctas { padding: 1.5rem 0 0; display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+    .se-bottom-cta { display: flex; align-items: center; gap: 3rem; margin-top: 2.5rem; padding: 2rem 2.5rem; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.03); }
+    .se-bottom-cta__copy { flex: 1; }
+    .se-bottom-cta__headline { font-size: 1.05rem; font-weight: 700; color: var(--white); margin: 0 0 0.5rem; }
+    .se-bottom-cta__body { font-size: 0.875rem; line-height: 1.6; color: var(--muted); margin: 0; }
+    .se-bottom-cta__body strong { color: var(--white); font-weight: 600; }
+    .se-ctas { display: flex; flex-direction: column; gap: 12px; width: 340px; flex-shrink: 0; }
     .se-cta-primary { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px 24px; background: var(--accent); color: var(--black); font-family: var(--font); font-size: 15px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: normal; text-align: center; }
     .se-cta-primary:hover { background: #b8ee00; transform: translateY(-1px); }
     .se-cta-primary svg { width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.2s; }
@@ -53,7 +54,8 @@
       .se-section { padding: 72px 0; }
       .se-pricing-grid { grid-template-columns: 1fr; }
       .se-headline { font-size: 34px; }
-      .se-ctas { max-width: 100%; }
+      .se-ctas { max-width: 100%; width: 100%; }
+      .se-bottom-cta { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
     }
     @media (max-width: 480px) {
       .se-headline { font-size: 28px; }
@@ -261,19 +263,21 @@
 
         </div>
 
-        <div class="se-anchor">
-          <p>Your platform grows with your team. <strong>Starter licence includes up to 10 users</strong>, with additional seats available as your business grows.</p>
-        </div>
-        <p class="se-scope">We scope your pipeline during a 20-minute strategy call first. You'll know exactly where the opportunity is and what we'll build before investing.</p>
-        <div class="se-ctas">
-          <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="se-cta-primary">
-            Book your 20-minute scoping call
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="/sales-calculator" class="se-cta-secondary">
-            Sales Engine vs. a new hire. See the ROI
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+        <div class="se-bottom-cta">
+          <div class="se-bottom-cta__copy">
+            <p class="se-bottom-cta__headline">Know exactly what you're getting before you invest.</p>
+            <p class="se-bottom-cta__body">We scope your pipeline on a 20-minute call first. You'll see the opportunity and what we'll build before committing. Starter licence includes <strong>up to 10 users</strong>, with additional seats available as your team grows.</p>
+          </div>
+          <div class="se-ctas">
+            <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="se-cta-primary">
+              Book your 20-minute scoping call
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="/sales-calculator" class="se-cta-secondary">
+              Sales Engine vs. a new hire. See the ROI
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
