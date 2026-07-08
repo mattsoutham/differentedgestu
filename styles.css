@@ -1256,6 +1256,7 @@ ul { list-style: none; }
   right: 0;
   z-index: 1001;
   height: var(--announce-h);
+  overflow: hidden;
   background: var(--black);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -1302,6 +1303,11 @@ ul { list-style: none; }
   height: 16px;
   width: auto;
   flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .announce-bar__reviews,
+  .announce-bar__divider { display: none; }
+  .announce-bar__inner { gap: 0.6rem; }
 }
 
 /* ============================================================
