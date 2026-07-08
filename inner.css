@@ -1362,44 +1362,49 @@
 }
 
 .vis-upfront-box {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   border: 1px solid var(--accent);
   border-radius: 8px;
-  padding: 1rem 1.25rem;
+  padding: 1.1rem 1.25rem 1.25rem;
   margin-top: 1.25rem;
   background: rgba(200,240,0,0.04);
 }
-.vis-upfront-box__icon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-}
 .vis-upfront-box__label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--accent);
-  letter-spacing: 0.02em;
-  margin-bottom: 0.2rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
 }
 .vis-upfront-box__price {
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 900;
   color: var(--white);
   line-height: 1.1;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.75rem;
 }
-.vis-upfront-box__note {
+.vis-upfront-box__perks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.vis-upfront-box__perks li {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.8);
+  padding-left: 1.4rem;
+  position: relative;
   line-height: 1.4;
+}
+.vis-upfront-box__perks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .vis-pricing-card__label {
