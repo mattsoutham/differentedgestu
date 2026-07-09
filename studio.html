@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="/images/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Hire — East Sussex Video &amp; Podcast Studio | Different Edge Studio</title>
+  <meta name="description" content="A purpose-built podcast and video studio on the East Sussex coast. Available to hire for founders, consultants and growing businesses. Bootstrap Studio Packs from £79/month." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://differentedgestudio.com/studio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://differentedgestudio.com/studio" />
+  <meta property="og:title" content="Studio Hire — Different Edge Studio" />
+  <meta property="og:description" content="A purpose-built podcast and video studio on the East Sussex coast for founders, consultants and growing businesses." />
+  <meta property="og:image" content="https://differentedgestudio.com/images/og-home.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="inner.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── STUDIO PAGE STYLES ── */
+
+    /* Placeholder image block */
+    .studio-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: #1a1a1a;
+      border: 1px dashed rgba(200,240,0,0.25);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .studio-placeholder--sq {
+      aspect-ratio: 4/3;
+    }
+
+    /* ── WHITE SECTIONS ── */
+    .studio-white {
+      background: #ffffff;
+      color: #0a0a0a;
+    }
+    .studio-white .eyebrow { color: rgba(0,0,0,0.45); }
+    .studio-white h2 { color: #0a0a0a; }
+    .studio-white p { color: rgba(0,0,0,0.65); }
+
+    /* ── REASSURANCE TILES ── */
+    .reassurance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .reassurance-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .reassurance-card__icon {
+      width: 44px;
+      height: 44px;
+      background: #f0f9e0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: #5a8500;
+    }
+    .reassurance-card h3 { font-size: 1.05rem; font-weight: 700; color: #0a0a0a; margin: 0 0 0.5rem; }
+    .reassurance-card p { font-size: 0.9rem; line-height: 1.6; color: rgba(0,0,0,0.6); margin: 0; }
+
+    /* ── CHECKLIST ── */
+    .studio-checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem 2rem;
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 1.5rem;
+    }
+    .studio-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.95rem;
+      color: #0a0a0a;
+    }
+    .studio-checklist li::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #0a0a0a;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='3 8 6.5 11.5 13 5' stroke='%23c8f000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 14px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .studio-proof-line {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.5);
+      margin: 0;
+    }
+
+    /* ── QUALIFY BOX ── */
+    .qualify-box {
+      background: #f5f5f5;
+      border-left: 3px solid #c8f000;
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 1.75rem;
+      margin-top: 2rem;
+    }
+    .qualify-box h3 { font-size: 1rem; font-weight: 700; color: #0a0a0a; margin: 0 0 0.5rem; }
+    .qualify-box p { font-size: 0.9rem; line-height: 1.6; color: rgba(0,0,0,0.65); margin: 0 0 0.5rem; }
+    .qualify-box p:last-child { margin: 0; font-size: 0.8rem; color: rgba(0,0,0,0.45); }
+
+    /* ── PACKAGE CARDS ── */
+    .studio-packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      align-items: start;
+    }
+    .pkg-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .pkg-card--featured {
+      border: 2px solid #c8f000;
+      box-shadow: 0 0 0 4px rgba(200,240,0,0.08);
+    }
+    .pkg-card__badge {
+      background: #c8f000;
+      color: #0a0a0a;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0.45rem 0;
+    }
+    .pkg-card__body {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .pkg-card__num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin: 0 0 0.25rem;
+    }
+    .pkg-card__name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #0a0a0a;
+      margin: 0 0 0.3rem;
+    }
+    .pkg-card__tagline {
+      font-size: 0.875rem;
+      color: rgba(0,0,0,0.55);
+      margin: 0 0 1.25rem;
+      line-height: 1.4;
+    }
+    .pkg-card__price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin: 0 0 0.25rem;
+      line-height: 1.1;
+    }
+    .pkg-card__price-note {
+      font-size: 0.78rem;
+      color: rgba(0,0,0,0.45);
+      margin: 0 0 1.25rem;
+    }
+    .pkg-card__divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin: 0 0 1.25rem;
+    }
+    .pkg-card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+    .pkg-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: rgba(0,0,0,0.7);
+      line-height: 1.4;
+    }
+    .pkg-card__list li svg { color: #5a8500; flex-shrink: 0; margin-top: 1px; }
+    .pkg-card__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+    .pkg-card__cta--outline {
+      background: transparent;
+      border: 1.5px solid rgba(0,0,0,0.2);
+      color: #0a0a0a;
+    }
+    .pkg-card__cta--outline:hover { background: rgba(0,0,0,0.05); }
+    .pkg-card__cta--primary {
+      background: #c8f000;
+      color: #0a0a0a;
+    }
+    .pkg-card__cta--primary:hover { background: #b8ee00; transform: translateY(-1px); }
+
+    /* ── IMPACT UPGRADE BOX ── */
+    .upgrade-box {
+      margin-top: 2rem;
+      background: #0a0a0a;
+      border: 1px solid rgba(200,240,0,0.3);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .upgrade-box__copy { flex: 1; }
+    .upgrade-box__label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.4rem;
+    }
+    .upgrade-box__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.4rem;
+    }
+    .upgrade-box__price {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0 0 0.6rem;
+    }
+    .upgrade-box__desc {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.65);
+      margin: 0 0 0.75rem;
+    }
+    .upgrade-box__bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .upgrade-box__bullets li {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      gap: 0.5rem;
+    }
+    .upgrade-box__bullets li::before { content: '&#10003;'; color: var(--accent); font-weight: 700; }
+
+    /* ── NEXT GEN CLOSER ── */
+    .next-gen {
+      background: #0a0a0a;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding: 4rem 0;
+    }
+    .next-gen__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .next-gen__highlight {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0.5rem 0 1.5rem;
+    }
+    .next-gen__img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #1a1a1a;
+      border: 1px dashed rgba(200,240,0,0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .next-gen__how {
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .next-gen__how h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin: 0 0 0.5rem; }
+    .next-gen__how p { font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.6); margin: 0; }
+
+    /* ── CHARITY CARD ── */
+    .charity-card {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+    }
+    .charity-card__num {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #0a0a0a;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .charity-card__copy h3 { font-size: 1.05rem; font-weight: 700; color: #0a0a0a; margin: 0 0 0.35rem; }
+    .charity-card__copy p { font-size: 0.9rem; color: rgba(0,0,0,0.6); margin: 0 0 0.35rem; line-height: 1.5; }
+    .charity-card__copy small { font-size: 0.78rem; color: rgba(0,0,0,0.4); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .reassurance-grid { grid-template-columns: 1fr; }
+      .studio-packages { grid-template-columns: 1fr; }
+      .next-gen__inner { grid-template-columns: 1fr; gap: 2rem; }
+      .upgrade-box { flex-direction: column; gap: 1rem; }
+      .studio-checklist { grid-template-columns: 1fr; }
+      .charity-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV injected by nav.js -->
+
+  <main style="padding-top: var(--nav-h);">
+
+    <!-- HERO -->
+    <section class="page-hero section">
+      <div class="container page-hero__inner">
+        <p class="eyebrow">Studio Hire</p>
+        <h1>Record better content in a<br/><span class="accent">studio built for commercial growth.</span></h1>
+        <p class="page-hero__sub">A purpose-built podcast and video studio on the East Sussex coast for founders, consultants and growing businesses who want to show up professionally.</p>
+        <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:1.5rem;">Book studio call &rarr;</a>
+      </div>
+    </section>
+
+    <!-- HERO IMAGE -->
+    <div style="padding: 0 0 4rem;">
+      <div class="container">
+        <div class="studio-placeholder" style="aspect-ratio:16/6;">[ Studio hero image ]</div>
+      </div>
+    </div>
+
+    <!-- INTRO COPY -->
+    <section class="studio-white section">
+      <div class="container" style="max-width:760px; text-align:center;">
+        <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.7); margin:0;">We spend our days building commercial growth assets and systems for medium and large businesses across the UK. But when we are not working on larger client projects, our purpose-built recording studio is available to hire.</p>
+        <p style="font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.7); margin:1.25rem 0 0;">Located practically on the beach on the East Sussex coast, the space is intimate, calm and completely private. It is designed to help you feel comfortable on mic and camera, even if you are not used to being filmed.</p>
+      </div>
+    </section>
+
+    <!-- THREE REASSURANCE TILES -->
+    <section class="studio-white section" style="padding-top:0;">
+      <div class="container">
+        <p class="eyebrow" style="text-align:center;">Three things people need to trust first</p>
+        <h2 style="text-align:center; color:#0a0a0a; max-width:600px; margin:0.5rem auto 0;">Show them the studio is easy, professional and not intimidating.</h2>
+
+        <!-- Studio strip placeholder -->
+        <div style="margin: 2rem 0;">
+          <div class="studio-placeholder studio-placeholder--sq" style="aspect-ratio:21/6;">[ Three-part studio strip: mixer / camera / seating area ]</div>
+        </div>
+
+        <div class="reassurance-grid">
+          <div class="reassurance-card">
+            <div class="reassurance-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+            </div>
+            <h3>Clear sound</h3>
+            <p>Professional microphones and a controlled studio setup so your voice sounds clear, balanced and easy to listen to.</p>
+          </div>
+          <div class="reassurance-card">
+            <div class="reassurance-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="4" width="20" height="16" rx="2"/><polygon points="10 9 16 12 10 15 10 9"/></svg>
+            </div>
+            <h3>Professional video</h3>
+            <p>A multi-camera setup that makes your content look sharp without you having to manage the technical side.</p>
+          </div>
+          <div class="reassurance-card">
+            <div class="reassurance-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </div>
+            <h3>Production-ready setup</h3>
+            <p>Lighting, backdrops and filming angles adjusted to suit your content, your brand and your confidence on camera.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITY CHECKLIST -->
+    <section class="studio-white section" style="padding-top:0; padding-bottom:4rem;">
+      <div class="container">
+        <hr style="border:none; border-top:1px solid rgba(0,0,0,0.08); margin-bottom:3rem;" />
+        <p class="eyebrow" style="text-align:center;">What you get</p>
+        <h2 style="text-align:center; color:#0a0a0a; max-width:560px; margin:0.5rem auto 0;">Everything you need to record with confidence.</h2>
+        <ul class="studio-checklist">
+          <li>Purpose-built podcast and video studio</li>
+          <li>Green screen available</li>
+          <li>Clear professional audio</li>
+          <li>Bring your own props or brand items</li>
+          <li>Up to 3 x 4K cameras</li>
+          <li>Editing and social clips available</li>
+          <li>Lighting set up for you</li>
+          <li>Premium coffee and soft drinks included</li>
+          <li>Teleprompter available</li>
+          <li>Flexible studio sessions</li>
+        </ul>
+        <p class="studio-proof-line" style="text-align:center;">Hundreds of episodes recorded &mdash; 5-star rated on Google</p>
+      </div>
+    </section>
+
+    <!-- BOOTSTRAP STUDIO PACKS INTRO -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Bootstrap Studio Packs</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+          <div>
+            <h2>We champion entrepreneurship and people doing their thing.</h2>
+            <p>So if you are a solo founder, independent consultant or bootstrapping a startup, we can help you share your message with more confidence.</p>
+          </div>
+          <div class="qualify-box">
+            <h3>See if you qualify.</h3>
+            <p>For solopreneurs, first-year founders and small owner-led businesses who need professional content support without buying a full Different Edge Studio package.</p>
+            <p>Available for businesses under &pound;100k annual revenue with no internal sales or marketing team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGE CARDS -->
+    <section class="studio-white section">
+      <div class="container">
+        <p class="eyebrow" style="text-align:center;">Bootstrap Studio Packs</p>
+        <h2 style="text-align:center; color:#0a0a0a; max-width:560px; margin:0.5rem auto 0;">Choose the level of support you need.</h2>
+        <p style="text-align:center; color:rgba(0,0,0,0.5); font-size:0.875rem; margin-top:0.5rem;">SCRIPT if you know what to say. LAUNCH if you need to start properly. IMPACT if you want professional filming.</p>
+
+        <div class="studio-packages">
+
+          <!-- SCRIPT -->
+          <div class="pkg-card">
+            <div class="pkg-card__body">
+              <p class="pkg-card__num">01</p>
+              <p class="pkg-card__name">SCRIPT</p>
+              <p class="pkg-card__tagline">Monthly brand scripts in your voice, ready to film.</p>
+              <p class="pkg-card__price">&pound;79<span style="font-size:0.5em;font-weight:600;color:rgba(0,0,0,0.4);margin-left:3px;">+ vat</span></p>
+              <p class="pkg-card__price-note">/ month &mdash; 12 scripts &nbsp;|&nbsp; &pound;99 + vat / month &mdash; 20 scripts</p>
+              <hr class="pkg-card__divider" />
+              <ul class="pkg-card__list">
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>30 min phone / camera upskill</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Monthly short-form video scripts</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Hooks and talking points</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Written around your business and audience</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Works with LAUNCH or existing ideas</li>
+              </ul>
+              <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="pkg-card__cta pkg-card__cta--outline">Explore Script &rarr;</a>
+            </div>
+          </div>
+
+          <!-- LAUNCH (featured) -->
+          <div class="pkg-card pkg-card--featured">
+            <div class="pkg-card__badge">&#9733; Start Here</div>
+            <div class="pkg-card__body">
+              <p class="pkg-card__num">02</p>
+              <p class="pkg-card__name">LAUNCH</p>
+              <p class="pkg-card__tagline">Launch with a message your customers remember.</p>
+              <p class="pkg-card__price">&pound;485<span style="font-size:0.5em;font-weight:600;color:rgba(0,0,0,0.4);margin-left:3px;">+ vat</span></p>
+              <p class="pkg-card__price-note">one-off</p>
+              <hr class="pkg-card__divider" />
+              <ul class="pkg-card__list">
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>30 min content strategy session</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Audience and offer positioning</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>60 mins filming</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>60 mins edit</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>10 brand content shorts built around your expertise</li>
+              </ul>
+              <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="pkg-card__cta pkg-card__cta--primary">Start with Launch &rarr;</a>
+            </div>
+          </div>
+
+          <!-- IMPACT -->
+          <div class="pkg-card">
+            <div class="pkg-card__body">
+              <p class="pkg-card__num">03</p>
+              <p class="pkg-card__name">IMPACT</p>
+              <p class="pkg-card__tagline">Film it properly. Send it with impact.</p>
+              <p class="pkg-card__price">&pound;895<span style="font-size:0.5em;font-weight:600;color:rgba(0,0,0,0.4);margin-left:3px;">+ vat</span></p>
+              <p class="pkg-card__price-note">one-off</p>
+              <hr class="pkg-card__divider" />
+              <ul class="pkg-card__list">
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>90-minute filming session</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Pre-session content direction</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Shot list / talking points</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Professional filming</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>6 edited short-form videos</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Captions and formatting</li>
+                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="13 4 6 11 3 8"/></svg>Premium coffee and soft drinks for all studio guests</li>
+              </ul>
+              <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="pkg-card__cta pkg-card__cta--outline">Explore Impact &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- IMPACT UPGRADE -->
+        <div class="upgrade-box">
+          <div class="upgrade-box__copy">
+            <p class="upgrade-box__label">Upgrade your IMPACT Package</p>
+            <p class="upgrade-box__price">&pound;145<span style="font-size:0.45em;font-weight:600;letter-spacing:0.04em;vertical-align:middle;margin-left:3px;color:rgba(255,255,255,0.45);">+ vat</span></p>
+            <p class="upgrade-box__desc">Get 90 days access to our platform to send video by email and track the impact.</p>
+            <ul class="upgrade-box__bullets">
+              <li>Qwilr achieved 2-3x more email responses</li>
+              <li>Textla reached a nearly 100% reply rate</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- THE NEXT-GEN CLOSER -->
+    <section class="next-gen">
+      <div class="container next-gen__inner">
+        <div>
+          <p class="eyebrow">The Next-Gen Closer</p>
+          <h2 style="color:var(--white);">No Budget Shouldn't Mean No Voice.</h2>
+          <p class="next-gen__highlight">3 Free Studio Places for Local Founders &amp; Creators Aged 18&ndash;21</p>
+          <p>High-end audio and 4K video gear shouldn't just belong to established firms with massive marketing budgets. The barrier to entry is high, and we want to lower it.</p>
+          <p>Every quarter, we are giving away three fully funded studio spots to young people in Sussex aged 18 to 21 who are trying to get a business, a podcast, or a creative project off the ground.</p>
+          <p>If you are a solo founder, a freelancer, or bootstrapping a startup and need a professional, supportive space to finally build your authority and get comfortable on camera, we will provide the gear, the tech and the guidance completely on us.</p>
+          <p style="color:rgba(255,255,255,0.6);">No catch. No hidden costs. Just a leg up from a team that wants to see you win.</p>
+          <div class="next-gen__how">
+            <h3>How to apply</h3>
+            <p>Send a short, 60-second smartphone video to <a href="mailto:hello@differentedgestudio.com" style="color:var(--accent);">hello@differentedgestudio.com</a> telling us about your idea and how using the studio will help you launch it.</p>
+          </div>
+        </div>
+        <div>
+          <div class="next-gen__img-placeholder">[ Young people podcast / video setup image ]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARITY DISCOUNT -->
+    <section class="studio-white section">
+      <div class="container" style="max-width:760px;">
+        <div class="charity-card">
+          <p class="charity-card__num accent" style="color:#0a0a0a;">20%</p>
+          <div class="charity-card__copy">
+            <h3>Discount on the IMPACT Package for Sussex-based registered charities.</h3>
+            <p>For local charities who need professional content but have limited resources.</p>
+            <small>Applies to the IMPACT Package only.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta section">
+      <div class="container cta__inner">
+        <h2>Let's get you seen.</h2>
+        <p class="cta__sub">Book a quick studio call and we'll help you choose the right setup.</p>
+        <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="btn btn--primary">Book studio call &rarr;</a>
+        <ul class="cta__checks">
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>Strategic conversation with Matt or Dan</li>
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>No commitment</li>
+          <li><span class="cta__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11 14 15 10"/></svg></span>Walk away with clarity either way</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="/" class="footer__logo"><img src="images/Logo-light.svg" alt="Different Edge Studio" /></a>
+      <p class="footer__copy">&copy; 2026 Different Edge Studio. All rights reserved.</p>
+      <a href="https://kerfuffle.com" target="_blank" rel="noopener" class="footer__kerfuffle" aria-label="Kerfuffle Preferred Supplier"><img src="images/kerfuffle.webp" loading="lazy" alt="Kerfuffle Preferred Supplier" /></a>
+      <div class="footer__social"><a href="https://www.instagram.com/differentedgestudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.linkedin.com/company/diffedgestudio/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div>
+      <nav class="footer__nav" aria-label="Footer navigation"><a href="/privacy">Privacy &amp; Cookies</a></nav>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
