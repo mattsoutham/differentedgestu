@@ -23,6 +23,30 @@
   color: var(--muted);
   font-weight: 600;
 }
+.built-for__heading {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0;
+  max-width: 760px;
+}
+.built-for__sub {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 640px;
+  margin: -0.75rem 0 0;
+}
+.built-for__most-popular {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0;
+}
 .built-for__tags {
   display: flex;
   gap: 1rem;
