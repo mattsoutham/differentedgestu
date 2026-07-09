@@ -36,6 +36,12 @@
     .se-feature-list { list-style: none; margin-top: 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     .se-feature-list li { font-size: 13px; line-height: 1.5; color: var(--muted); padding-left: 18px; position: relative; }
     .se-feature-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .se-roi-nudge { padding: 5rem 0 4rem; }
+    .se-roi-nudge__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; max-width: 640px; margin: 0 auto; }
+    .se-roi-nudge__heading { font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; letter-spacing: -0.02em; color: var(--white); margin: 0; line-height: 1.2; }
+    .se-roi-nudge__sub { font-size: 1rem; line-height: 1.6; color: var(--muted); margin: 0; }
+    .se-roi-nudge__cta { width: auto; padding: 14px 28px; }
+    .se-roi-nudge__note { font-size: 0.8rem; color: rgba(255,255,255,0.35); margin: 0; }
     .se-bottom-cta { display: flex; align-items: center; gap: 3rem; margin-top: 2.5rem; padding: 2rem 2.5rem; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.03); }
     .se-bottom-cta__copy { flex: 1; }
     .se-bottom-cta__headline { font-size: 1.05rem; font-weight: 700; color: var(--white); margin: 0 0 0.5rem; }
@@ -286,6 +292,19 @@
             </a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ROI NUDGE -->
+    <section class="se-roi-nudge">
+      <div class="container se-roi-nudge__inner">
+        <h2 class="se-roi-nudge__heading">Could your current team close more before you hire again?</h2>
+        <p class="se-roi-nudge__sub">Compare the Sales Engine investment with the cost of adding another full-time salesperson.</p>
+        <a href="/sales-calculator" class="se-cta-secondary se-roi-nudge__cta">
+          Sales Engine vs. a new hire. See the ROI
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="se-roi-nudge__note">See how the investment stacks up against hiring another full-time salesperson.</p>
       </div>
     </section>
 
