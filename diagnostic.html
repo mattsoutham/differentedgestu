@@ -210,36 +210,108 @@
     .diag-breakdown__area { font-weight: 600; font-size: 0.9rem; color: var(--white); margin-bottom: 0.2rem; }
     .diag-breakdown__note { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
 
-    /* Recommendation */
-    .diag-reco {
-      background: var(--mid);
-      border: 2px solid var(--accent);
-      border-radius: 8px;
-      padding: 2rem;
+    /* Results: band name */
+    .diag-band {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* Results: score label */
+    .diag-score-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Results: summary */
+    .diag-summary {
+      font-size: 0.9375rem;
+      color: #E0E0E0;
+      line-height: 1.7;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Results: divider */
+    .diag-divider {
+      border: none;
+      border-top: 1px solid #2A2A2A;
+      margin: 24px 0;
+    }
+
+    /* Results: recommendation label */
+    .diag-reco-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
       text-align: center;
       margin-bottom: 1rem;
     }
-    .diag-reco__label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .diag-reco h3 { font-size: 1.25rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
-    .diag-reco p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
 
-    /* Upsell */
-    .diag-upsell {
-      background: var(--mid);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
+    /* Recommendation card */
+    .diag-reco-card {
+      background: #141414;
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1rem;
     }
-    .diag-upsell h4 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.35rem; }
-    .diag-upsell p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+    .diag-reco-card__name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .diag-reco-card__copy {
+      font-size: 0.9375rem;
+      color: #ffffff;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .diag-reco-card__stat {
+      font-size: 0.875rem;
+      color: #9E9E9E;
+      border-top: 1px solid #2A2A2A;
+      padding-top: 1rem;
+      margin-bottom: 0.35rem;
+      line-height: 1.5;
+    }
+    .diag-reco-card__source {
+      font-size: 0.75rem;
+      color: #666666;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.02em;
+    }
+    .diag-reco-card__cta {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 0.875rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .diag-reco-card__cta:hover { background: #b8ee00; }
 
     .hidden { display: none !important; }
 
@@ -401,7 +473,7 @@
 
       const yesCount = answers.filter(Boolean).length;
       const score = yesCount * 12.5;
-      const reco = getRecommendation(score);
+      const reco = getRecommendation(score, answers);
 
       document.getElementById('diag-gate').classList.add('hidden');
       renderResults(score, reco);
@@ -413,20 +485,99 @@
       }).catch(err => console.warn('Lead capture failed:', err));
     }
 
-    function getRecommendation(score) {
-      if (score <= 25)   return { title: 'Hidden Expertise',           next: 'The Authority Build' };
-      if (score <= 62.5) return { title: 'Building Authority',         next: 'The Authority Build + The Visibility Engine' };
-      if (score < 100)   return { title: 'Visible, But Underutilised', next: 'The Sales Engine' };
-                         return { title: 'Commercial Growth System',   next: 'The Complete System' };
+    // Question-to-cluster mapping (0-indexed)
+    // Q1=0, Q2=1, Q3=2, Q4=3, Q5=4, Q6=5, Q7=6, Q8=7
+    const CLUSTER_MAP = {
+      authority:   [0, 2],       // Q1, Q3
+      visibility:  [4, 5],       // Q5, Q6
+      sales:       [1, 3, 6],    // Q2, Q4, Q7
+    };
+
+    const COPY = {
+      authority: {
+        'Low Buyer Confidence':       'Right now, buyers are unlikely to feel confident choosing your business before speaking to your team. The expertise is there, but it\'s not visible in the places buyers look before they make contact. Every new conversation starts from scratch, and while that\'s happening, competitors who\'ve made the decision easier are getting the call first.',
+        'Emerging Buyer Confidence':  'Some of the building blocks are in place, but not enough to give buyers consistent confidence before they enquire. The gaps in your current setup may be creating hesitancy at exactly the moment a buyer is deciding who to shortlist, and that hesitancy doesn\'t wait for you to fix it. It moves to the competitor who made trust easier.',
+        product: 'The Authority Build',
+        rec: 'We extract the expertise already inside your business in a single day, transforming it into a commercial asset library that helps buyers trust you before they ever enquire. Hero film, leader authority series, and deployment across your website and sales toolkit.',
+        stat: '81% of buyers say trust is a deal breaker or deciding factor before choosing a supplier.',
+        source: 'Edelman, "In Brands We Trust?", 2019',
+        cta: 'Get Started',
+      },
+      sales: {
+        'Emerging Buyer Confidence':  'Buyers can see signals of credibility, but confidence breaks down once they\'re inside your sales pipeline. Your best salespeople build that confidence naturally, but the rest of the team can\'t replicate it consistently. That inconsistency creates hesitancy mid-deal, and while your buyers pause, your competitors stay in their ear.',
+        'Strong Buyer Confidence':    'Buyer confidence is strong at the front door. The gap is what happens between first impression and signed deal. Your team has the credibility to win, but without a consistent way to carry that confidence through every touchpoint, deals slow down and late-stage proposals go quiet.',
+        product: 'The Sales Engine',
+        rec: 'We capture the thinking, language, and commercial judgment behind your highest-performing salespeople and deploy it directly inside your CRM. Every buyer experiences the strongest version of your business, regardless of who they\'re speaking to.',
+        stat: '40%+ of B2B deals stall due to internal misalignment.',
+        source: 'Edelman-LinkedIn B2B TL Impact Report, 2025',
+        cta: 'Get Started',
+      },
+      visibility: {
+        'Emerging Buyer Confidence':  'Your business has pockets of credibility, but buyer confidence fades between touchpoints because there\'s no consistent presence keeping you visible. A buyer who finds you today might feel confident. A buyer who finds you next month might not remember you were an option. That gap is where competitors with a consistent presence quietly get ahead.',
+        'Strong Buyer Confidence':    'Buyer confidence is high when they\'re in front of you. The risk is what happens when they\'re not. Between conversations, between quarters, between campaigns, visibility drops and competitors fill the space. The businesses that hold buyer confidence over time are the ones that stay visible without burning out on producing it.',
+        product: 'The Visibility Engine',
+        rec: '90 minutes every 90 days. We capture fresh expertise from your founders and leadership team and transform it into a continuous stream of commercial assets that keep your business visible, relevant, and remembered.',
+        stat: '60% of B2B buyers will pay a premium for organisations producing consistent thought leadership.',
+        source: 'Edelman-LinkedIn, 2024 (n=3,500)',
+        cta: 'Get Started',
+      },
+      complete: {
+        'Full Buyer Confidence':      'Rare territory. Buyers can find you, trust you, and your team sells with consistency. The businesses that maintain this level of buyer confidence treat trust, visibility, and sales enablement as one connected commercial system rather than three separate efforts.',
+        'sub100':                     'Buyer confidence isn\'t breaking in one place, it\'s leaking across trust, visibility, and sales consistency. Fixing one without the others means the improvement doesn\'t compound, and your competitors only need to be stronger in one area to create enough doubt to win the deal.',
+        product: 'The Complete System',
+        rec: 'All three products working together as commercial infrastructure. Authority Build creates buyer confidence. Visibility Engine maintains it. Sales Engine deploys it where deals are won. Scoped via a strategy call and limited to four businesses per year.',
+        stat: 'Companies using video consistently across the full buyer journey see 49% faster revenue growth.',
+        source: 'Aberdeen Group',
+        cta: 'Book a Strategy Call',
+      },
+    };
+
+    function getRecommendation(score, ans) {
+      // Score band
+      let band;
+      if (score <= 25)       band = 'Low Buyer Confidence';
+      else if (score <= 62.5) band = 'Emerging Buyer Confidence';
+      else if (score < 100)  band = 'Strong Buyer Confidence';
+      else                   band = 'Full Buyer Confidence';
+
+      // Always override at extremes
+      if (score <= 25)  return { band, cluster: 'authority', summary: COPY.authority[band] };
+      if (score === 100) return { band, cluster: 'complete',  summary: COPY.complete['Full Buyer Confidence'] };
+
+      // Count "no" answers per cluster
+      const counts = { authority: 0, visibility: 0, sales: 0 };
+      Object.entries(CLUSTER_MAP).forEach(([key, indices]) => {
+        indices.forEach(i => { if (!ans[i]) counts[key]++; });
+      });
+      const q8No = !ans[7];
+
+      // Q8 special case: if Q8 is "no" AND other clusters are tied, recommend Complete System
+      if (q8No) {
+        const vals = Object.values(counts);
+        const max = Math.max(...vals);
+        const tied = vals.filter(v => v === max).length === vals.length;
+        if (tied) return { band, cluster: 'complete', summary: COPY.complete['sub100'] };
+      }
+
+      // Pick highest cluster; tiebreaker: authority > sales > visibility
+      const order = ['authority', 'sales', 'visibility'];
+      let winner = order[0];
+      for (const key of order) {
+        if (counts[key] > counts[winner]) winner = key;
+      }
+
+      return { band, cluster: winner, summary: COPY[winner][band] };
     }
 
     function renderResults(score, reco) {
       const el = document.getElementById('diag-results');
       const dashOffset = 440 - (440 * score / 100);
       const ringColor = score >= 75 ? '#c8f000' : score >= 37.5 ? '#E0A852' : '#E05252';
+      const c = COPY[reco.cluster];
+      const ctaLink = reco.cluster === 'complete' ? CALENDLY : CALENDLY;
 
       el.innerHTML = `
-        <h2>Your Buyer Confidence <span class="accent">Score</span></h2>
+        <div class="diag-score-label">Your Buyer Confidence Score: ${Math.round(score)}/100</div>
         <div class="diag-ring-wrap">
           <div class="diag-ring">
             <svg viewBox="0 0 160 160">
@@ -439,16 +590,16 @@
             </div>
           </div>
         </div>
-        <div class="diag-breakdown">
-          <div class="diag-breakdown__heading">Your result</div>
-          <div class="diag-breakdown__row">
-            <div class="diag-breakdown__area">${reco.title}</div>
-          </div>
-        </div>
-        <div class="diag-reco">
-          <div class="diag-reco__label">Recommended next step</div>
-          <h3>${reco.next}</h3>
-          <a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn--primary">Book a Strategy Call &rarr;</a>
+        <p class="diag-band">${reco.band}</p>
+        <p class="diag-summary">${reco.summary}</p>
+        <hr class="diag-divider" />
+        <p class="diag-reco-label">Your Recommendation</p>
+        <div class="diag-reco-card">
+          <p class="diag-reco-card__name">${c.product}</p>
+          <p class="diag-reco-card__copy">${c.rec}</p>
+          <p class="diag-reco-card__stat">${c.stat}</p>
+          <p class="diag-reco-card__source">${c.source}</p>
+          <a href="${ctaLink}" target="_blank" rel="noopener" class="diag-reco-card__cta">${c.cta} &rarr;</a>
         </div>
       `;
       el.classList.remove('hidden');
