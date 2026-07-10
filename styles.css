@@ -1703,3 +1703,39 @@ ul { list-style: none; }
 @media (max-width: 600px) {
   #cookie-banner { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
+/* ── PROCESS STRIP ── */
+.process-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.process-strip__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.process-strip__caption {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+.process-strip__img-wrap {
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  overflow: hidden;
+  box-shadow: 0 0 0 4px rgba(200,240,0,0.06);
+}
+.process-strip__img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.process-strip__img-wrap:hover .process-strip__img { transform: scale(1.03); }
+@media (max-width: 768px) {
+  .process-strip__grid { grid-template-columns: 1fr; gap: 2rem; }
+}
