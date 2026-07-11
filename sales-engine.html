@@ -36,6 +36,13 @@
     .se-feature-list { list-style: none; margin-top: 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     .se-feature-list li { font-size: 13px; line-height: 1.5; color: var(--muted); padding-left: 18px; position: relative; }
     .se-feature-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .se-objection { background: var(--dark); }
+    .se-objection__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .se-objection__copy .eyebrow { margin-bottom: 0.75rem; }
+    .se-objection__copy h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .se-objection__copy p { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.8); }
+    .se-objection__placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1.5px solid var(--border); border-radius: 12px; aspect-ratio: 16/9; background: rgba(255,255,255,0.03); }
+    @media (max-width: 768px) { .se-objection__grid { grid-template-columns: 1fr; gap: 2rem; } }
     .se-roi-nudge { padding: 5rem 0 4rem; }
     .se-roi-nudge__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; max-width: 640px; margin: 0 auto; }
     .se-roi-nudge__heading { font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; letter-spacing: -0.02em; color: var(--white); margin: 0; line-height: 1.2; }
@@ -272,11 +279,12 @@
                 <span class="se-price-amount">£9,995<span style="font-size:0.45em;font-weight:600;letter-spacing:0.04em;vertical-align:middle;margin-left:3px;color:var(--muted);">+vat</span></span>
                 <span class="se-price-period">to get started</span>
               </div>
-              <p class="se-price-desc">One-off implementation. Build your Sales Engine once. We analyse your pipeline, capture your top performers, build your commercial sales asset library and deploy it into your CRM.</p>
+              <p class="se-price-desc">Build your Sales Engine once. We analyse your pipeline, capture your top performers, build your commercial sales asset library and deploy it into your CRM.</p>
               <ul class="se-feature-list">
                 <li>Sales Process Audit and Pipeline Mapping</li>
                 <li>Top Performer Method Discovery</li>
                 <li>Commercial Sales Asset Library</li>
+                <li>Objection Killer Films</li>
                 <li>Professional Asset Capture</li>
                 <li>CRM Integration and Deployment</li>
                 <li>Sales Team Platform Onboarding</li>
@@ -289,10 +297,10 @@
             <div class="se-price-block">
               <p class="se-price-label">YOUR SALES ENGINE PLATFORM</p>
               <div class="se-price-row">
-                <span class="se-price-amount">£595<span style="font-size:0.45em;font-weight:600;letter-spacing:0.04em;vertical-align:middle;margin-left:3px;color:var(--muted);">+vat</span></span>
+                <span class="se-price-amount">£995<span style="font-size:0.45em;font-weight:600;letter-spacing:0.04em;vertical-align:middle;margin-left:3px;color:var(--muted);">+vat</span></span>
                 <span class="se-price-period">/ month</span>
               </div>
-              <p class="se-price-desc">Up to 10 users. The commercial platform that helps every salesperson move buyers forward with greater consistency.</p>
+              <p class="se-price-desc">Up to 15 users. The commercial platform that helps every salesperson move buyers forward with greater consistency.</p>
               <div style="border: 1px solid var(--accent); border-radius: 6px; padding: 14px 16px; margin: 14px 0; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.85);">
                 <p style="font-weight:700; color:var(--white); margin:0 0 10px;">Most platforms stop at software. We don't.</p>
                 <p style="margin:0 0 8px; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">Every Sales Engine includes:</p>
@@ -320,7 +328,7 @@
         <div class="se-bottom-cta">
           <div class="se-bottom-cta__copy">
             <p class="se-bottom-cta__headline">Know exactly what you're getting before you invest.</p>
-            <p class="se-bottom-cta__body">We scope your pipeline on a 20-minute call first. You'll see the opportunity and what we'll build before committing. Starter licence includes <strong>up to 10 users</strong>, with additional seats available as your team grows.</p>
+            <p class="se-bottom-cta__body">We scope your pipeline on a 20-minute call first. You'll see the opportunity and what we'll build before committing. Starter licence includes <strong>up to 15 users</strong>, with additional seats available as your team grows.</p>
           </div>
           <div class="se-ctas">
             <a href="https://calendly.com/dan_de/bootcamp-application" target="_blank" rel="noopener" class="se-cta-primary">
@@ -342,6 +350,24 @@
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <p class="se-roi-nudge__note">See how the investment stacks up against hiring another full-time salesperson.</p>
+      </div>
+    </section>
+
+    <!-- OBJECTION KILLERS -->
+    <section class="se-objection section">
+      <div class="container se-objection__grid" data-reveal>
+        <div class="se-objection__copy">
+          <p class="eyebrow">Built for the moments deals go quiet</p>
+          <h2>Objection Killers</h2>
+          <p>The questions buyers hesitate to ask are often the ones holding the deal up. We identify the objections, concerns and points of confusion that repeatedly slow opportunities down, then turn them into short commercial films your team can send at exactly the right moment.</p>
+          <p style="margin-top:1rem; color:var(--muted); font-size:0.95rem;">Price. Risk. Implementation. Internal approval. Why you. Why now.</p>
+        </div>
+        <div class="se-objection__media">
+          <div class="se-objection__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48" style="color:var(--accent);"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+            <p style="margin-top:1rem; font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">Video coming soon</p>
+          </div>
+        </div>
       </div>
     </section>
 
