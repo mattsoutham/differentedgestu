@@ -1179,11 +1179,11 @@ ul { list-style: none; }
   .nav__links.is-open {
     display: flex;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: var(--nav-h);
+    left: 0; right: 0;
     background: var(--dark);
-    padding: calc(var(--nav-h) + 1.5rem) 1.5rem 1.5rem;
-    z-index: 99;
-    overflow-y: auto;
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
   }
   .nav__links.is-open ul {
     flex-direction: column;
