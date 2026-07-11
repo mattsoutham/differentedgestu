@@ -1721,6 +1721,7 @@ ul { list-style: none; }
   color: var(--accent);
   letter-spacing: 0.01em;
   line-height: 1.4;
+  min-height: 2.45rem;
 }
 .process-strip__img-wrap {
   border-radius: 12px;
