@@ -1178,8 +1178,8 @@ ul { list-style: none; }
   /* Mobile nav open state */
   .nav__links.is-open {
     display: flex;
-    position: fixed;
-    top: var(--nav-h);
+    position: absolute;
+    top: 100%;
     left: 0; right: 0;
     background: var(--dark);
     border-bottom: 1px solid var(--border);
