@@ -1560,6 +1560,29 @@
   width: 14px;
   height: 14px;
   color: var(--accent);
+  align-self: flex-start;
+  margin-top: 3px;
+}
+.vis-pricing-card__list--detailed li {
+  align-items: flex-start;
+}
+.vis-pricing-card__list--detailed li div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.vis-pricing-card__list--detailed li strong {
+  color: var(--white);
+}
+.vis-list-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+.vis-list-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-left: 0.3rem;
 }
 
 .vis-pricing-card__cta {
