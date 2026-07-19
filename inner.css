@@ -1173,6 +1173,21 @@
   font-weight: 700;
   font-size: 0.9rem;
 }
+.pricing-checklist--detailed li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.pricing-checklist--detailed li strong {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.pricing-checklist--detailed li span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
 
 /* ============================================================
    RESPONSIVE — INNER PAGES
