@@ -1173,10 +1173,13 @@
   font-weight: 700;
   font-size: 0.9rem;
 }
+.pricing-checklist--detailed {
+  gap: 1rem;
+}
 .pricing-checklist--detailed li {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.25rem;
 }
 .pricing-checklist--detailed li strong {
   color: var(--white);
@@ -1187,6 +1190,7 @@
   font-size: 0.8rem;
   color: rgba(255,255,255,0.5);
   line-height: 1.5;
+  padding-left: 0;
 }
 
 /* ============================================================
