@@ -6,20 +6,111 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="512x512" href="/images/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Complete System — 12-Month Deployment | Different Edge Studio</title>
-  <meta name="description" content="The full architecture. Sales Engine, Visibility, and Showcase — built, managed, and scaled under one roof for 12 months. One team. One unified commercial strategy." />
+  <title>The Complete System — B2B Commercial Growth | Different Edge Studio</title>
+  <meta name="description" content="A repeatable B2B commercial growth system installed in your business over 12 months. Authority Build, Visibility Engine and Sales Engine — one team, one strategy, one outcome." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://differentedgestudio.com/complete-system" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://differentedgestudio.com/complete-system" />
-  <meta property="og:title" content="The Complete System — 12-Month Deployment | Different Edge Studio" />
-  <meta property="og:description" content="For mid-market businesses that want their entire revenue machinery built, managed, and scaled under one roof." />
+  <meta property="og:title" content="The Complete System — B2B Commercial Growth | Different Edge Studio" />
+  <meta property="og:description" content="A repeatable B2B commercial growth system installed in your business over 12 months. One team, one strategy, one outcome." />
   <meta property="og:image" content="https://differentedgestudio.com/images/og-home.jpg" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="inner.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Stage cards ── */
+    .cs-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .cs-stage-card { background: var(--dark); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+    .cs-stage-card__num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .cs-stage-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .cs-stage-card p { font-size: 0.8125rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* ── What you get — two-column list ── */
+    .cs-deliverables { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 2rem; }
+    .cs-deliv-group { margin-bottom: 1.5rem; }
+    .cs-deliv-group:last-child { margin-bottom: 0; }
+    .cs-deliv-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.6rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-deliv-list { list-style: none; padding: 0; margin: 0; }
+    .cs-deliv-list li { font-size: 0.8125rem; color: rgba(255,255,255,0.85); line-height: 1.9; display: flex; gap: 0.5rem; }
+    .cs-deliv-list li::before { content: '•'; color: var(--accent); flex-shrink: 0; }
+
+    /* ── Performance Promise ── */
+    .cs-promise-section {
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 2.5rem;
+      background: var(--dark);
+    }
+    .cs-promise-section h2 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); margin-bottom: 1rem; }
+    .cs-promise-section p { font-size: 0.9375rem; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 0.85rem; }
+    .cs-promise-closer { font-size: 1rem; font-weight: 700; color: var(--accent); margin-top: 0.5rem; }
+    .cs-gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .cs-gov-col__heading { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .cs-gov-col ul { list-style: none; padding: 0; margin: 0; }
+    .cs-gov-col li { font-size: 0.8125rem; color: var(--muted); line-height: 2; }
+
+    /* ── Comparison table ── */
+    .cs-compare-table { width: 100%; border-collapse: collapse; background: var(--dark); border-radius: 8px; overflow: hidden; margin: 1.5rem 0 1rem; }
+    .cs-compare-table thead td { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+    .cs-compare-table tbody tr { border-bottom: 1px solid var(--border); }
+    .cs-compare-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .cs-compare-table tbody td { padding: 0.75rem 1rem; font-size: 0.8125rem; }
+    .cs-compare-table tbody td:first-child { color: rgba(255,255,255,0.85); }
+    .cs-compare-table tbody td:last-child { color: var(--muted); text-align: right; white-space: nowrap; }
+    .cs-compare-table tfoot td { padding: 0.9rem 1rem; font-size: 0.9375rem; font-weight: 700; }
+    .cs-compare-table tfoot td:first-child { color: var(--white); }
+    .cs-compare-table tfoot td:last-child { color: var(--accent); text-align: right; white-space: nowrap; }
+    .cs-compare-note { font-size: 0.8125rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Investment price cards ── */
+    .cs-price-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0 1.75rem; }
+    .cs-price-card { background: var(--dark); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+    .cs-price-card__label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .cs-price-card__amount { font-size: 1.2rem; font-weight: 700; color: var(--accent); font-family: 'Courier New', monospace; margin-bottom: 0.25rem; }
+    .cs-price-card__note { font-size: 0.75rem; color: var(--muted); }
+    .cs-total-price { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; color: var(--accent); font-family: 'Courier New', monospace; line-height: 1; }
+    .cs-total-note { font-size: 0.9rem; color: var(--muted); margin-top: 0.35rem; margin-bottom: 0.75rem; }
+    .cs-callout {
+      background: var(--dark);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+      margin: 1.25rem 0 1.75rem;
+    }
+    .cs-callout strong { color: var(--accent); }
+    .cs-scarcity { font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; text-align: center; }
+
+    /* ── Fit section ── */
+    .cs-fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 2rem; }
+    .cs-fit-col__heading { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cs-fit-col__heading.yes { color: var(--accent); }
+    .cs-fit-col__heading.no  { color: var(--muted); }
+    .cs-fit-list { list-style: none; padding: 0; margin: 0; }
+    .cs-fit-list li { font-size: 0.875rem; line-height: 2.1; display: flex; gap: 0.6rem; }
+    .cs-fit-list li.yes { color: rgba(255,255,255,0.9); }
+    .cs-fit-list li.no  { color: var(--muted); }
+    .cs-fit-list li .tick { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .cs-fit-list li .cross { color: #444; flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .cs-stages { grid-template-columns: 1fr; }
+      .cs-deliverables { grid-template-columns: 1fr; }
+      .cs-price-cards { grid-template-columns: 1fr; }
+      .cs-gov-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cs-fit-grid { grid-template-columns: 1fr; }
+      .cs-promise-section { padding: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -27,104 +118,231 @@
 
   <main style="padding-top: var(--nav-h);">
 
-    <!-- PAGE HERO -->
+    <!-- A: HERO -->
     <section class="page-hero section">
-      <div class="container page-hero__inner">
-        <p class="eyebrow">The Complete System // 12-Month Deployment</p>
-        <h1>The Full<br/><span class="accent">Architecture.</span></h1>
-        <p class="page-hero__sub">For mid-market businesses that want their entire revenue machinery built, managed, and scaled under one roof. No juggling three different creative agencies. No internal execution bottlenecks. One team, one unified commercial strategy, running for 12 months. Us on your side.</p>
+      <div class="container page-hero__inner" data-reveal>
+        <p class="eyebrow">The Complete System</p>
+        <h1>A repeatable B2B<br/><span class="accent">commercial growth system.</span></h1>
+        <p class="page-hero__sub" style="color:var(--accent);font-weight:500;">Engineered to turn your expertise into the business buyers remember, trust and choose.</p>
+        <p class="page-hero__sub" style="color:var(--muted);font-size:0.9rem;margin-top:-0.5rem;">Installed in your business over 12 months.</p>
+        <p class="page-hero__sub">Executive-sponsored. Skin in the game. Both sides. We take four Complete System clients each year because bone-deep commitment to moving one commercial metric requires us to be as invested as you are.</p>
       </div>
     </section>
 
-    <!-- WHAT'S INCLUDED -->
-    <section class="service-steps section">
-      <div class="container">
-        <p class="eyebrow">What's included</p>
-        <h2>Every product. One team. Twelve months.</h2>
-        <div class="steps-grid" data-reveal>
-
-          <div class="step-card">
-            <div class="step-card__num accent">01</div>
-            <h3>The Complete Showcase Suite</h3>
-            <p>We build your entire core video asset library from scratch including your homepage explainer, leadership films, and customer proof sequences.</p>
+    <!-- B: THREE STAGES -->
+    <section class="section">
+      <div class="container" data-reveal>
+        <p class="eyebrow">Three stages. One commercial system.</p>
+        <div class="cs-stages">
+          <div class="cs-stage-card">
+            <p class="cs-stage-card__num">Stage 1</p>
+            <h3>Authority Build</h3>
+            <p>Build the trust foundation. Hero film, authority series, customer proof and deployment map.</p>
           </div>
-
-          <div class="step-card">
-            <div class="step-card__num accent">02</div>
-            <h3>The Sales Engine Rollout</h3>
-            <p>Full system architecture mapped directly into your CRM, professional video sequence tracks, and live deal coaching and training to get your reps executing from day one.</p>
+          <div class="cs-stage-card">
+            <p class="cs-stage-card__num">Stage 2</p>
+            <h3>Visibility Engine</h3>
+            <p>Stay visible and relevant. Quarterly filming, Market Pulse, thought leadership and deployment plans.</p>
           </div>
-
-          <div class="step-card">
-            <div class="step-card__num accent">03</div>
-            <h3>12 Months of Market Visibility</h3>
-            <p>Six highly structured studio deployments across the year to continuously extract your executive team's insights and dominate your industry's attention. Award winning leadership/sales development elements and monthly live deal coaching.</p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-card__num accent">04</div>
-            <h3>Continuous Content Execution</h3>
-            <p>Our team writes every single text hook, LinkedIn post, and long-form thought leadership piece in your exact voice. Zero writing required from you.</p>
-          </div>
-
-          <div class="step-card step-card--wide">
-            <div class="step-card__num accent">05</div>
-            <h3>Two Private Strategy Intensives</h3>
-            <p>Two dedicated days spent on-site with our commercial leadership team to audit your broader pipeline, optimise close rates, and remove sales friction.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- THE SCIENCE -->
-    <section class="complete-science section">
-      <div class="container complete-science__inner" data-reveal>
-        <div class="complete-science__copy">
-          <p class="eyebrow">The Science</p>
-          <h2>The science.</h2>
-          <p>We're not social media hacks or brand bros. We have 20 years of experience changing behaviour. We have proven how video supports growth.</p>
-          <p>Buyers judge trust in a face within a tenth of a second (Princeton, Willis &amp; Todorov, 2006) and that trust compounds every time they see it again (Zajonc's simple repeatable exposure effect, 1968). Video doesn't just inform buyers.</p>
-          <p class="complete-science__closer">It builds the trust that's stronger and that closes deals faster automatically, repeatedly, before a word is read.</p>
-        </div>
-        <div class="complete-science__stats">
-          <div class="stat-card">
-            <p class="stat-card__num accent">1/10<span style="font-size:0.5em;">th</span></p>
-            <p>of a second: how quickly buyers form a trust judgement from a face on camera</p>
-          </div>
-          <div class="stat-card">
-            <p class="stat-card__num accent">2–3×</p>
-            <p>higher reply rates when video is used in outreach (Warmly Case Study, 2025)</p>
-          </div>
-          <div class="stat-card">
-            <p class="stat-card__num accent">33%</p>
-            <p>fewer no-shows to sales meetings with video follow-up (Vidyard, May 2025)</p>
-          </div>
-          <div class="stat-card">
-            <p class="stat-card__num accent">23%</p>
-            <p>shorter sales cycles for B2B teams using video throughout the process (Zebracat, 2025)</p>
+          <div class="cs-stage-card">
+            <p class="cs-stage-card__num">Stage 3</p>
+            <h3>Sales Engine</h3>
+            <p>Remove hesitation and move deals. Top Performer Method, Objection Killers, CRM deployment.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PRICING -->
-    <section class="service-pricing section">
-      <div class="container service-pricing__grid" data-reveal>
-        <div class="service-pricing__copy">
-          <p class="eyebrow">Investment</p>
-          <h2>One fixed monthly retainer. Everything included.</h2>
-          <p>Structured as a single, fixed monthly retainer. Scoped and priced explicitly on your strategy call.</p>
-          <p>No hidden costs. No scope creep surprises. We scope your requirements cleanly before anything is agreed.</p>
-          <a href="/apply" class="btn btn--primary" style="margin-top:1.5rem;">Apply for the Complete System &rarr;</a>
-        </div>
-        <div class="service-pricing__numbers">
-          <div class="pricing-line">
-            <span class="pricing-line__label">Investment</span>
-            <span class="pricing-line__value accent" style="font-size:1.1rem;">Scoped on call</span>
+    <!-- C: WHAT YOU GET ACROSS 12 MONTHS -->
+    <section class="section" style="background:var(--mid);">
+      <div class="container" data-reveal>
+        <p class="eyebrow">What you get across 12 months</p>
+        <div class="cs-deliverables">
+
+          <div>
+            <div class="cs-deliv-group">
+              <p class="cs-deliv-label">Authority assets</p>
+              <ul class="cs-deliv-list">
+                <li>1 Hero Brand Film</li>
+                <li>3 long-form Leader Authority episodes</li>
+                <li>10 strategic short-form commercial assets</li>
+                <li>1 Customer Proof Film</li>
+                <li>Buyer journey messaging and deployment map</li>
+                <li>Homepage conversion diagnostic</li>
+              </ul>
+            </div>
+            <div class="cs-deliv-group">
+              <p class="cs-deliv-label">Visibility assets</p>
+              <ul class="cs-deliv-list">
+                <li>4 professionally filmed Market Authority Broadcast films</li>
+                <li>20 short-form commercial assets — 5 per quarter</li>
+                <li>16 Market Pulse edits — 4 per quarter</li>
+                <li>1 Inside Your Business film</li>
+                <li>10 professionally written thought-leadership articles</li>
+                <li>4 quarterly 90-Day Visibility Plans</li>
+              </ul>
+            </div>
           </div>
-          <div class="pricing-line pricing-line--note">
-            <p>Fixed monthly retainer. 12-month deployment. Requires a strategy call first.</p>
+
+          <div>
+            <div class="cs-deliv-group">
+              <p class="cs-deliv-label">Sales Engine build</p>
+              <ul class="cs-deliv-list">
+                <li>Sales Process Audit and Pipeline Mapping</li>
+                <li>Top Performer Method Discovery</li>
+                <li>Commercial Sales Asset Library</li>
+                <li>Objection Killer Films</li>
+                <li>Professional Asset Capture</li>
+                <li>CRM Integration and Deployment</li>
+                <li>Sales Team Platform Onboarding</li>
+              </ul>
+            </div>
+            <div class="cs-deliv-group">
+              <p class="cs-deliv-label">Sales Engine platform</p>
+              <ul class="cs-deliv-list">
+                <li>Platform for up to 15 users</li>
+                <li>Dynamic personalised videos</li>
+                <li>Personalised thumbnails</li>
+                <li>HubSpot and Salesforce-ready CRM integrations</li>
+                <li>Team workflows and custom-branded platform</li>
+                <li>Real-time buyer engagement reporting</li>
+                <li>Dedicated account management</li>
+              </ul>
+            </div>
+            <div class="cs-deliv-group">
+              <p class="cs-deliv-label">Ongoing support</p>
+              <ul class="cs-deliv-list">
+                <li>Quarterly Live Deal Coaching</li>
+                <li>Sales Manager Development Day</li>
+                <li>Monthly performance reviews</li>
+                <li>30–90 day implementation sprints</li>
+                <li>Data-led optimisation</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- D: PERFORMANCE UPLIFT PROMISE -->
+    <section class="section">
+      <div class="container" data-reveal>
+        <div class="cs-promise-section">
+          <p class="eyebrow">The Performance Uplift Promise</p>
+          <h2>We agree one measurable target. Then we stand behind it.</h2>
+          <p>Every Complete System engagement starts with one measurable commercial target agreed with your leadership team. Then we work alongside you for 12 months, using real data, monthly reviews and focused implementation sprints to move it.</p>
+          <p>If both sides deliver on the agreed plan and the metric has not improved, we do not walk away. We re-diagnose the problem and deliver an additional 90-day corrective sprint at no charge.</p>
+          <p class="cs-promise-closer">One metric that matters. One team accountable for moving it.</p>
+          <div class="cs-gov-grid">
+            <div class="cs-gov-col">
+              <p class="cs-gov-col__heading">You provide</p>
+              <ul>
+                <li>Named executive sponsor</li>
+                <li>Day-to-day champion (1hr/week)</li>
+                <li>Monthly review attendance</li>
+                <li>Team participation in coaching</li>
+                <li>Access to commercial data</li>
+              </ul>
+            </div>
+            <div class="cs-gov-col">
+              <p class="cs-gov-col__heading">We provide</p>
+              <ul>
+                <li>Dan as your programme lead</li>
+                <li>Full diagnostic on your data</li>
+                <li>Monthly performance reviews</li>
+                <li>30–90 day implementation sprints</li>
+                <li>Corrective sprint if needed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- E: WHAT THIS REPLACES -->
+    <section class="section" style="background:var(--mid);">
+      <div class="container" data-reveal>
+        <p class="eyebrow">What this replaces</p>
+        <h2>Most businesses assemble this from four different suppliers. You get one team, one strategy, one system.</h2>
+        <table class="cs-compare-table">
+          <thead>
+            <tr>
+              <td>What it replaces</td>
+              <td>Typical annual cost</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Additional sales hire (base salary only)</td><td>£25,000 – £35,000</td></tr>
+            <tr><td>External sales consultancy (12 months)</td><td>£30,000 – £60,000</td></tr>
+            <tr><td>Video agency retainer (12 months)</td><td>£24,000 – £48,000</td></tr>
+            <tr><td>Marketing agency content programme</td><td>£18,000 – £36,000</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Combined</td><td>£97,000 – £179,000</td></tr>
+          </tfoot>
+        </table>
+        <p class="cs-compare-note">The Complete System replaces all four. One team, one strategy, one set of commercial assets that build authority, drive visibility and close deals.</p>
+      </div>
+    </section>
+
+    <!-- F: THE INVESTMENT -->
+    <section class="section">
+      <div class="container" data-reveal>
+        <p class="eyebrow">The investment</p>
+        <div class="cs-price-cards">
+          <div class="cs-price-card">
+            <p class="cs-price-card__label">Authority Build</p>
+            <p class="cs-price-card__amount">£8,495 <span style="font-size:0.65em;color:var(--muted);font-family:inherit;font-weight:400;">+VAT</span></p>
+            <p class="cs-price-card__note">One-off build</p>
+          </div>
+          <div class="cs-price-card">
+            <p class="cs-price-card__label">Visibility Engine</p>
+            <p class="cs-price-card__amount">£1,500 <span style="font-size:0.65em;color:var(--muted);font-family:inherit;font-weight:400;">+VAT/mo</span></p>
+            <p class="cs-price-card__note">12-month programme</p>
+          </div>
+          <div class="cs-price-card">
+            <p class="cs-price-card__label">Sales Engine</p>
+            <p class="cs-price-card__amount">£9,995 <span style="font-size:0.65em;color:var(--muted);font-family:inherit;font-weight:400;">+VAT</span></p>
+            <p class="cs-price-card__note">Build + £995/mo platform</p>
+          </div>
+        </div>
+        <p class="cs-total-price">From £48,430</p>
+        <p class="cs-total-note">+VAT across 12 months</p>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:0;">Exact scope confirmed on your strategy call. Includes all three products, platform access, quarterly coaching, Sales Manager Development Day and the Performance Uplift Promise.</p>
+        <div class="cs-callout">
+          <strong>That is less than half</strong> the cost of assembling the same capability from separate suppliers. And none of those suppliers guarantee the outcome.
+        </div>
+        <div style="text-align:center;">
+          <a href="/apply" class="btn btn--primary">Apply for the Complete System &rarr;</a>
+          <p class="cs-scarcity">Limited to four clients each year.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- G: WHO THIS IS FOR / NOT FOR -->
+    <section class="section" style="background:var(--mid);">
+      <div class="container" data-reveal>
+        <div class="cs-fit-grid">
+          <div>
+            <p class="cs-fit-col__heading yes">This is for you if</p>
+            <ul class="cs-fit-list">
+              <li class="yes"><span class="tick">✓</span> You run a B2B business doing £500k+</li>
+              <li class="yes"><span class="tick">✓</span> Leadership will commit to monthly reviews</li>
+              <li class="yes"><span class="tick">✓</span> You have a team that speaks to customers</li>
+              <li class="yes"><span class="tick">✓</span> You already invest in getting better</li>
+              <li class="yes"><span class="tick">✓</span> You want one system, not four suppliers</li>
+            </ul>
+          </div>
+          <div>
+            <p class="cs-fit-col__heading no">This is not for you if</p>
+            <ul class="cs-fit-list">
+              <li class="no"><span class="cross">✗</span> You want a video and nothing else</li>
+              <li class="no"><span class="cross">✗</span> Nobody in leadership will own the outcome</li>
+              <li class="no"><span class="cross">✗</span> You are looking for the cheapest option</li>
+              <li class="no"><span class="cross">✗</span> You want to hand it off and not be involved</li>
+              <li class="no"><span class="cross">✗</span> You need results without changing anything</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -151,10 +369,8 @@
       <a href="/" class="footer__logo"><img src="images/Logo-light.svg" alt="Different Edge Studio" /></a>
       <p class="footer__copy">&copy; 2026 Different Edge Studio. All rights reserved.</p>
       <a href="https://kerfuffle.com" target="_blank" rel="noopener" class="footer__kerfuffle" aria-label="Kerfuffle Preferred Supplier"><img src="images/kerfuffle.webp" loading="lazy" alt="Kerfuffle Preferred Supplier" /></a>
-      <div class="footer__social"><a href="https://www.instagram.com/differentedgestudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.linkedin.com/company/diffedgestudio/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div><nav class="footer__nav" aria-label="Footer navigation"><a href="/privacy">Privacy &amp; Cookies</a>
-        
-        
-      </nav>
+      <div class="footer__social"><a href="https://www.instagram.com/differentedgestudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.linkedin.com/company/diffedgestudio/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div>
+      <nav class="footer__nav" aria-label="Footer navigation"><a href="/privacy">Privacy &amp; Cookies</a></nav>
     </div>
   </footer>
 
