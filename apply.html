@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="/images/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for the Complete System | Different Edge Studio</title>
+  <meta name="description" content="We take four Complete System clients each year. Four quick questions to see if your business is the right fit." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://differentedgestudio.com/apply" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="inner.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    .apply-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 3rem 0 5rem;
+    }
+
+    /* INTRO */
+    .apply-intro {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      animation: applyFadeUp .5s ease;
+    }
+    .apply-intro .eyebrow { margin-bottom: 1rem; }
+    .apply-intro h1 { margin-bottom: 1rem; }
+    .apply-intro-note {
+      background: var(--mid);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      text-align: left;
+      margin-top: 1.5rem;
+    }
+
+    /* PROGRESS */
+    .apply-progress { margin-bottom: 2rem; }
+    .apply-progress__label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .apply-progress__bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .apply-progress__fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width .4s ease;
+    }
+
+    /* QUESTION CARD */
+    .apply-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      animation: applyFadeUp .35s ease;
+    }
+    .apply-card__area {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .apply-card__q {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .apply-card__sub {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+    .apply-btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .apply-btn-answer {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--white);
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+    }
+    .apply-btn-answer:hover { border-color: var(--accent); color: var(--accent); }
+    .apply-btn-answer.selected { border-color: var(--accent); color: var(--accent); background: rgba(200,255,0,0.06); }
+
+    /* Dropdown */
+    .apply-select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      transition: border-color .15s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+    .apply-select:focus { outline: none; border-color: var(--accent); }
+    .apply-select option { background: var(--dark); }
+
+    .apply-select-next {
+      margin-top: 1.25rem;
+    }
+
+    /* Text input */
+    .apply-textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 80px;
+      transition: border-color .15s;
+      box-sizing: border-box;
+    }
+    .apply-textarea:focus { outline: none; border-color: var(--accent); }
+    .apply-textarea::placeholder { color: var(--muted); }
+
+    /* Contact gate */
+    .apply-gate {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      animation: applyFadeUp .35s ease;
+    }
+    .apply-gate h2 { margin-bottom: 0.35rem; font-size: 1.5rem; }
+    .apply-gate .apply-gate-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .apply-gate hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    .apply-gate label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-top: 1.1rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .apply-gate input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      transition: border-color .15s;
+      box-sizing: border-box;
+    }
+    .apply-gate input:focus { outline: none; border-color: var(--accent); }
+    .apply-gate input::placeholder { color: var(--muted); }
+    .apply-gate .btn {
+      width: 100%;
+      margin-top: 1.5rem;
+      text-align: center;
+      justify-content: center;
+    }
+    .apply-gate .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Confirmation / redirect */
+    .apply-confirm {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      animation: applyFadeUp .4s ease;
+    }
+    .apply-confirm__icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(200,255,0,0.1);
+      border: 2px solid rgba(200,255,0,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: var(--accent);
+    }
+    .apply-confirm h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .apply-confirm p { color: var(--muted); font-size: 0.9375rem; line-height: 1.7; }
+    .apply-confirm p.redirect-note {
+      color: rgba(255,255,255,0.8);
+      margin-top: 1rem;
+    }
+
+    .hidden { display: none !important; }
+
+    @keyframes applyFadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .apply-wrap { padding: 2rem 0 4rem; }
+      .apply-card, .apply-gate { padding: 1.25rem; }
+      .apply-card__q { font-size: 1rem; }
+      .apply-btn-row { flex-direction: column; }
+      .apply-btn-answer { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV injected by nav.js -->
+
+  <main style="padding-top: var(--nav-h);">
+    <section class="section">
+      <div class="container apply-wrap">
+
+        <!-- INTRO -->
+        <div id="apply-intro" class="apply-intro">
+          <p class="eyebrow">THE COMPLETE SYSTEM</p>
+          <h1>Apply for <span class="accent">a place</span></h1>
+          <div class="apply-intro-note">
+            We take four Complete System clients each year. Four quick questions to see if your business is the right fit.
+          </div>
+          <button class="btn btn--primary" style="margin-top:2rem;" onclick="startApply()">Start your application &rarr;</button>
+        </div>
+
+        <!-- QUESTIONS -->
+        <div id="apply-quiz" class="hidden">
+          <div class="apply-progress">
+            <div class="apply-progress__label">
+              <span id="apply-prog-text">Question 1 of 4</span>
+              <span id="apply-prog-area"></span>
+            </div>
+            <div class="apply-progress__bar">
+              <div class="apply-progress__fill" id="apply-prog-fill" style="width:25%"></div>
+            </div>
+          </div>
+          <div class="apply-card" id="apply-card">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <!-- CONTACT GATE -->
+        <div id="apply-gate" class="apply-gate hidden">
+          <h2>Almost <span class="accent">there.</span></h2>
+          <p class="apply-gate-sub">Leave your details and we will be in touch.</p>
+          <hr />
+          <label for="a-name">Your name</label>
+          <input type="text" id="a-name" placeholder="First and last name" autocomplete="name" />
+          <label for="a-company">Company</label>
+          <input type="text" id="a-company" placeholder="Company name" autocomplete="organization" />
+          <label for="a-email">Email</label>
+          <input type="email" id="a-email" placeholder="you@company.com" autocomplete="email" />
+          <button class="btn btn--primary" id="btn-apply-gate" disabled onclick="submitApply()">Apply for a place &rarr;</button>
+        </div>
+
+        <!-- CONFIRMATION (qualified) -->
+        <div id="apply-qualified" class="apply-confirm hidden">
+          <div class="apply-confirm__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h2>Application <span class="accent">received.</span></h2>
+          <p>If your business is right for the Complete System, our team will be in touch within 48 hours.</p>
+        </div>
+
+        <!-- NOT QUALIFIED (redirect) -->
+        <div id="apply-notqualified" class="apply-confirm hidden">
+          <div class="apply-confirm__icon" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:var(--muted);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+          </div>
+          <h2>Thanks for <span class="accent">applying.</span></h2>
+          <p class="redirect-note">Based on what you have told us, one of our individual products might be a better starting point right now. Have a look at the options below and get in touch when you are ready.</p>
+          <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--muted);">Taking you there now…</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="/" class="footer__logo"><img src="images/Logo-light.svg" alt="Different Edge Studio" /></a>
+      <p class="footer__copy">&copy; 2026 Different Edge Studio. All rights reserved.</p>
+      <a href="https://kerfuffle.com" target="_blank" rel="noopener" class="footer__kerfuffle" aria-label="Kerfuffle Preferred Supplier"><img src="images/kerfuffle.webp" loading="lazy" alt="Kerfuffle Preferred Supplier" /></a>
+      <div class="footer__social"><a href="https://www.instagram.com/differentedgestudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.linkedin.com/company/diffedgestudio/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div>
+      <nav class="footer__nav" aria-label="Footer navigation"><a href="/privacy">Privacy &amp; Cookies</a></nav>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script>
+    const CAPTURE_URL = '/apply-capture.php';
+
+    // Answers collected as we go
+    const applyAnswers = { revenue: null, commitment: null, track: null, metric: '' };
+    let currentQ = 0;
+
+    const questions = [
+      {
+        area: 'REVENUE',
+        q: 'What is your current annual revenue?',
+        sub: null,
+        type: 'dropdown',
+        options: ['Under £500K','£500K – £1M','£1M – £2M','£2M – £5M','£5M – £10M','£10M – £20M','£20M+'],
+        key: 'revenue',
+      },
+      {
+        area: 'COMMITMENT',
+        q: 'Do you have a senior leader willing to sponsor this programme and commit to monthly reviews for 12 months?',
+        sub: 'The system works when leadership stays involved. We need skin in the game from both sides.',
+        type: 'buttons',
+        options: ['Yes','Not yet','Not sure'],
+        key: 'commitment',
+      },
+      {
+        area: 'TRACK RECORD',
+        q: 'Has your business invested over £20k in sales capability or team development in the last 36 months?',
+        sub: 'Training, consultancy, tools, hires. Anything your business has spent to improve commercial performance.',
+        type: 'buttons',
+        options: ['Yes','No','It\'s under discussion'],
+        key: 'track',
+      },
+      {
+        area: 'YOUR TARGET',
+        q: 'If we could move one commercial number for your business over the next 12 months, what would it be?',
+        sub: 'The metric that would make the biggest difference to your growth.',
+        type: 'text',
+        placeholder: 'e.g. close rate, no-show rate, deal cycle length, pipeline velocity',
+        key: 'metric',
+      },
+    ];
+
+    function startApply() {
+      document.getElementById('apply-intro').classList.add('hidden');
+      document.getElementById('apply-quiz').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      const card = document.getElementById('apply-card');
+      const total = questions.length;
+
+      document.getElementById('apply-prog-text').textContent = `Question ${currentQ + 1} of ${total}`;
+      document.getElementById('apply-prog-area').textContent = q.area;
+      document.getElementById('apply-prog-fill').style.width = ((currentQ + 1) / total * 100) + '%';
+
+      let inner = `<div class="apply-card__area">${q.area}</div>
+        <div class="apply-card__q">${q.q}</div>`;
+      if (q.sub) inner += `<div class="apply-card__sub">${q.sub}</div>`;
+
+      if (q.type === 'dropdown') {
+        const opts = q.options.map(o => `<option value="${o}">${o}</option>`).join('');
+        inner += `<select class="apply-select" id="apply-dropdown" onchange="selectDropdown(this.value)">
+          <option value="">Select an option</option>
+          ${opts}
+        </select>
+        <div class="apply-select-next hidden" id="dropdown-next-wrap">
+          <button class="btn btn--primary" onclick="nextQuestion()">Next &rarr;</button>
+        </div>`;
+      } else if (q.type === 'buttons') {
+        const btns = q.options.map(o =>
+          `<button class="apply-btn-answer" onclick="selectButton(this, '${o.replace("'", "\\'")}')">${o}</button>`
+        ).join('');
+        inner += `<div class="apply-btn-row">${btns}</div>`;
+      } else if (q.type === 'text') {
+        inner += `<textarea class="apply-textarea" id="apply-text" placeholder="${q.placeholder}" oninput="textInput(this.value)"></textarea>
+        <div style="margin-top:1.25rem;">
+          <button class="btn btn--primary" id="text-next-btn" disabled onclick="nextQuestion()">Next &rarr;</button>
+        </div>`;
+      }
+
+      card.innerHTML = inner;
+      card.style.animation = 'none';
+      card.offsetHeight;
+      card.style.animation = 'applyFadeUp .35s ease';
+    }
+
+    function selectDropdown(val) {
+      if (!val) return;
+      applyAnswers[questions[currentQ].key] = val;
+      document.getElementById('dropdown-next-wrap').classList.remove('hidden');
+    }
+
+    function selectButton(btn, val) {
+      document.querySelectorAll('.apply-btn-answer').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      applyAnswers[questions[currentQ].key] = val;
+      setTimeout(nextQuestion, 280);
+    }
+
+    function textInput(val) {
+      applyAnswers[questions[currentQ].key] = val;
+      const btn = document.getElementById('text-next-btn');
+      if (btn) btn.disabled = val.trim().length < 2;
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < questions.length) {
+        renderQuestion();
+      } else {
+        document.getElementById('apply-quiz').classList.add('hidden');
+        document.getElementById('apply-gate').classList.remove('hidden');
+      }
+    }
+
+    // Gate validation
+    ['a-name','a-company','a-email'].forEach(id => {
+      document.getElementById(id).addEventListener('input', checkGate);
+    });
+    function checkGate() {
+      const n = document.getElementById('a-name').value.trim();
+      const c = document.getElementById('a-company').value.trim();
+      const e = document.getElementById('a-email').value.trim();
+      document.getElementById('btn-apply-gate').disabled = !(n && c && e.includes('@') && e.includes('.'));
+    }
+
+    function isQualified() {
+      const r = applyAnswers.revenue;
+      const c = applyAnswers.commitment;
+      const t = applyAnswers.track;
+      if (r === 'Under £500K') return false;
+      if (c === 'Not sure')    return false;
+      if (t === 'No')          return false;
+      return true;
+    }
+
+    function submitApply() {
+      const name    = document.getElementById('a-name').value.trim();
+      const company = document.getElementById('a-company').value.trim();
+      const email   = document.getElementById('a-email').value.trim();
+      const qualified = isQualified();
+
+      document.getElementById('apply-gate').classList.add('hidden');
+
+      if (qualified) {
+        document.getElementById('apply-qualified').classList.remove('hidden');
+      } else {
+        document.getElementById('apply-notqualified').classList.remove('hidden');
+        setTimeout(() => {
+          window.location.href = '/#products';
+        }, 3500);
+      }
+
+      fetch(CAPTURE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          company,
+          email,
+          revenue:    applyAnswers.revenue,
+          commitment: applyAnswers.commitment,
+          track:      applyAnswers.track,
+          metric:     applyAnswers.metric,
+          qualified,
+        }),
+      }).catch(err => console.warn('Capture failed:', err));
+    }
+  </script>
+</body>
+</html>
