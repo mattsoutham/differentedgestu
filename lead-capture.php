@@ -6,13 +6,7 @@
  * Falls back to PHP mail() if Mailgun key is not set.
  */
 
-// ── CONFIG ────────────────────────────────────────────────────────────────────
-$NOTIFY_EMAIL      = 'matt@differentedgestudio.com, dan@differentedgestudio.com';
-$FROM_EMAIL        = 'results@mg.differentedgestudio.com';
-$FROM_NAME         = 'Different Edge Studio';
-$MAILGUN_API_KEY   = '';  // paste your Mailgun private API key here (bbbc8336-...)
-$MAILGUN_DOMAIN    = 'mg.differentedgestudio.com';
-// ─────────────────────────────────────────────────────────────────────────────
+require_once __DIR__ . '/mailgun-config.php';
 
 header('Access-Control-Allow-Origin: https://differentedgestudio.com');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
