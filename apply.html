@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="512x512" href="/images/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apply for the Complete System | Different Edge Studio</title>
-  <meta name="description" content="We take four Complete System clients each year. Four quick questions to see if your business is the right fit." />
+  <meta name="description" content="We take four Complete System clients each year. Six quick questions to see if your business is the right fit." />
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://differentedgestudio.com/apply" />
   <link rel="stylesheet" href="styles.css" />
@@ -262,7 +262,7 @@
           <p class="eyebrow">THE COMPLETE SYSTEM</p>
           <h1>Apply for <span class="accent">a place</span></h1>
           <div class="apply-intro-note">
-            We take four Complete System clients each year. Four quick questions to see if your business is the right fit.
+            We take four Complete System clients each year. Six quick questions to see if your business is the right fit — and to point you in the right direction if it is not.
           </div>
           <button class="btn btn--primary" style="margin-top:2rem;" onclick="startApply()">Start your application &rarr;</button>
         </div>
@@ -306,13 +306,24 @@
           <p>If your business is right for the Complete System, our team will be in touch within 48 hours.</p>
         </div>
 
+        <!-- PROGRAMME PRESCRIPTION -->
+        <div id="apply-prescription" class="apply-confirm hidden">
+          <div class="apply-confirm__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <h2>Thanks for <span class="accent">applying.</span></h2>
+          <p>Based on what you have told us, <strong id="prescription-name" style="color:var(--white);"></strong> is the most likely starting point for your business right now.</p>
+          <p class="redirect-note" style="margin-top:0.75rem;">Someone from our team will be in touch shortly. In the meantime, you can find out more below.</p>
+          <a id="prescription-link" href="#" class="btn btn--primary" style="display:inline-flex;margin-top:1.5rem;"></a>
+        </div>
+
         <!-- NOT QUALIFIED (redirect) -->
         <div id="apply-notqualified" class="apply-confirm hidden">
           <div class="apply-confirm__icon" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:var(--muted);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
           </div>
           <h2>Thanks for <span class="accent">applying.</span></h2>
-          <p class="redirect-note">Based on what you have told us, one of our individual products might be a better starting point right now. Have a look at the options below and get in touch when you are ready.</p>
+          <p class="redirect-note">Based on what you have told us, one of our individual programmes might be a better starting point right now. Have a look at the options and get in touch when you are ready.</p>
           <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--muted);">Taking you there now…</p>
         </div>
 
@@ -334,44 +345,76 @@
   <script>
     const CAPTURE_URL = '/apply-capture.php';
 
-    // Answers collected as we go
-    const applyAnswers = { revenue: null, commitment: null, track: null, metric: '' };
+    const applyAnswers = { lostArea: null, salesTeam: null, sponsor: null, managers: null, data: null, revenue: null };
     let currentQ = 0;
 
     const questions = [
       {
-        area: 'REVENUE',
-        q: 'What is your current annual revenue?',
+        area: 'BUYER CONFIDENCE',
+        q: 'Where is buyer confidence being lost?',
+        sub: 'Pick the area that feels most pressing right now.',
+        type: 'buttons',
+        options: ['Being seen by the right buyers', 'Being taken seriously once found', 'Converting and keeping buyers', 'Across more than one of these'],
+        key: 'lostArea',
+      },
+      {
+        area: 'SALES TEAM',
+        q: 'Do you have a customer-facing sales or account management team?',
         sub: null,
-        type: 'dropdown',
-        options: ['Under £500K','£500K – £1M','£1M – £2M','£2M – £5M','£5M – £10M','£10M – £20M','£20M+'],
+        type: 'buttons',
+        options: ['Yes', 'No', 'One or two people'],
+        key: 'salesTeam',
+      },
+      {
+        area: 'EXECUTIVE SPONSOR',
+        q: 'Who is the executive sponsor for this?',
+        sub: 'The system works when a senior leader owns the commercial target and stays involved throughout.',
+        type: 'buttons',
+        options: ['Named and confirmed', 'We\'re working on it', 'Not identified yet'],
+        key: 'sponsor',
+      },
+      {
+        area: 'SALES MANAGERS',
+        q: 'Will your sales managers take part in the programme?',
+        sub: 'Manager reinforcement is central to how the Sales Engine embeds — and to the Complete System as a whole.',
+        type: 'buttons',
+        options: ['Yes', 'No', 'We don\'t have sales managers'],
+        key: 'managers',
+      },
+      {
+        area: 'COMMERCIAL DATA',
+        q: 'Can you give us access to meaningful commercial data?',
+        sub: 'Pipeline performance, conversion rates, deal cycle length — what we measure the programme against.',
+        type: 'buttons',
+        options: ['Yes', 'Possibly', 'No'],
+        key: 'data',
+      },
+      {
+        area: 'REVENUE',
+        q: 'Is your annual revenue above £500,000?',
+        sub: null,
+        type: 'buttons',
+        options: ['Yes', 'No'],
         key: 'revenue',
       },
-      {
-        area: 'COMMITMENT',
-        q: 'Do you have a senior leader willing to sponsor this programme and commit to monthly reviews for 12 months?',
-        sub: 'The system works when leadership stays involved. We need skin in the game from both sides.',
-        type: 'buttons',
-        options: ['Yes','Not yet','Not sure'],
-        key: 'commitment',
-      },
-      {
-        area: 'TRACK RECORD',
-        q: 'Has your business invested over £20k in sales capability or team development in the last 36 months?',
-        sub: 'Training, consultancy, tools, hires. Anything your business has spent to improve commercial performance.',
-        type: 'buttons',
-        options: ['Yes','No','It\'s under discussion'],
-        key: 'track',
-      },
-      {
-        area: 'YOUR TARGET',
-        q: 'If we could move one commercial number for your business over the next 12 months, what would it be?',
-        sub: 'The metric that would make the biggest difference to your growth.',
-        type: 'text',
-        placeholder: 'e.g. close rate, no-show rate, deal cycle length, pipeline velocity',
-        key: 'metric',
-      },
     ];
+
+    // Map single-area answers to programme pages
+    const programmeMap = {
+      'Being seen by the right buyers':      { name: 'Visibility Engine',  url: '/visibility' },
+      'Being taken seriously once found':    { name: 'Authority Build',     url: '/authority-build' },
+      'Converting and keeping buyers':       { name: 'Sales Engine',        url: '/sales-engine' },
+    };
+
+    function getRoute() {
+      const { lostArea, sponsor, revenue } = applyAnswers;
+      if (revenue === 'No') return { type: 'disqualified', reason: 'revenue' };
+      if (lostArea !== 'Across more than one of these') {
+        return { type: 'prescription', programme: programmeMap[lostArea] };
+      }
+      if (sponsor === 'Not identified yet') return { type: 'disqualified', reason: 'sponsor' };
+      return { type: 'complete-system' };
+    }
 
     function startApply() {
       document.getElementById('apply-intro').classList.add('hidden');
@@ -392,26 +435,10 @@
         <div class="apply-card__q">${q.q}</div>`;
       if (q.sub) inner += `<div class="apply-card__sub">${q.sub}</div>`;
 
-      if (q.type === 'dropdown') {
-        const opts = q.options.map(o => `<option value="${o}">${o}</option>`).join('');
-        inner += `<select class="apply-select" id="apply-dropdown" onchange="selectDropdown(this.value)">
-          <option value="">Select an option</option>
-          ${opts}
-        </select>
-        <div class="apply-select-next hidden" id="dropdown-next-wrap">
-          <button class="btn btn--primary" onclick="nextQuestion()">Next &rarr;</button>
-        </div>`;
-      } else if (q.type === 'buttons') {
-        const btns = q.options.map(o =>
-          `<button class="apply-btn-answer" onclick="selectButton(this, '${o.replace("'", "\\'")}')">${o}</button>`
-        ).join('');
-        inner += `<div class="apply-btn-row">${btns}</div>`;
-      } else if (q.type === 'text') {
-        inner += `<textarea class="apply-textarea" id="apply-text" placeholder="${q.placeholder}" oninput="textInput(this.value)"></textarea>
-        <div style="margin-top:1.25rem;">
-          <button class="btn btn--primary" id="text-next-btn" disabled onclick="nextQuestion()">Next &rarr;</button>
-        </div>`;
-      }
+      const btns = q.options.map(o =>
+        `<button class="apply-btn-answer" onclick="selectButton(this, '${o.replace(/'/g, "\\'")}')">${o}</button>`
+      ).join('');
+      inner += `<div class="apply-btn-row">${btns}</div>`;
 
       card.innerHTML = inner;
       card.style.animation = 'none';
@@ -419,23 +446,11 @@
       card.style.animation = 'applyFadeUp .35s ease';
     }
 
-    function selectDropdown(val) {
-      if (!val) return;
-      applyAnswers[questions[currentQ].key] = val;
-      document.getElementById('dropdown-next-wrap').classList.remove('hidden');
-    }
-
     function selectButton(btn, val) {
       document.querySelectorAll('.apply-btn-answer').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       applyAnswers[questions[currentQ].key] = val;
       setTimeout(nextQuestion, 280);
-    }
-
-    function textInput(val) {
-      applyAnswers[questions[currentQ].key] = val;
-      const btn = document.getElementById('text-next-btn');
-      if (btn) btn.disabled = val.trim().length < 2;
     }
 
     function nextQuestion() {
@@ -459,45 +474,40 @@
       document.getElementById('btn-apply-gate').disabled = !(n && c && e.includes('@') && e.includes('.'));
     }
 
-    function isQualified() {
-      const r = applyAnswers.revenue;
-      const c = applyAnswers.commitment;
-      const t = applyAnswers.track;
-      if (r === 'Under £500K') return false;
-      if (c === 'Not sure')    return false;
-      if (t === 'No')          return false;
-      return true;
-    }
-
     function submitApply() {
       const name    = document.getElementById('a-name').value.trim();
       const company = document.getElementById('a-company').value.trim();
       const email   = document.getElementById('a-email').value.trim();
-      const qualified = isQualified();
+      const route   = getRoute();
 
       document.getElementById('apply-gate').classList.add('hidden');
 
-      if (qualified) {
+      if (route.type === 'complete-system') {
         document.getElementById('apply-qualified').classList.remove('hidden');
+      } else if (route.type === 'prescription') {
+        const el = document.getElementById('apply-prescription');
+        document.getElementById('prescription-name').textContent = route.programme.name;
+        document.getElementById('prescription-link').href = route.programme.url;
+        document.getElementById('prescription-link').textContent = 'See the ' + route.programme.name + ' →';
+        el.classList.remove('hidden');
       } else {
         document.getElementById('apply-notqualified').classList.remove('hidden');
-        setTimeout(() => {
-          window.location.href = '/#products';
-        }, 3500);
+        setTimeout(() => { window.location.href = '/#products'; }, 4000);
       }
 
       fetch(CAPTURE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name,
-          company,
-          email,
-          revenue:    applyAnswers.revenue,
-          commitment: applyAnswers.commitment,
-          track:      applyAnswers.track,
-          metric:     applyAnswers.metric,
-          qualified,
+          name, company, email,
+          lostArea:  applyAnswers.lostArea,
+          salesTeam: applyAnswers.salesTeam,
+          sponsor:   applyAnswers.sponsor,
+          managers:  applyAnswers.managers,
+          data:      applyAnswers.data,
+          revenue:   applyAnswers.revenue,
+          route:     route.type,
+          programme: route.programme ? route.programme.name : null,
         }),
       }).catch(err => console.warn('Capture failed:', err));
     }
