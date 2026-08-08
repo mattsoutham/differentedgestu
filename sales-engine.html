@@ -63,9 +63,12 @@
     .se-cta-secondary:hover { background: rgba(200,255,0,0.06); }
     .se-cta-secondary svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform 0.2s; }
     .se-cta-secondary:hover svg { transform: translateX(3px); }
+    .se-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .se-compare-grid > * { min-width: 0; }
     @media (max-width: 960px) {
       .se-section { padding: 72px 0; }
       .se-pricing-grid { grid-template-columns: 1fr; }
+      .se-compare-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .se-headline { font-size: 34px; }
       .se-ctas { max-width: 100%; width: 100%; }
       .se-bottom-cta { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
@@ -387,7 +390,7 @@
       <div class="container" data-reveal>
         <div style="background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:2.5rem;">
           <p class="eyebrow" style="margin-bottom:1rem;">A complete Sales Engine. Or a complete commercial system?</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;">
+          <div class="se-compare-grid">
             <div>
               <p style="font-size:0.9375rem;color:rgba(255,255,255,0.8);line-height:1.75;margin-bottom:1rem;">The Sales Engine is the right answer when sales execution is the main problem. We identify where opportunities lose momentum, capture what your best people do differently, build the assets buyers need and deploy the method across the team and CRM.</p>
               <p style="font-size:0.9375rem;color:rgba(255,255,255,0.8);line-height:1.75;">But sometimes the sales team is not the whole problem. Buyers may not understand the business clearly enough. Your leaders may not be visible often enough. And the team may be trying to convert interest before enough familiarity and trust have been built.</p>
