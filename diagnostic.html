@@ -442,113 +442,113 @@
 
   <script src="nav.js"></script>
   <script>
-    const CALENDLY = ‘https://calendly.com/dan_de/bootcamp-application’;
+    const CALENDLY = 'https://calendly.com/dan_de/bootcamp-application';
 
     const questions = [
-      ‘Can buyers easily see and hear from the people leading your business before they enquire?’,
-      ‘Do buyers receive the right commercial assets at every stage of their buying journey?’,
-      ‘Can a new buyer understand what makes your business different in under 90 seconds?’,
-      ‘Have you answered your buyers’ biggest questions before they need to ask them?’,
-      ‘Do buyers see genuine proof from customers before making a decision?’,
-      ‘Would a buyer regularly see your expertise if they followed your business for a month?’,
-      ‘Can every salesperson consistently communicate what your top performers already know?’,
-      ‘Does your website, marketing and sales process tell one consistent commercial story?’
+      'Can buyers easily see and hear from the people leading your business before they enquire?',
+      'Do buyers receive the right commercial assets at every stage of their buying journey?',
+      'Can a new buyer understand what makes your business different in under 90 seconds?',
+      "Have you answered your buyers' biggest questions before they need to ask them?",
+      'Do buyers see genuine proof from customers before making a decision?',
+      'Would a buyer regularly see your expertise if they followed your business for a month?',
+      'Can every salesperson consistently communicate what your top performers already know?',
+      'Does your website, marketing and sales process tell one consistent commercial story?'
     ];
 
     const SIGNAL_NAMES = [
-      ‘Leader Visibility’,
-      ‘Buyer Journey Assets’,
-      ‘First Impression Clarity’,
-      ‘Objection Handling’,
-      ‘Customer Proof’,
-      ‘Consistent Presence’,
-      ‘Sales Consistency’,
-      ‘Message Alignment’
+      'Leader Visibility',
+      'Buyer Journey Assets',
+      'First Impression Clarity',
+      'Objection Handling',
+      'Customer Proof',
+      'Consistent Presence',
+      'Sales Consistency',
+      'Message Alignment'
     ];
 
     // Flat band copy — stored in data object for email sequence (Step 1 Part 2)
     const BAND_COPY = {
       low: {
-        key: ‘low’,
-        name: ‘Low Buyer Confidence’,
-        summary: ‘Right now you are invisible to buyers before they speak to you. The expertise is there but buyers cannot find it, and every new conversation starts from zero. While you are rebuilding that credibility from scratch on every call, the competitors who made the decision easier are getting it first.’,
-        product: ‘The Authority Build’,
-        productSummary: ‘In 90 days we build the commercial foundation buyers need to trust your business before they ever speak to you. Hero film, leader authority series, customer proof, and full deployment across your buyer journey. Everything a serious buyer looks for, in one sprint.’,
-        cta: ‘Get the three things to fix first’,
-        ctaSub: ‘15 minutes. We tell you exactly where to start and in what order. No preparation needed.’
+        key: 'low',
+        name: 'Low Buyer Confidence',
+        summary: 'Right now you are invisible to buyers before they speak to you. The expertise is there but buyers cannot find it, and every new conversation starts from zero. While you are rebuilding that credibility from scratch on every call, the competitors who made the decision easier are getting it first.',
+        product: 'The Authority Build',
+        productSummary: 'In 90 days we build the commercial foundation buyers need to trust your business before they ever speak to you. Hero film, leader authority series, customer proof, and full deployment across your buyer journey. Everything a serious buyer looks for, in one sprint.',
+        cta: 'Get the three things to fix first',
+        ctaSub: '15 minutes. We tell you exactly where to start and in what order. No preparation needed.'
       },
       building: {
-        key: ‘building’,
-        name: ‘Building Buyer Confidence’,
-        summary: ‘Buyers can find you, but when they do, what they find raises more questions than it answers. There are signals of credibility in place but they are not consistent, not connected, and not doing enough to make the decision feel easy. The business is better than it looks from the outside.’,
-        product: ‘Authority Build or Visibility Engine’,
-        productSummary: ‘In 90 days we can turn that first look into genuine confidence. Either by building the foundation assets that are missing, or by making the assets you already have show up consistently in the places buyers look. Which one depends on your specific gaps, which is exactly what the 15-minute call is for.’,
-        cta: ‘Get the three things to fix first’,
-        ctaSub: ‘15 minutes. We look at your specific gaps and tell you the fastest path to closing them.’
+        key: 'building',
+        name: 'Building Buyer Confidence',
+        summary: 'Buyers can find you, but when they do, what they find raises more questions than it answers. There are signals of credibility in place but they are not consistent, not connected, and not doing enough to make the decision feel easy. The business is better than it looks from the outside.',
+        product: 'Authority Build or Visibility Engine',
+        productSummary: 'In 90 days we can turn that first look into genuine confidence. Either by building the foundation assets that are missing, or by making the assets you already have show up consistently in the places buyers look. Which one depends on your specific gaps, which is exactly what the 15-minute call is for.',
+        cta: 'Get the three things to fix first',
+        ctaSub: '15 minutes. We look at your specific gaps and tell you the fastest path to closing them.'
       },
       emerging: {
-        key: ‘emerging’,
-        name: ‘Emerging Buyer Confidence’,
-        summary: ‘You have real assets working for you and buyers can see genuine credibility. The gap is consistency. Confidence builds in some parts of the journey and drops in others, and buyers who were close to a decision pause when something does not join up. Your best salespeople bridge that gap naturally. The rest of the team cannot replicate it.’,
-        product: ‘Visibility Engine or Sales Engine’,
-        productSummary: ‘In 90 days we can make sure every buyer gets the same experience your best conversations already deliver. Consistent presence, consistent messaging, and the assets that keep deals moving when your team are not in the room.’,
-        cta: ‘Get the three things to fix first’,
-        ctaSub: ‘15 minutes. We identify which two or three signals will move your score fastest and tell you exactly how.’
+        key: 'emerging',
+        name: 'Emerging Buyer Confidence',
+        summary: 'You have real assets working for you and buyers can see genuine credibility. The gap is consistency. Confidence builds in some parts of the journey and drops in others, and buyers who were close to a decision pause when something does not join up. Your best salespeople bridge that gap naturally. The rest of the team cannot replicate it.',
+        product: 'Visibility Engine or Sales Engine',
+        productSummary: 'In 90 days we can make sure every buyer gets the same experience your best conversations already deliver. Consistent presence, consistent messaging, and the assets that keep deals moving when your team are not in the room.',
+        cta: 'Get the three things to fix first',
+        ctaSub: '15 minutes. We identify which two or three signals will move your score fastest and tell you exactly how.'
       },
       optimised: {
-        key: ‘optimised’,
-        name: ‘Optimised Buyer Confidence’,
-        summary: ‘You are in the top quartile. High-grade assets are working across visibility, authority and sales conversations, and buyers are getting a consistent, confident experience before and during the buying process. This is rare. Most of your competition are not here.’,
-        product: ‘Complete System or Sales Engine’,
-        productSummary: ‘We help you maintain, optimise and compound what you have built. The Complete System ties your visibility, authority and sales assets into one joined-up programme with a performance guarantee attached.’,
-        cta: ‘See how we help businesses at your level’,
-        ctaSub: ‘15 minutes. We show you exactly what the top-performing businesses in your sector are doing that you are not yet doing.’
+        key: 'optimised',
+        name: 'Optimised Buyer Confidence',
+        summary: 'You are in the top quartile. High-grade assets are working across visibility, authority and sales conversations, and buyers are getting a consistent, confident experience before and during the buying process. This is rare. Most of your competition are not here.',
+        product: 'Complete System or Sales Engine',
+        productSummary: 'We help you maintain, optimise and compound what you have built. The Complete System ties your visibility, authority and sales assets into one joined-up programme with a performance guarantee attached.',
+        cta: 'See how we help businesses at your level',
+        ctaSub: '15 minutes. We show you exactly what the top-performing businesses in your sector are doing that you are not yet doing.'
       }
     };
 
     // Cluster-specific copy for on-page results (answer-pattern routing — preserved)
     const COPY = {
       authority: {
-        ‘Low Buyer Confidence’:       ‘Right now, buyers are unlikely to feel confident choosing your business before speaking to your team. The expertise is there, but it\’s not visible in the places buyers look before they make contact. Every new conversation starts from scratch, and while that\’s happening, competitors who\’ve made the decision easier are getting the call first.’,
-        ‘Building Buyer Confidence’:  ‘Some of the building blocks are in place, but not enough to give buyers consistent confidence before they enquire. The gaps in your current setup may be creating hesitancy at exactly the moment a buyer is deciding who to shortlist, and that hesitancy doesn\’t wait for you to fix it. It moves to the competitor who made trust easier.’,
-        ‘Emerging Buyer Confidence’:  ‘Some of the building blocks are in place, but not enough to give buyers consistent confidence before they enquire. The gaps in your current setup may be creating hesitancy at exactly the moment a buyer is deciding who to shortlist, and that hesitancy doesn\’t wait for you to fix it. It moves to the competitor who made trust easier.’,
-        ‘Optimised Buyer Confidence’: ‘Buyer confidence is strong at the front door. The gap is what happens between first impression and signed deal. Your team has the credibility to win, but without a consistent way to carry that confidence through every touchpoint, deals slow down and late-stage proposals go quiet.’,
-        product: ‘The Authority Build’,
-        rec: ‘We extract the expertise already inside your business in a single day, transforming it into a commercial asset library that helps buyers trust you before they ever enquire. Hero film, leader authority series, and deployment across your website and sales toolkit.’,
-        stat: ‘81% of buyers say trust is a deal breaker or deciding factor before choosing a supplier.’,
-        source: ‘Edelman, “In Brands We Trust?”, 2019’,
-        cta: ‘Get the three things to fix first’,
+        'Low Buyer Confidence':       'Right now, buyers are unlikely to feel confident choosing your business before speaking to your team. The expertise is there, but it\'s not visible in the places buyers look before they make contact. Every new conversation starts from scratch, and while that\'s happening, competitors who\'ve made the decision easier are getting the call first.',
+        'Building Buyer Confidence':  'Some of the building blocks are in place, but not enough to give buyers consistent confidence before they enquire. The gaps in your current setup may be creating hesitancy at exactly the moment a buyer is deciding who to shortlist, and that hesitancy doesn\'t wait for you to fix it. It moves to the competitor who made trust easier.',
+        'Emerging Buyer Confidence':  'Some of the building blocks are in place, but not enough to give buyers consistent confidence before they enquire. The gaps in your current setup may be creating hesitancy at exactly the moment a buyer is deciding who to shortlist, and that hesitancy doesn\'t wait for you to fix it. It moves to the competitor who made trust easier.',
+        'Optimised Buyer Confidence': 'Buyer confidence is strong at the front door. The gap is what happens between first impression and signed deal. Your team has the credibility to win, but without a consistent way to carry that confidence through every touchpoint, deals slow down and late-stage proposals go quiet.',
+        product: 'The Authority Build',
+        rec: 'We extract the expertise already inside your business in a single day, transforming it into a commercial asset library that helps buyers trust you before they ever enquire. Hero film, leader authority series, and deployment across your website and sales toolkit.',
+        stat: '81% of buyers say trust is a deal breaker or deciding factor before choosing a supplier.',
+        source: 'Edelman, “In Brands We Trust?”, 2019',
+        cta: 'Get the three things to fix first',
       },
       sales: {
-        ‘Low Buyer Confidence’:       ‘Buyers can find you, but the sales process is carrying the full weight of building trust that should already exist before the first conversation.’,
-        ‘Building Buyer Confidence’:  ‘Buyers can see signals of credibility, but confidence breaks down once they\’re inside your sales pipeline. Your best salespeople build that confidence naturally, but the rest of the team can\’t replicate it consistently. That inconsistency creates hesitancy mid-deal, and while your buyers pause, your competitors stay in their ear.’,
-        ‘Emerging Buyer Confidence’:  ‘Buyers can see signals of credibility, but confidence breaks down once they\’re inside your sales pipeline. Your best salespeople build that confidence naturally, but the rest of the team can\’t replicate it consistently. That inconsistency creates hesitancy mid-deal, and while your buyers pause, your competitors stay in their ear.’,
-        ‘Optimised Buyer Confidence’: ‘Buyer confidence is strong at the front door. The gap is what happens between first impression and signed deal. Your team has the credibility to win, but without a consistent way to carry that confidence through every touchpoint, deals slow down and late-stage proposals go quiet.’,
-        product: ‘The Sales Engine’,
-        rec: ‘We capture the thinking, language, and commercial judgment behind your highest-performing salespeople and deploy it directly inside your CRM. Every buyer experiences the strongest version of your business, regardless of who they\’re speaking to.’,
-        stat: ‘81% of buyers say trust is a deal-breaker before choosing a supplier.’,
-        source: ‘Edelman, “In Brands We Trust?”, 2019’,
-        cta: ‘Get the three things to fix first’,
+        'Low Buyer Confidence':       'Buyers can find you, but the sales process is carrying the full weight of building trust that should already exist before the first conversation.',
+        'Building Buyer Confidence':  'Buyers can see signals of credibility, but confidence breaks down once they\'re inside your sales pipeline. Your best salespeople build that confidence naturally, but the rest of the team can\'t replicate it consistently. That inconsistency creates hesitancy mid-deal, and while your buyers pause, your competitors stay in their ear.',
+        'Emerging Buyer Confidence':  'Buyers can see signals of credibility, but confidence breaks down once they\'re inside your sales pipeline. Your best salespeople build that confidence naturally, but the rest of the team can\'t replicate it consistently. That inconsistency creates hesitancy mid-deal, and while your buyers pause, your competitors stay in their ear.',
+        'Optimised Buyer Confidence': 'Buyer confidence is strong at the front door. The gap is what happens between first impression and signed deal. Your team has the credibility to win, but without a consistent way to carry that confidence through every touchpoint, deals slow down and late-stage proposals go quiet.',
+        product: 'The Sales Engine',
+        rec: 'We capture the thinking, language, and commercial judgment behind your highest-performing salespeople and deploy it directly inside your CRM. Every buyer experiences the strongest version of your business, regardless of who they\'re speaking to.',
+        stat: '81% of buyers say trust is a deal-breaker before choosing a supplier.',
+        source: 'Edelman, “In Brands We Trust?”, 2019',
+        cta: 'Get the three things to fix first',
       },
       visibility: {
-        ‘Low Buyer Confidence’:       ‘Buyers can\’t find you consistently, and when they do, there\’s not enough presence to build the familiarity that makes trust possible.’,
-        ‘Building Buyer Confidence’:  ‘Your business has pockets of credibility, but buyer confidence fades between touchpoints because there\’s no consistent presence keeping you visible. A buyer who finds you today might feel confident. A buyer who finds you next month might not remember you were an option.’,
-        ‘Emerging Buyer Confidence’:  ‘Your business has pockets of credibility, but buyer confidence fades between touchpoints because there\’s no consistent presence keeping you visible. A buyer who finds you today might feel confident. A buyer who finds you next month might not remember you were an option. That gap is where competitors with a consistent presence quietly get ahead.’,
-        ‘Optimised Buyer Confidence’: ‘Buyer confidence is high when they\’re in front of you. The risk is what happens when they\’re not. Between conversations, between quarters, between campaigns, visibility drops and competitors fill the space. The businesses that hold buyer confidence over time are the ones that stay visible without burning out on producing it.’,
-        product: ‘The Visibility Engine’,
-        rec: ‘90 minutes every 90 days. We capture fresh expertise from your founders and leadership team and transform it into a continuous stream of commercial assets that keep your business visible, relevant, and remembered.’,
-        stat: ‘60% of B2B buyers will pay a premium for organisations producing consistent thought leadership.’,
-        source: ‘Edelman-LinkedIn, 2024 (n=3,500)’,
-        cta: ‘Get the three things to fix first’,
+        'Low Buyer Confidence':       'Buyers can\'t find you consistently, and when they do, there\'s not enough presence to build the familiarity that makes trust possible.',
+        'Building Buyer Confidence':  'Your business has pockets of credibility, but buyer confidence fades between touchpoints because there\'s no consistent presence keeping you visible. A buyer who finds you today might feel confident. A buyer who finds you next month might not remember you were an option.',
+        'Emerging Buyer Confidence':  'Your business has pockets of credibility, but buyer confidence fades between touchpoints because there\'s no consistent presence keeping you visible. A buyer who finds you today might feel confident. A buyer who finds you next month might not remember you were an option. That gap is where competitors with a consistent presence quietly get ahead.',
+        'Optimised Buyer Confidence': 'Buyer confidence is high when they\'re in front of you. The risk is what happens when they\'re not. Between conversations, between quarters, between campaigns, visibility drops and competitors fill the space. The businesses that hold buyer confidence over time are the ones that stay visible without burning out on producing it.',
+        product: 'The Visibility Engine',
+        rec: '90 minutes every 90 days. We capture fresh expertise from your founders and leadership team and transform it into a continuous stream of commercial assets that keep your business visible, relevant, and remembered.',
+        stat: '60% of B2B buyers will pay a premium for organisations producing consistent thought leadership.',
+        source: 'Edelman-LinkedIn, 2024 (n=3,500)',
+        cta: 'Get the three things to fix first',
       },
       complete: {
-        ‘Optimised Buyer Confidence’: ‘Rare territory. Buyers can find you, trust you, and your team sells with consistency. The businesses that maintain this level of buyer confidence treat trust, visibility, and sales enablement as one connected commercial system rather than three separate efforts.’,
-        ‘sub100’:                     ‘Buyer confidence isn\’t breaking in one place, it\’s leaking across trust, visibility, and sales consistency. Fixing one without the others means the improvement doesn\’t compound, and your competitors only need to be stronger in one area to create enough doubt to win the deal.’,
-        product: ‘The Complete System’,
-        rec: ‘All three products working together as commercial infrastructure. Authority Build creates buyer confidence. Visibility Engine maintains it. Sales Engine deploys it where deals are won. Scoped via a strategy call and limited to four businesses per year.’,
-        stat: ‘60% of B2B buyers will pay a premium for organisations producing consistent thought leadership.’,
-        source: ‘Edelman-LinkedIn, 2024’,
-        cta: ‘See how we help businesses at your level’,
+        'Optimised Buyer Confidence': 'Rare territory. Buyers can find you, trust you, and your team sells with consistency. The businesses that maintain this level of buyer confidence treat trust, visibility, and sales enablement as one connected commercial system rather than three separate efforts.',
+        'sub100':                     'Buyer confidence isn\'t breaking in one place, it\'s leaking across trust, visibility, and sales consistency. Fixing one without the others means the improvement doesn\'t compound, and your competitors only need to be stronger in one area to create enough doubt to win the deal.',
+        product: 'The Complete System',
+        rec: 'All three products working together as commercial infrastructure. Authority Build creates buyer confidence. Visibility Engine maintains it. Sales Engine deploys it where deals are won. Scoped via a strategy call and limited to four businesses per year.',
+        stat: '60% of B2B buyers will pay a premium for organisations producing consistent thought leadership.',
+        source: 'Edelman-LinkedIn, 2024',
+        cta: 'See how we help businesses at your level',
       },
     };
 
@@ -556,21 +556,21 @@
     const answers = [];
 
     function startQuiz() {
-      document.getElementById(‘diag-intro’).classList.add(‘hidden’);
-      document.getElementById(‘diag-quiz’).classList.remove(‘hidden’);
+      document.getElementById('diag-intro').classList.add('hidden');
+      document.getElementById('diag-quiz').classList.remove('hidden');
       showQuestion();
     }
 
     function showQuestion() {
-      document.getElementById(‘q-area’).textContent = ‘’;
-      document.getElementById(‘q-text’).textContent = questions[current];
-      document.getElementById(‘prog-text’).textContent = `Question ${current + 1} of 8`;
-      document.getElementById(‘prog-area’).textContent = ‘’;
-      document.getElementById(‘prog-fill’).style.width = ((current + 1) / 8 * 100) + ‘%’;
-      const card = document.getElementById(‘q-card’);
-      card.style.animation = ‘none’;
+      document.getElementById('q-area').textContent = '';
+      document.getElementById('q-text').textContent = questions[current];
+      document.getElementById('prog-text').textContent = `Question ${current + 1} of 8`;
+      document.getElementById('prog-area').textContent = '';
+      document.getElementById('prog-fill').style.width = ((current + 1) / 8 * 100) + '%';
+      const card = document.getElementById('q-card');
+      card.style.animation = 'none';
       card.offsetHeight;
-      card.style.animation = ‘diagFadeUp .35s ease’;
+      card.style.animation = 'diagFadeUp .35s ease';
     }
 
     function answer(val) {
@@ -579,24 +579,24 @@
       if (current < 8) {
         showQuestion();
       } else {
-        document.getElementById(‘diag-quiz’).classList.add(‘hidden’);
-        document.getElementById(‘diag-gate’).classList.remove(‘hidden’);
+        document.getElementById('diag-quiz').classList.add('hidden');
+        document.getElementById('diag-gate').classList.remove('hidden');
       }
     }
 
-    [‘g-name’,’g-email’,’g-size’].forEach(id => {
-      document.getElementById(id).addEventListener(‘input’, checkGate);
-      document.getElementById(id).addEventListener(‘change’, checkGate);
+    ['g-name','g-email','g-size'].forEach(id => {
+      document.getElementById(id).addEventListener('input', checkGate);
+      document.getElementById(id).addEventListener('change', checkGate);
     });
 
     function checkGate() {
-      const n = document.getElementById(‘g-name’).value.trim();
-      const e = document.getElementById(‘g-email’).value.trim();
-      const s = document.getElementById(‘g-size’).value;
-      document.getElementById(‘btn-gate’).disabled = !(n && e.includes(‘@’) && e.includes(‘.’) && s);
+      const n = document.getElementById('g-name').value.trim();
+      const e = document.getElementById('g-email').value.trim();
+      const s = document.getElementById('g-size').value;
+      document.getElementById('btn-gate').disabled = !(n && e.includes('@') && e.includes('.') && s);
     }
 
-    const WORKER_URL = ‘/lead-capture.php’;
+    const WORKER_URL = '/lead-capture.php';
 
     function getBandCopy(score) {
       if (score <= 25) return BAND_COPY.low;
@@ -606,10 +606,10 @@
     }
 
     function submitGate() {
-      const name  = document.getElementById(‘g-name’).value.trim();
-      const email = document.getElementById(‘g-email’).value.trim();
-      const size  = document.getElementById(‘g-size’).value;
-      const firstName = name.split(‘ ‘)[0];
+      const name  = document.getElementById('g-name').value.trim();
+      const email = document.getElementById('g-email').value.trim();
+      const size  = document.getElementById('g-size').value;
+      const firstName = name.split(' ')[0];
 
       const yesCount = answers.filter(Boolean).length;
       const score    = Math.round((yesCount / 8) * 100);
@@ -617,12 +617,12 @@
       const bandCopy = getBandCopy(score);
       const signals  = SIGNAL_NAMES.map((label, i) => ({ label, answer: answers[i] === true }));
 
-      document.getElementById(‘diag-gate’).classList.add(‘hidden’);
+      document.getElementById('diag-gate').classList.add('hidden');
       renderResults(score, reco, signals, bandCopy);
 
       fetch(WORKER_URL, {
-        method: ‘POST’,
-        headers: { ‘Content-Type’: ‘application/json’ },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name, first_name: firstName, email, size,
           score,
@@ -633,7 +633,7 @@
           recommendation:      reco.cluster,
           signals:             JSON.stringify(signals)
         }),
-      }).catch(err => console.warn(‘Lead capture failed:’, err));
+      }).catch(err => console.warn('Lead capture failed:', err));
     }
 
     // Question-to-cluster mapping (0-indexed)
@@ -646,14 +646,14 @@
     function getRecommendation(score, ans) {
       // Display band
       let band;
-      if (score <= 25)      band = ‘Low Buyer Confidence’;
-      else if (score <= 49) band = ‘Building Buyer Confidence’;
-      else if (score <= 84) band = ‘Emerging Buyer Confidence’;
-      else                  band = ‘Optimised Buyer Confidence’;
+      if (score <= 25)      band = 'Low Buyer Confidence';
+      else if (score <= 49) band = 'Building Buyer Confidence';
+      else if (score <= 84) band = 'Emerging Buyer Confidence';
+      else                  band = 'Optimised Buyer Confidence';
 
       // Extreme overrides
-      if (score <= 25)   return { band, cluster: ‘authority’, summary: COPY.authority[band] };
-      if (score === 100) return { band, cluster: ‘complete’,  summary: COPY.complete[‘Optimised Buyer Confidence’] };
+      if (score <= 25)   return { band, cluster: 'authority', summary: COPY.authority[band] };
+      if (score === 100) return { band, cluster: 'complete',  summary: COPY.complete['Optimised Buyer Confidence'] };
 
       // Count "no" answers per cluster
       const counts = { authority: 0, visibility: 0, sales: 0 };
@@ -667,11 +667,11 @@
         const vals = Object.values(counts);
         const max  = Math.max(...vals);
         const tied = vals.filter(v => v === max).length === vals.length;
-        if (tied) return { band, cluster: ‘complete’, summary: COPY.complete[‘sub100’] };
+        if (tied) return { band, cluster: 'complete', summary: COPY.complete['sub100'] };
       }
 
       // Pick weakest cluster; tiebreaker: authority > sales > visibility
-      const order = [‘authority’, ‘sales’, ‘visibility’];
+      const order = ['authority', 'sales', 'visibility'];
       let winner = order[0];
       for (const key of order) {
         if (counts[key] > counts[winner]) winner = key;
@@ -681,14 +681,14 @@
     }
 
     function renderResults(score, reco, signals, bandCopy) {
-      const el = document.getElementById(‘diag-results’);
+      const el = document.getElementById('diag-results');
       const dashOffset = 440 - (440 * score / 100);
 
       // Ring colour by band
-      const ringColor = score >= 85 ? ‘#D0EE4D’
-                      : score >= 50 ? ‘#C8A800’
-                      : score >= 26 ? ‘#E0A852’
-                      : ‘#E05252’;
+      const ringColor = score >= 85 ? '#D0EE4D'
+                      : score >= 50 ? '#C8A800'
+                      : score >= 26 ? '#E0A852'
+                      : '#E05252';
 
       const c = COPY[reco.cluster];
 
@@ -702,13 +702,13 @@
             <div class="diag-signal diag-signal--gap">
               <span class="diag-signal__label">${s.label}</span>
               <span class="diag-signal__status diag-signal__status--gap">Not yet in place</span>
-            </div>`).join(‘’)}
-          ${gaps.length && wins.length ? ‘<hr class="diag-signal-rule" />’ : ‘’}
+            </div>`).join('')}
+          ${gaps.length && wins.length ? '<hr class="diag-signal-rule" />' : ''}
           ${wins.map(s => `
             <div class="diag-signal diag-signal--win">
               <span class="diag-signal__label">${s.label}</span>
               <span class="diag-signal__status diag-signal__status--win">In place</span>
-            </div>`).join(‘’)}
+            </div>`).join('')}
         </div>`;
 
       el.innerHTML = `
@@ -749,11 +749,11 @@
           <p class="diag-cta-sub">${bandCopy.ctaSub}</p>
         </div>
       `;
-      el.classList.remove(‘hidden’);
+      el.classList.remove('hidden');
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          const ring = document.getElementById(‘ring-anim’);
+          const ring = document.getElementById('ring-anim');
           if (ring) ring.style.strokeDashoffset = dashOffset;
         });
       });
