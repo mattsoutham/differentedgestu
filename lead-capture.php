@@ -1,12 +1,13 @@
 <?php
 /**
  * Different Edge Studio — Diagnostic Lead Capture
- * Drop this file in the root of the site (same folder as index.html).
- * Uses Mailgun REST API via curl for reliable delivery.
- * Falls back to PHP mail() if Mailgun key is not set.
+ * Adds subscriber to MailerLite with assessment custom fields.
+ * Sends internal alert to DES team via Mailgun.
+ * MailerLite automation handles all emails to the lead.
  */
 
 require_once __DIR__ . '/mailgun-config.php';
+require_once __DIR__ . '/mailerlite-config.php';
 
 header('Access-Control-Allow-Origin: https://differentedgestudio.com');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
@@ -27,18 +28,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $raw  = file_get_contents('php://input');
 $data = json_decode($raw, true);
 
-if (!$data || empty($data['name']) || empty($data['email'])) {
+if (!$data || empty($data['email'])) {
     http_response_code(400);
     echo json_encode(['ok' => false, 'error' => 'Missing fields']);
     exit;
 }
 
-$name           = htmlspecialchars($data['name']);
-$email          = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-$size           = htmlspecialchars($data['size'] ?? '');
-$score          = intval($data['score'] ?? 0);
-$recommendation = htmlspecialchars($data['recommendation'] ?? '');
-$areas          = $data['areas'] ?? [];
+$email      = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+$first_name = htmlspecialchars($data['first_name'] ?? ($data['name'] ?? ''));
+$size       = htmlspecialchars($data['size'] ?? '');
+$score      = intval($data['score'] ?? 0);
+$band_key   = htmlspecialchars($data['band_key'] ?? '');
+$band_name  = htmlspecialchars($data['band_name'] ?? '');
+$band_summary        = htmlspecialchars($data['band_summary'] ?? '');
+$recommended_product = htmlspecialchars($data['recommended_product'] ?? '');
+$signals_raw = $data['signals'] ?? '[]';
+$signals_str = is_array($signals_raw) ? json_encode($signals_raw) : $signals_raw;
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
@@ -46,160 +51,126 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// 1. Email results to the user
-send_email(
-    $MAILGUN_API_KEY, $MAILGUN_DOMAIN,
-    $email,
-    "{$FROM_NAME} <{$FROM_EMAIL}>",
-    'Your Buyer Confidence Assessment Results',
-    build_user_email($name, $score, $recommendation, $areas)
-);
+// 1. Add / update subscriber in MailerLite
+$ml_result = mailerlite_upsert($MAILERLITE_API_KEY, $MAILERLITE_GROUP_ID, [
+    'email'  => $email,
+    'fields' => [
+        'first_name'          => $first_name,
+        'score'               => $score,
+        'band_key'            => $band_key,
+        'band_name'           => $band_name,
+        'band_summary'        => $band_summary,
+        'recommended_product' => $recommended_product,
+        'company_size'        => $size,
+        'signals'             => $signals_str,
+    ],
+]);
 
-// 2. Alert the DES team
-send_email(
+// 2. Internal alert to DES team
+send_mailgun_email(
     $MAILGUN_API_KEY, $MAILGUN_DOMAIN,
     $NOTIFY_EMAIL,
     "DES Diagnostic <{$FROM_EMAIL}>",
-    "New diagnostic lead: {$name} — {$score}/7 — {$recommendation}",
-    build_lead_email($name, $email, $size, $score, $recommendation, $areas)
+    "New diagnostic lead: {$first_name} — {$score}/100 — {$band_name}",
+    build_lead_alert($first_name, $email, $size, $score, $band_name, $recommended_product, $signals_raw, $ml_result)
 );
 
 http_response_code(200);
 echo json_encode(['ok' => true]);
 exit;
 
-// ── Mailer ────────────────────────────────────────────────────────────────────
+// ── MailerLite ────────────────────────────────────────────────────────────────
 
-function send_email($api_key, $domain, $to, $from, $subject, $html) {
-    if ($api_key) {
-        $ch = curl_init("https://api.eu.mailgun.net/v3/{$domain}/messages");
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD        => "api:{$api_key}",
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => [
-                'from'    => $from,
-                'to'      => $to,
-                'subject' => $subject,
-                'html'    => $html,
-            ],
-        ]);
-        $result = curl_exec($ch);
-        $err    = curl_error($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-    } else {
-        $headers  = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $headers .= "From: {$from}\r\n";
-        mail($to, $subject, $html, $headers);
+function mailerlite_upsert($api_key, $group_id, $payload) {
+    if (!$api_key) return ['error' => 'No MailerLite API key configured'];
+
+    if ($group_id) {
+        $payload['groups'] = [$group_id];
     }
+
+    $ch = curl_init('https://connect.mailerlite.com/api/subscribers');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => json_encode($payload),
+        CURLOPT_HTTPHEADER     => [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            "Authorization: Bearer {$api_key}",
+        ],
+    ]);
+    $body   = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $err    = curl_error($ch);
+    curl_close($ch);
+
+    return ['status' => $status, 'body' => $body, 'curl_error' => $err];
 }
 
-// ── Email templates ───────────────────────────────────────────────────────────
+// ── Mailgun ───────────────────────────────────────────────────────────────────
 
-function build_user_email($name, $score, $recommendation, $areas) {
-    $pct = round(($score / 7) * 100);
-    $bar = max(4, $pct);
+function send_mailgun_email($api_key, $domain, $to, $from, $subject, $html) {
+    if (!$api_key) return;
+    $ch = curl_init("https://api.eu.mailgun.net/v3/{$domain}/messages");
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERPWD        => "api:{$api_key}",
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => [
+            'from'    => $from,
+            'to'      => $to,
+            'subject' => $subject,
+            'html'    => $html,
+        ],
+    ]);
+    curl_exec($ch);
+    curl_close($ch);
+}
 
-    $reco_map = [
-        'Sales Engine'       => 'Your pipeline has the biggest gap in how video supports your sales process. The Sales Engine is where to start.',
-        'Visibility'         => 'Your market presence and authority are the weakest link. Visibility will compound the fastest for you.',
-        'Showcase'           => 'Your core brand video and showcase assets are holding you back. Getting Showcase right anchors everything else.',
-        'The Complete System'=> 'Your business has gaps across all three areas. The Complete System is the most efficient way to close them all.',
-    ];
-    $reco_body = $reco_map[$recommendation] ?? "Book a call and we'll walk you through exactly where to start.";
+// ── Internal alert template ───────────────────────────────────────────────────
 
-    $area_rows = '';
-    foreach ($areas as $a) {
-        $label  = htmlspecialchars($a['label'] ?? '');
-        $yes    = intval($a['yes'] ?? 0);
-        $total  = intval($a['total'] ?? 0);
-        $a_pct  = $total > 0 ? round(($yes / $total) * 100) : 0;
-        $colour = $a_pct >= 67 ? '#c8f000' : ($a_pct >= 34 ? '#E0A852' : '#E05252');
-        $area_rows .= "
-        <tr>
-          <td style='padding:10px 16px;color:#aaa;font-size:14px;width:140px;'>{$label}</td>
-          <td style='padding:10px 16px;'>
-            <div style='background:#1a1a1a;border-radius:4px;height:6px;width:100%;margin-bottom:4px;'>
-              <div style='background:{$colour};height:6px;border-radius:4px;width:{$a_pct}%;'></div>
-            </div>
-            <span style='color:{$colour};font-size:12px;font-weight:700;'>{$yes}/{$total} answered yes</span>
-          </td>
+function build_lead_alert($name, $email, $size, $score, $band_name, $product, $signals_raw, $ml_result) {
+    $band_colour = $score >= 85 ? '#D0EE4D' : ($score >= 50 ? '#C8A800' : ($score >= 26 ? '#E0A852' : '#E05252'));
+    $signals     = is_array($signals_raw) ? $signals_raw : json_decode($signals_raw, true) ?? [];
+
+    $sig_rows = '';
+    foreach ($signals as $s) {
+        $label  = htmlspecialchars($s['label'] ?? '');
+        $answer = !empty($s['answer']);
+        $status = $answer ? '<span style="color:#6aaa6a;">In place</span>' : '<span style="color:#D0EE4D;font-weight:700;">Gap</span>';
+        $sig_rows .= "<tr style='border-top:1px solid #222;'>
+          <td style='padding:7px 14px;font-size:13px;color:#ccc;'>{$label}</td>
+          <td style='padding:7px 14px;font-size:13px;'>{$status}</td>
         </tr>";
     }
+
+    $ml_status = isset($ml_result['status']) ? intval($ml_result['status']) : 0;
+    $ml_badge  = ($ml_status === 200 || $ml_status === 201)
+        ? '<span style="color:#6aaa6a;">&#10003; Added to MailerLite</span>'
+        : '<span style="color:#E05252;">&#10007; MailerLite error ' . $ml_status . '</span>';
+
+    $safe_email = htmlspecialchars($email);
+    $safe_name  = htmlspecialchars($name);
 
     return "<!DOCTYPE html>
 <html lang='en'>
 <body style='margin:0;padding:0;background:#0a0a0a;'>
-<div style='max-width:600px;margin:0 auto;padding:40px 24px;font-family:Inter,Arial,sans-serif;color:#fff;'>
-  <img src='https://differentedgestudio.com/images/Logo-light.svg' alt='Different Edge Studio' style='height:32px;margin-bottom:40px;' />
-  <h1 style='font-size:26px;font-weight:900;margin:0 0 8px;'>Hi {$name},</h1>
-  <p style='color:#888;font-size:15px;margin:0 0 32px;'>Here are your Buyer Confidence Assessment results.</p>
-  <div style='background:#111111;border:2px solid #c8f000;border-radius:10px;padding:28px;text-align:center;margin-bottom:32px;'>
-    <p style='color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin:0 0 12px;'>Overall Score</p>
-    <p style='font-size:72px;font-weight:900;color:#c8f000;margin:0;line-height:1;'>{$score}<span style='font-size:32px;color:#444;'>/7</span></p>
-    <div style='background:#1a1a1a;border-radius:6px;height:8px;width:80%;margin:20px auto 0;'>
-      <div style='background:#c8f000;height:8px;border-radius:6px;width:{$bar}%;'></div>
-    </div>
-  </div>
-  <h2 style='font-size:16px;font-weight:700;margin:0 0 4px;'>Area breakdown</h2>
-  <p style='color:#666;font-size:13px;margin:0 0 16px;'>Where your biggest gaps are right now.</p>
-  <table style='width:100%;border-collapse:collapse;background:#111;border-radius:8px;overflow:hidden;margin-bottom:32px;'>
-    {$area_rows}
+<div style='max-width:540px;margin:0 auto;padding:32px 24px;font-family:Arial,sans-serif;color:#fff;'>
+  <h2 style='font-size:18px;font-weight:900;margin:0 0 4px;'>New Diagnostic Submission</h2>
+  <p style='color:#666;font-size:12px;margin:0 0 24px;'>{$ml_badge}</p>
+  <table style='width:100%;border-collapse:collapse;background:#111;border-radius:8px;overflow:hidden;margin-bottom:20px;'>
+    <tr><td style='padding:10px 14px;color:#888;font-size:13px;width:140px;'>Name</td><td style='padding:10px 14px;font-weight:700;'>{$safe_name}</td></tr>
+    <tr style='border-top:1px solid #222;'><td style='padding:10px 14px;color:#888;font-size:13px;'>Email</td><td style='padding:10px 14px;'><a href='mailto:{$safe_email}' style='color:#D0EE4D;'>{$safe_email}</a></td></tr>
+    <tr style='border-top:1px solid #222;'><td style='padding:10px 14px;color:#888;font-size:13px;'>Size</td><td style='padding:10px 14px;'>{$size}</td></tr>
+    <tr style='border-top:1px solid #222;'><td style='padding:10px 14px;color:#888;font-size:13px;'>Score</td><td style='padding:10px 14px;font-weight:900;font-size:22px;color:{$band_colour};'>{$score}<span style='font-size:13px;color:#555;'>/100</span></td></tr>
+    <tr style='border-top:1px solid #222;'><td style='padding:10px 14px;color:#888;font-size:13px;'>Band</td><td style='padding:10px 14px;font-weight:700;color:{$band_colour};'>{$band_name}</td></tr>
+    <tr style='border-top:1px solid #222;'><td style='padding:10px 14px;color:#888;font-size:13px;'>Recommended</td><td style='padding:10px 14px;font-weight:700;'>{$product}</td></tr>
   </table>
-  <div style='background:#111;border-left:3px solid #c8f000;border-radius:0 8px 8px 0;padding:20px 24px;margin-bottom:32px;'>
-    <p style='font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin:0 0 6px;'>Our recommendation</p>
-    <h3 style='font-size:18px;font-weight:800;color:#fff;margin:0 0 10px;'>{$recommendation}</h3>
-    <p style='color:#aaa;font-size:14px;line-height:1.6;margin:0;'>{$reco_body}</p>
-  </div>
-  <p style='color:#888;font-size:14px;margin:0 0 20px;'>This assessment covers 7 signals. Our full audit covers 30 — including your site, your competitors, and your sales sequence. It's free and takes 20 minutes.</p>
-  <a href='https://calendly.com/dan_de/bootcamp-application' style='display:inline-block;background:#c8f000;color:#0a0a0a;font-weight:800;text-decoration:none;padding:14px 28px;border-radius:6px;font-size:15px;'>Book your free audit call &rarr;</a>
-  <hr style='border:none;border-top:1px solid #1a1a1a;margin:40px 0 20px;' />
-  <p style='color:#444;font-size:12px;margin:0;'>Different Edge Studio &bull; <a href='https://differentedgestudio.com' style='color:#666;text-decoration:none;'>differentedgestudio.com</a></p>
-</div>
-</body>
-</html>";
-}
-
-function build_lead_email($name, $email, $size, $score, $recommendation, $areas) {
-    $urgency = $score <= 2
-        ? '🔴 High intent — very few yes answers, significant pain'
-        : ($score <= 4 ? '🟡 Mid intent — clear gaps, good fit' : '🟢 Warm lead — mostly yes, already using some video');
-
-    $area_rows = '';
-    foreach ($areas as $a) {
-        $label = htmlspecialchars($a['label'] ?? '');
-        $yes   = intval($a['yes'] ?? 0);
-        $total = intval($a['total'] ?? 0);
-        $a_pct = $total > 0 ? round(($yes / $total) * 100) : 0;
-        $area_rows .= "<tr style='border-top:1px solid #1a1a1a;'>
-          <td style='padding:8px 16px;color:#888;font-size:13px;'>{$label}</td>
-          <td style='padding:8px 16px;font-weight:700;color:#c8f000;font-size:13px;'>{$yes}/{$total} ({$a_pct}%)</td>
-        </tr>";
-    }
-
-    $reply_email = htmlspecialchars($email);
-    $reply_name  = htmlspecialchars($name);
-
-    return "<!DOCTYPE html>
-<html lang='en'>
-<body style='margin:0;padding:0;background:#0a0a0a;'>
-<div style='max-width:520px;margin:0 auto;padding:32px 24px;font-family:Arial,sans-serif;color:#fff;'>
-  <h2 style='font-size:20px;font-weight:900;margin:0 0 4px;'>New Diagnostic Lead</h2>
-  <p style='color:#888;font-size:13px;margin:0 0 24px;'>{$urgency}</p>
+  <h3 style='font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#666;margin:0 0 8px;'>Signal Breakdown</h3>
   <table style='width:100%;border-collapse:collapse;background:#111;border-radius:8px;overflow:hidden;margin-bottom:24px;'>
-    <tr><td style='padding:10px 16px;color:#888;font-size:13px;width:130px;'>Name</td><td style='padding:10px 16px;font-weight:700;'>{$reply_name}</td></tr>
-    <tr style='border-top:1px solid #1a1a1a;'><td style='padding:10px 16px;color:#888;font-size:13px;'>Email</td><td style='padding:10px 16px;'><a href='mailto:{$reply_email}' style='color:#c8f000;text-decoration:none;'>{$reply_email}</a></td></tr>
-    <tr style='border-top:1px solid #1a1a1a;'><td style='padding:10px 16px;color:#888;font-size:13px;'>Business size</td><td style='padding:10px 16px;'>{$size}</td></tr>
-    <tr style='border-top:1px solid #1a1a1a;'><td style='padding:10px 16px;color:#888;font-size:13px;'>Score</td><td style='padding:10px 16px;font-weight:900;font-size:20px;color:#c8f000;'>{$score}<span style='font-size:14px;color:#444;'>/7</span></td></tr>
-    <tr style='border-top:1px solid #1a1a1a;'><td style='padding:10px 16px;color:#888;font-size:13px;'>Recommendation</td><td style='padding:10px 16px;font-weight:700;'>{$recommendation}</td></tr>
+    {$sig_rows}
   </table>
-  <h3 style='font-size:13px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin:0 0 8px;'>Area Breakdown</h3>
-  <table style='width:100%;border-collapse:collapse;background:#111;border-radius:8px;overflow:hidden;margin-bottom:24px;'>
-    {$area_rows}
-  </table>
-  <a href='mailto:{$reply_email}?subject=Your Different Edge Studio Assessment' style='display:inline-block;background:#c8f000;color:#0a0a0a;font-weight:800;text-decoration:none;padding:12px 24px;border-radius:6px;font-size:14px;'>Reply to {$reply_name} &rarr;</a>
+  <a href='mailto:{$safe_email}?subject=Your%20Buyer%20Confidence%20Assessment' style='display:inline-block;background:#D0EE4D;color:#0a0a0a;font-weight:800;text-decoration:none;padding:12px 24px;border-radius:6px;font-size:14px;'>Reply to {$safe_name} &rarr;</a>
 </div>
 </body>
 </html>";
