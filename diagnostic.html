@@ -347,6 +347,7 @@
     .diag-cta-sub {
       font-size: 0.8125rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.55;
     }
+    .diag-gaps-meaning { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 1rem 0 0; }
 
     .hidden { display: none !important; }
 
@@ -472,6 +473,10 @@
         key: 'low',
         name: 'Low Buyer Confidence',
         summary: 'Right now you are invisible to buyers before they speak to you. The expertise is there but buyers cannot find it, and every new conversation starts from zero. While you are rebuilding that credibility from scratch on every call, the competitors who made the decision easier are getting it first.',
+        signalHeading: 'Where you are losing buyers right now',
+        gapsMeaning: 'Most of your eight signals are not yet in place. That is not a criticism, it means there is a clear and straightforward path. Every signal you add compounds the one before it.',
+        gapLabel: 'Not yet in place',
+        winLabel: 'In place',
         product: 'The Authority Build',
         productSummary: 'In 90 days we build the commercial foundation buyers need to trust your business before they ever speak to you. Hero film, leader authority series, customer proof, and full deployment across your buyer journey. Everything a serious buyer looks for, in one sprint.',
         cta: 'Get the three things to fix first',
@@ -481,6 +486,10 @@
         key: 'building',
         name: 'Building Buyer Confidence',
         summary: 'Buyers can find you, but when they do, what they find raises more questions than it answers. There are signals of credibility in place but they are not consistent, not connected, and not doing enough to make the decision feel easy. The business is better than it looks from the outside.',
+        signalHeading: 'Where confidence is breaking down',
+        gapsMeaning: 'You have some of the right assets in place, which means you are not starting from zero. The gaps are specific and fixable. Closing two or three of them changes how buyers experience you across the whole journey.',
+        gapLabel: 'Not yet in place',
+        winLabel: 'In place',
         product: 'Authority Build or Visibility Engine',
         productSummary: 'In 90 days we can turn that first look into genuine confidence. Either by building the foundation assets that are missing, or by making the assets you already have show up consistently in the places buyers look. Which one depends on your specific gaps, which is exactly what the 15-minute call is for.',
         cta: 'Get the three things to fix first',
@@ -490,6 +499,10 @@
         key: 'emerging',
         name: 'Emerging Buyer Confidence',
         summary: 'You have real assets working for you and buyers can see genuine credibility. The gap is consistency. Confidence builds in some parts of the journey and drops in others, and buyers who were close to a decision pause when something does not join up. Your best salespeople bridge that gap naturally. The rest of the team cannot replicate it.',
+        signalHeading: 'Where confidence is building and where it is dropping',
+        gapsMeaning: 'You are in the top half. The signals you have in place are doing real work. The ones you are missing are where deals slow or buyers go quiet. Close those gaps and the whole system compounds.',
+        gapLabel: 'Not yet in place',
+        winLabel: 'In place',
         product: 'Visibility Engine or Sales Engine',
         productSummary: 'In 90 days we can make sure every buyer gets the same experience your best conversations already deliver. Consistent presence, consistent messaging, and the assets that keep deals moving when your team are not in the room.',
         cta: 'Get the three things to fix first',
@@ -499,6 +512,10 @@
         key: 'optimised',
         name: 'Optimised Buyer Confidence',
         summary: 'You are in the top quartile. High-grade assets are working across visibility, authority and sales conversations, and buyers are getting a consistent, confident experience before and during the buying process. This is rare. Most of your competition are not here.',
+        signalHeading: 'Your signal breakdown',
+        gapsMeaning: 'You have built something most businesses never get to. The opportunity now is to protect it, compound it, and make sure it scales as the business grows. Any remaining gaps are the difference between good and dominant.',
+        gapLabel: 'The remaining opportunity',
+        winLabel: 'Active and working',
         product: 'Complete System or Sales Engine',
         productSummary: 'We help you maintain, optimise and compound what you have built. The Complete System ties your visibility, authority and sales assets into one joined-up programme with a performance guarantee attached.',
         cta: 'See how we help businesses at your level',
@@ -697,19 +714,20 @@
       const wins = signals.filter(s =>  s.answer);
       const signalHTML = `
         <div class="diag-signals">
-          <p class="diag-signals__heading">Where your gaps are right now</p>
+          <p class="diag-signals__heading">${bandCopy.signalHeading}</p>
           ${gaps.map(s => `
             <div class="diag-signal diag-signal--gap">
               <span class="diag-signal__label">${s.label}</span>
-              <span class="diag-signal__status diag-signal__status--gap">Not yet in place</span>
+              <span class="diag-signal__status diag-signal__status--gap">${bandCopy.gapLabel}</span>
             </div>`).join('')}
           ${gaps.length && wins.length ? '<hr class="diag-signal-rule" />' : ''}
           ${wins.map(s => `
             <div class="diag-signal diag-signal--win">
               <span class="diag-signal__label">${s.label}</span>
-              <span class="diag-signal__status diag-signal__status--win">In place</span>
+              <span class="diag-signal__status diag-signal__status--win">${bandCopy.winLabel}</span>
             </div>`).join('')}
-        </div>`;
+        </div>
+        <p class="diag-gaps-meaning">${bandCopy.gapsMeaning}</p>`;
 
       el.innerHTML = `
         <div class="diag-score-label">Your Buyer Confidence Score: ${score}/100</div>
@@ -730,7 +748,7 @@
         <hr class="diag-divider" />
         ${signalHTML}
         <hr class="diag-divider" />
-        <p class="diag-reco-label">Your Recommendation</p>
+        <p class="diag-reco-label">Your Next Step</p>
         <div class="diag-reco-card">
           <p class="diag-reco-card__name">${c.product}</p>
           <p class="diag-reco-card__copy">${c.rec}</p>
