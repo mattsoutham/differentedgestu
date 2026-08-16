@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Email 2 — Day 2</title>
+<!--
+  SUBJECT:  The number that explains your score
+  PREHEADER: One stat. Relevant to where you are right now.
+  FROM NAME: Dan at Different Edge Studio
+  TIMING: Day 2 delay
+  NO CTA BUTTON in this email.
+
+  CONDITIONAL CONTENT — set in MailerLite block visibility:
+  Block A: show when  band_key = low  OR  band_key = building
+  Block B: show when  band_key = emerging  OR  band_key = optimised
+-->
+</head>
+<body style="margin:0;padding:0;background:#f4f4f4;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f4f4;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden;">
+
+        <!-- LOGO -->
+        <tr>
+          <td style="padding:32px 40px 24px;">
+            <img src="https://differentedgestudio.com/images/Logo-dark.svg" alt="Different Edge Studio" height="28" style="display:block;" />
+          </td>
+        </tr>
+
+        <!-- =====================================================
+             BLOCK A — LOW + BUILDING BANDS
+             MailerLite: set block condition to
+             band_key = low  OR  band_key = building
+             ===================================================== -->
+        <tr>
+          <td style="padding:0 40px 32px;">
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">Hi {$first_name},</p>
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">One number that explains a lot about your score.</p>
+
+            <!-- STAT BLOCK -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-left:3px solid #D0EE4D;margin:0 0 24px;">
+              <tr>
+                <td style="padding:16px 20px;">
+                  <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#222222;line-height:1.5;">Buyers spend only 17% of their decision-making journey with any single supplier. The other 83% is decided on what they have already seen, read and heard before they ever make contact.</p>
+                  <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#999999;">Gartner, 2024.</p>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">At your score, most of that 83% is working against you. The buyers who should be choosing you are forming an opinion before you get the chance to make one.</p>
+            <p style="margin:0 0 32px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">Tomorrow I will show you what it looks like when that changes.</p>
+
+            <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:16px;color:#222222;">Dan</p>
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:#888888;">Different Edge Studio</p>
+          </td>
+        </tr>
+        <!-- END BLOCK A -->
+
+        <!-- =====================================================
+             BLOCK B — EMERGING + OPTIMISED BANDS
+             MailerLite: set block condition to
+             band_key = emerging  OR  band_key = optimised
+             ===================================================== -->
+        <!--
+        <tr>
+          <td style="padding:0 40px 32px;">
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">Hi {$first_name},</p>
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">One number that explains a lot about your score.</p>
+
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-left:3px solid #D0EE4D;margin:0 0 24px;">
+              <tr>
+                <td style="padding:16px 20px;">
+                  <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#222222;line-height:1.5;">60% of B2B decision-makers say they are willing to pay a premium to work with businesses that demonstrate genuine thinking through their expertise.</p>
+                  <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#999999;">Edelman-LinkedIn B2B Thought Leadership Impact Report, 2024.</p>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">You have some of this working. The signals that are not yet in place are where that premium is being left on the table.</p>
+            <p style="margin:0 0 32px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">Tomorrow I will show you what it looks like when those gaps are closed.</p>
+
+            <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:16px;color:#222222;">Dan</p>
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:#888888;">Different Edge Studio</p>
+          </td>
+        </tr>
+        -->
+        <!-- END BLOCK B -->
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="padding:20px 40px;background:#f9f9f9;border-top:1px solid #eeeeee;">
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#aaaaaa;line-height:1.6;">
+              Different Edge Studio &bull; <a href="https://differentedgestudio.com" style="color:#aaaaaa;">differentedgestudio.com</a><br/>
+              <a href="{$unsubscribe}" style="color:#aaaaaa;">Unsubscribe</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

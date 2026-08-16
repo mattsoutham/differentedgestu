@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Email 1 — Immediate</title>
+<!--
+  SUBJECT:  Your Buyer Confidence Score: {$score}/100
+  PREHEADER: Your 30 Signals checklist is attached. Here is where your gaps are.
+  FROM NAME: Dan at Different Edge Studio
+  TIMING: Triggered immediately on form submission
+-->
+</head>
+<body style="margin:0;padding:0;background:#f4f4f4;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f4f4;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden;">
+
+        <!-- LOGO -->
+        <tr>
+          <td style="padding:32px 40px 24px;">
+            <img src="https://differentedgestudio.com/images/Logo-dark.svg" alt="Different Edge Studio" height="28" style="display:block;" />
+          </td>
+        </tr>
+
+        <!-- GREETING -->
+        <tr>
+          <td style="padding:0 40px 24px;">
+            <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">Hi {$first_name},</p>
+            <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">You scored <strong>{$score} out of 100</strong>.</p>
+            <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.6;">That puts you in the <strong>{$band_name}</strong> band.</p>
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:16px;color:#444444;line-height:1.7;">{$band_summary}</p>
+          </td>
+        </tr>
+
+        <!-- DIVIDER -->
+        <tr>
+          <td style="padding:8px 40px;">
+            <div style="height:1px;background:#eeeeee;"></div>
+          </td>
+        </tr>
+
+        <!-- SIGNAL BREAKDOWN HEADING -->
+        <tr>
+          <td style="padding:24px 40px 12px;">
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#999999;">Your eight signals</p>
+            <p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#666666;line-height:1.5;">The gaps are listed first.</p>
+          </td>
+        </tr>
+
+        <!-- SIGNAL BREAKDOWN (pre-rendered HTML from PHP) -->
+        <tr>
+          <td style="padding:8px 40px 24px;">
+            {$signal_breakdown_html}
+          </td>
+        </tr>
+
+        <!-- DIVIDER -->
+        <tr>
+          <td style="padding:0 40px 24px;">
+            <div style="height:1px;background:#eeeeee;"></div>
+          </td>
+        </tr>
+
+        <!-- CHECKLIST SECTION -->
+        <tr>
+          <td style="padding:0 40px 24px;">
+            <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">The 30 Signals checklist covers everything the full review looks at.</p>
+            <p style="margin:0 0 28px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">Download it, score yourself, and you will see exactly which signals are costing you buyers right now.</p>
+
+            <!-- CTA BUTTON -->
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="border-radius:6px;background:#D0EE4D;">
+                  <a href="https://differentedgestudio.com/downloads/30-signals-checklist.pdf" style="display:inline-block;padding:14px 28px;font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0a0a0a;text-decoration:none;border-radius:6px;">Download the 30 Signals checklist &rarr;</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- DIVIDER -->
+        <tr>
+          <td style="padding:0 40px 24px;">
+            <div style="height:1px;background:#eeeeee;"></div>
+          </td>
+        </tr>
+
+        <!-- CLOSING -->
+        <tr>
+          <td style="padding:0 40px 32px;">
+            <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">When you are ready to go deeper, the Buyer Confidence Review is 15 minutes. We look at your specific gaps and tell you the three things to fix first, in order.</p>
+            <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:16px;color:#222222;line-height:1.7;">Normally £89. Free because you took the assessment.</p>
+            <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:16px;color:#222222;">Dan</p>
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:#888888;">Different Edge Studio</p>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="padding:20px 40px;background:#f9f9f9;border-top:1px solid #eeeeee;">
+            <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#aaaaaa;line-height:1.6;">
+              Different Edge Studio &bull; <a href="https://differentedgestudio.com" style="color:#aaaaaa;">differentedgestudio.com</a><br/>
+              You received this because you completed the Buyer Confidence Assessment.<br/>
+              <a href="{$unsubscribe}" style="color:#aaaaaa;">Unsubscribe</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

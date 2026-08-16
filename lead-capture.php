@@ -43,7 +43,9 @@ $band_name  = htmlspecialchars($data['band_name'] ?? '');
 $band_summary        = htmlspecialchars($data['band_summary'] ?? '');
 $recommended_product = htmlspecialchars($data['recommended_product'] ?? '');
 $signals_raw = $data['signals'] ?? '[]';
-$signals_str = is_array($signals_raw) ? json_encode($signals_raw) : $signals_raw;
+$signals_arr = is_array($signals_raw) ? $signals_raw : (json_decode($signals_raw, true) ?? []);
+$signals_str = json_encode($signals_arr);
+$signal_breakdown_html = build_signal_breakdown_html($signals_arr);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
@@ -55,14 +57,15 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $ml_result = mailerlite_upsert($MAILERLITE_API_KEY, $MAILERLITE_GROUP_ID, [
     'email'  => $email,
     'fields' => [
-        'first_name'          => $first_name,
-        'score'               => $score,
-        'band_key'            => $band_key,
-        'band_name'           => $band_name,
-        'band_summary'        => $band_summary,
-        'recommended_product' => $recommended_product,
-        'company_size'        => $size,
-        'signals'             => $signals_str,
+        'first_name'             => $first_name,
+        'score'                  => $score,
+        'band_key'               => $band_key,
+        'band_name'              => $band_name,
+        'band_summary'           => $band_summary,
+        'recommended_product'    => $recommended_product,
+        'company_size'           => $size,
+        'signals'                => $signals_str,
+        'signal_breakdown_html'  => $signal_breakdown_html,
     ],
 ]);
 
@@ -78,6 +81,36 @@ send_mailgun_email(
 http_response_code(200);
 echo json_encode(['ok' => true]);
 exit;
+
+// ── Signal breakdown HTML (for Email 1 merge tag) ────────────────────────────
+
+function build_signal_breakdown_html($signals) {
+    if (empty($signals)) return '';
+
+    $gaps  = array_filter($signals, fn($s) => empty($s['answer']));
+    $wins  = array_filter($signals, fn($s) => !empty($s['answer']));
+
+    $rows = '';
+    foreach ($gaps as $s) {
+        $label = htmlspecialchars($s['label'] ?? '');
+        $rows .= "<tr>
+          <td style='padding:9px 16px;font-size:14px;font-weight:600;color:#222222;border-bottom:1px solid #eeeeee;'>{$label}</td>
+          <td style='padding:9px 16px;font-size:13px;font-weight:700;color:#222222;text-align:right;white-space:nowrap;border-bottom:1px solid #eeeeee;letter-spacing:0.03em;'>Not yet in place</td>
+        </tr>";
+    }
+    if (!empty($gaps) && !empty($wins)) {
+        $rows .= "<tr><td colspan='2' style='padding:0;height:1px;background:#dddddd;'></td></tr>";
+    }
+    foreach ($wins as $s) {
+        $label = htmlspecialchars($s['label'] ?? '');
+        $rows .= "<tr>
+          <td style='padding:9px 16px;font-size:14px;color:#666666;border-bottom:1px solid #eeeeee;'>{$label}</td>
+          <td style='padding:9px 16px;font-size:13px;color:#999999;text-align:right;white-space:nowrap;border-bottom:1px solid #eeeeee;'>In place</td>
+        </tr>";
+    }
+
+    return "<table width='100%' cellpadding='0' cellspacing='0' border='0' style='border-collapse:collapse;border:1px solid #eeeeee;border-radius:6px;overflow:hidden;'>{$rows}</table>";
+}
 
 // ── MailerLite ────────────────────────────────────────────────────────────────
 
