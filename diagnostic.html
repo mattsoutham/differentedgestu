@@ -348,6 +348,9 @@
       font-size: 0.8125rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.55;
     }
     .diag-gaps-meaning { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 1rem 0 0; }
+    .diag-video { margin: 1.5rem 0; }
+    .diag-video__wrap { padding: 56.25% 0 0 0; position: relative; border-radius: 8px; overflow: hidden; }
+    .diag-video__wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
     .hidden { display: none !important; }
 
@@ -441,9 +444,17 @@
     </div>
   </footer>
 
+  <script src="https://player.vimeo.com/api/player.js"></script>
   <script src="nav.js"></script>
   <script>
     const CALENDLY = 'https://calendly.com/dan_de/bootcamp-application';
+
+    const BAND_VIDEOS = {
+      low:       '1219590653',
+      building:  '1219590652',
+      emerging:  '1219590651',
+      optimised: '1219590654'
+    };
 
     const questions = [
       'Can buyers easily see and hear from the people leading your business before they enquire?',
@@ -745,6 +756,12 @@
         </div>
         <p class="diag-band">${reco.band}</p>
         <p class="diag-summary">${reco.summary}</p>
+        ${BAND_VIDEOS[bandCopy.key] ? `
+        <div class="diag-video">
+          <div class="diag-video__wrap">
+            <iframe src="https://player.vimeo.com/video/${BAND_VIDEOS[bandCopy.key]}?badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" title="Buyer Confidence — ${bandCopy.name}"></iframe>
+          </div>
+        </div>` : ''}
         <hr class="diag-divider" />
         ${signalHTML}
         <hr class="diag-divider" />
