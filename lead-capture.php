@@ -55,9 +55,9 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // 1. Add / update subscriber in MailerLite
 $ml_result = mailerlite_upsert($MAILERLITE_API_KEY, $MAILERLITE_GROUP_ID, [
-    'email'      => $email,
-    'first_name' => $first_name,
+    'email' => $email,
     'fields'     => [
+        'name'                   => $first_name,
         'score'                  => $score,
         'band_key'               => $band_key,
         'band_name'              => $band_name,
