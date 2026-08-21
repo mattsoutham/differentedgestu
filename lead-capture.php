@@ -61,7 +61,6 @@ $ml_result = mailerlite_upsert($MAILERLITE_API_KEY, $MAILERLITE_GROUP_ID, [
         'score'                  => $score,
         'band_key'               => $band_key,
         'band_name'              => $band_name,
-        'des_band_summary'       => $band_summary,
         'recommended_product'    => $recommended_product,
         'company_size'           => $size,
         'signals'                => $signals_str,
