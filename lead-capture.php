@@ -78,6 +78,14 @@ send_mailgun_email(
     build_lead_alert($first_name, $email, $size, $score, $band_name, $recommended_product, $signals_raw, $ml_result)
 );
 
+// Debug log — remove once working
+file_put_contents(__DIR__ . '/lead-debug.log',
+    date('Y-m-d H:i:s') . ' ML_STATUS=' . ($ml_result['status'] ?? 'none') .
+    ' ML_BODY=' . ($ml_result['body'] ?? '') .
+    ' CURL_ERR=' . ($ml_result['curl_error'] ?? '') . "\n",
+    FILE_APPEND
+);
+
 http_response_code(200);
 echo json_encode(['ok' => true]);
 exit;
