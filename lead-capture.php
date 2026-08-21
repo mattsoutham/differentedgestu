@@ -95,29 +95,22 @@ exit;
 function build_signal_breakdown_html($signals) {
     if (empty($signals)) return '';
 
-    $gaps  = array_filter($signals, fn($s) => empty($s['answer']));
-    $wins  = array_filter($signals, fn($s) => !empty($s['answer']));
+    $gaps = array_filter($signals, fn($s) => empty($s['answer']));
+    $wins = array_filter($signals, fn($s) => !empty($s['answer']));
 
+    $td = "style='padding:6px 10px;font-size:13px;border-bottom:1px solid #eee;'";
+    $tr = "style='color:#999;'";
     $rows = '';
     foreach ($gaps as $s) {
         $label = htmlspecialchars($s['label'] ?? '');
-        $rows .= "<tr>
-          <td style='padding:9px 16px;font-size:14px;font-weight:600;color:#222222;border-bottom:1px solid #eeeeee;'>{$label}</td>
-          <td style='padding:9px 16px;font-size:13px;font-weight:700;color:#222222;text-align:right;white-space:nowrap;border-bottom:1px solid #eeeeee;letter-spacing:0.03em;'>Not yet in place</td>
-        </tr>";
-    }
-    if (!empty($gaps) && !empty($wins)) {
-        $rows .= "<tr><td colspan='2' style='padding:0;height:1px;background:#dddddd;'></td></tr>";
+        $rows .= "<tr><td {$td}><b>{$label}</b></td><td {$td} align='right'>Gap</td></tr>";
     }
     foreach ($wins as $s) {
         $label = htmlspecialchars($s['label'] ?? '');
-        $rows .= "<tr>
-          <td style='padding:9px 16px;font-size:14px;color:#666666;border-bottom:1px solid #eeeeee;'>{$label}</td>
-          <td style='padding:9px 16px;font-size:13px;color:#999999;text-align:right;white-space:nowrap;border-bottom:1px solid #eeeeee;'>In place</td>
-        </tr>";
+        $rows .= "<tr {$tr}><td {$td}>{$label}</td><td {$td} align='right'>&#10003;</td></tr>";
     }
 
-    return "<table width='100%' cellpadding='0' cellspacing='0' border='0' style='border-collapse:collapse;border:1px solid #eeeeee;border-radius:6px;overflow:hidden;'>{$rows}</table>";
+    return "<table width='100%' style='border-collapse:collapse;border:1px solid #eee;font-family:Arial,sans-serif;'>{$rows}</table>";
 }
 
 // ── MailerLite ────────────────────────────────────────────────────────────────
