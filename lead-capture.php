@@ -61,7 +61,7 @@ $ml_result = mailerlite_upsert($MAILERLITE_API_KEY, $MAILERLITE_GROUP_ID, [
         'score'                  => $score,
         'band_key'               => $band_key,
         'band_name'              => $band_name,
-        'band_summary'           => $band_summary,
+        'des_band_summary'       => $band_summary,
         'recommended_product'    => $recommended_product,
         'company_size'           => $size,
         'signals'                => $signals_str,
@@ -98,19 +98,15 @@ function build_signal_breakdown_html($signals) {
     $gaps = array_filter($signals, fn($s) => empty($s['answer']));
     $wins = array_filter($signals, fn($s) => !empty($s['answer']));
 
-    $td = "style='padding:6px 10px;font-size:13px;border-bottom:1px solid #eee;'";
-    $tr = "style='color:#999;'";
-    $rows = '';
+    $out = '';
     foreach ($gaps as $s) {
-        $label = htmlspecialchars($s['label'] ?? '');
-        $rows .= "<tr><td {$td}><b>{$label}</b></td><td {$td} align='right'>Gap</td></tr>";
+        $out .= '<tr><td><b>' . htmlspecialchars($s['label'] ?? '') . '</b></td><td>Gap</td></tr>';
     }
     foreach ($wins as $s) {
-        $label = htmlspecialchars($s['label'] ?? '');
-        $rows .= "<tr {$tr}><td {$td}>{$label}</td><td {$td} align='right'>&#10003;</td></tr>";
+        $out .= '<tr><td>' . htmlspecialchars($s['label'] ?? '') . '</td><td>&#10003;</td></tr>';
     }
 
-    return "<table width='100%' style='border-collapse:collapse;border:1px solid #eee;font-family:Arial,sans-serif;'>{$rows}</table>";
+    return '<table width="100%">' . $out . '</table>';
 }
 
 // ── MailerLite ────────────────────────────────────────────────────────────────
