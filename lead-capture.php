@@ -97,15 +97,18 @@ function build_signal_breakdown_html($signals) {
     $gaps = array_filter($signals, fn($s) => empty($s['answer']));
     $wins = array_filter($signals, fn($s) => !empty($s['answer']));
 
-    $out = '';
+    $lines = [];
     foreach ($gaps as $s) {
-        $out .= '<tr><td><b>' . htmlspecialchars($s['label'] ?? '') . '</b></td><td>Gap</td></tr>';
+        $lines[] = '✗  ' . ($s['label'] ?? '');
+    }
+    if (!empty($gaps) && !empty($wins)) {
+        $lines[] = '---';
     }
     foreach ($wins as $s) {
-        $out .= '<tr><td>' . htmlspecialchars($s['label'] ?? '') . '</td><td>&#10003;</td></tr>';
+        $lines[] = '✓  ' . ($s['label'] ?? '');
     }
 
-    return '<table width="100%">' . $out . '</table>';
+    return implode("\n", $lines);
 }
 
 // ── MailerLite ────────────────────────────────────────────────────────────────
